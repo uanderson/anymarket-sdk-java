@@ -4,7 +4,7 @@
 
   <groupId>br.com.anymarket.sdk</groupId>
   <artifactId>anymarket-sdk-java</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1-SNAPSHOT</version>
   <modules>
     <module>anymarket-sdk-stock</module>
     <module>anymarket-sdk-common</module>
@@ -18,10 +18,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <httpclient.version>4.5.1</httpclient.version>
     <guava.version>18.0</guava.version>
     <commons-lang.version>3.4</commons-lang.version>
     <slf4j-simple.version>1.7.2</slf4j-simple.version>
+    <!-- Nao atualizar para 1.4.8, quebrado compatibildiade de dependencias-->
     <unirest.version>1.4.7</unirest.version>
     <jackson.version>2.6.2</jackson.version>
     <junit.version>4.12</junit.version>
@@ -35,11 +35,11 @@
         <artifactId>anymarket-sdk-common</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <version>${httpclient.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.apache.httpcomponents</groupId>-->
+        <!--<artifactId>httpclient</artifactId>-->
+        <!--<version>${httpclient.version}</version>-->
+      <!--</dependency>-->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
@@ -92,16 +92,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>anymarket-sdk-java</finalName>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <finalName>${project.build.finalName}-${project.version}</finalName>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -109,14 +100,15 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
           <compilerArgument>-parameters</compilerArgument>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
   <distributionManagement>
-
     <repository>
       <id>nexus</id>
       <name>RepositoryProxy</name>

@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk;
+package br.com.anymarket.sdk.exception;
 
 public class ClientException extends RuntimeException {
 

@@ -1,5 +1,8 @@
 package br.com.anymarket.sdk.http;
 
+import br.com.anymarket.sdk.exception.HttpClientException;
+import br.com.anymarket.sdk.exception.HttpServerException;
+import br.com.anymarket.sdk.exception.UnauthorizedException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,7 +23,8 @@ public class HttpService {
         HttpRequestWithBody put = Unirest.put(url);
         addHeaders(put, headers);
 
-        return put.body(writeValue(body));
+        String bodyJson = writeValueAsJson(body);
+        return put.body(bodyJson);
     }
 
     protected GetRequest get(String url, IntegrationHeader... headers) {
@@ -33,16 +37,7 @@ public class HttpService {
         HttpRequestWithBody post = Unirest.post(url);
         addHeaders(post, headers);
 
-        return post.body(writeValue(body));
-    }
-
-    protected Response execute(BaseRequest request) {
-        try {
-            HttpResponse<String> response = request.asString();
-            return new Response(response.getStatus(), response.getBody());
-        } catch (UnirestException e) {
-            return null;
-        }
+        return post.body(writeValueAsJson(body));
     }
 
     public <T> T readValue(String value, TypeReference<T> valueType) {
@@ -53,7 +48,7 @@ public class HttpService {
         }
     }
 
-    public String writeValue(Object value) {
+    public String writeValueAsJson(Object value) {
         try {
             return Mapper.get().writeValueAsString(value);
         } catch (JsonProcessingException ex) {
@@ -64,6 +59,30 @@ public class HttpService {
     private void addHeaders(HttpRequest request, IntegrationHeader... headers) {
         for (IntegrationHeader header : headers) {
             request.header(header.getKey(), header.getValue());
+        }
+    }
+
+    protected Response execute(BaseRequest request) {
+        try {
+            HttpResponse<String> response = request.asString();
+            checkGenericErrorToThrowGenericException(response.getStatus(), response.getBody());
+            return new Response(response.getStatus(), response.getBody());
+        } catch (UnirestException e) {
+            checkGenericErrorToThrowGenericException(500, e.getMessage());
+            return null;
+        }
+    }
+
+    private void checkGenericErrorToThrowGenericException(int status, String message) {
+        int statusCode = status;
+        if(statusCode >= 500){
+            throw new HttpServerException(message);
+        }
+        else if(statusCode == 401){
+            throw new UnauthorizedException(message);
+        }
+        else if(statusCode >= 400 && statusCode != 404){
+            throw new HttpClientException(message);
         }
     }
 
