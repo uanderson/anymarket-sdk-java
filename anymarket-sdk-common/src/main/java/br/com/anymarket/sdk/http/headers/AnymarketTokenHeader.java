@@ -41,4 +41,11 @@ public class AnymarketTokenHeader implements IntegrationHeader {
     public int hashCode() {
         return token.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "AnymarketTokenHeader{" +
+            "token='" + token + '\'' +
+            '}';
+    }
 }
