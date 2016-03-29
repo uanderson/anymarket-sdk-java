@@ -1,0 +1,15 @@
+br\com\anymarket\sdk\http\headers\IntegrationHeader.class
+br\com\anymarket\sdk\paging\Page.class
+br\com\anymarket\sdk\SDKConstants.class
+br\com\anymarket\sdk\paging\PageMetadata.class
+br\com\anymarket\sdk\http\restdsl\RestGetRequest.class
+br\com\anymarket\sdk\AnymarketPojo.class
+br\com\anymarket\sdk\http\headers\AnymarketTokenHeader.class
+br\com\anymarket\sdk\http\restdsl\AnyMarketRestDSL.class
+br\com\anymarket\sdk\http\PageableService.class
+br\com\anymarket\sdk\resource\Link.class
+br\com\anymarket\sdk\http\HttpService.class
+br\com\anymarket\sdk\http\restdsl\RestResponse.class
+br\com\anymarket\sdk\ClientException.class
+br\com\anymarket\sdk\http\restdsl\RestRequestWithBody.class
+br\com\anymarket\sdk\http\Mapper.class

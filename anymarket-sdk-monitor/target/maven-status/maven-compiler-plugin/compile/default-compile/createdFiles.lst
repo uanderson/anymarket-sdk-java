@@ -1,0 +1,6 @@
+br\com\anymarket\sdk\monitor\dto\Monitor$1.class
+br\com\anymarket\sdk\monitor\dto\MonitorStatus.class
+br\com\anymarket\sdk\monitor\dto\MonitorType.class
+br\com\anymarket\sdk\monitor\MonitorService.class
+br\com\anymarket\sdk\monitor\dto\Monitor$Builder.class
+br\com\anymarket\sdk\monitor\dto\Monitor.class

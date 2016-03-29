@@ -1,15 +1,18 @@
-package br.com.anymarket.sdk.http;
+package br.com.anymarket.sdk.http.restdsl;
 
+import br.com.anymarket.sdk.http.Mapper;
+import br.com.anymarket.sdk.paging.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 
 import java.io.IOException;
 
-public class Response {
+public class RestResponse {
 
     private int status;
     private String message;
 
-    public Response(int status, String message) {
+    public RestResponse(int status, String message) {
         this.status = status;
         this.message = message;
     }
@@ -25,6 +28,18 @@ public class Response {
     public <T> T to(Class<T> clazz) {
         try {
             return Mapper.get().readValue(message, clazz);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <T> Page<T> toPage(Class<T> clazz) {
+        JavaType pageType = Mapper
+                .get()
+                .getTypeFactory()
+                .constructParametrizedType(Page.class, Page.class, clazz);
+        try {
+            return Mapper.get().readValue(message, pageType);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

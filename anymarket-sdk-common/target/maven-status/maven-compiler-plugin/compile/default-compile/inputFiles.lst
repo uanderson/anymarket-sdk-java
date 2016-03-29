@@ -1,0 +1,15 @@
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\headers\IntegrationHeader.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\SDKConstants.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\ClientException.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\paging\PageMetadata.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\headers\AnymarketTokenHeader.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\RestGetRequest.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\RestResponse.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\HttpService.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\Mapper.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\AnyMarketRestDSL.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\resource\Link.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\PageableService.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\paging\Page.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\RestRequestWithBody.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\AnymarketPojo.java

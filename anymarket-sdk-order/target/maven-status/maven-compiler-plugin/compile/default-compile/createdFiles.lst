@@ -1,0 +1,13 @@
+br\com\anymarket\sdk\order\dto\Order.class
+br\com\anymarket\sdk\order\dto\SimpleSkuResource.class
+br\com\anymarket\sdk\order\dto\PaymentResource.class
+br\com\anymarket\sdk\order\dto\OrderStatus.class
+br\com\anymarket\sdk\order\dto\OrderItemResource.class
+br\com\anymarket\sdk\order\dto\InvoiceResource.class
+br\com\anymarket\sdk\order\OrderService.class
+br\com\anymarket\sdk\order\dto\ShippingResource.class
+br\com\anymarket\sdk\order\dto\BuyerResource.class
+br\com\anymarket\sdk\order\dto\MarketPlace.class
+br\com\anymarket\sdk\order\dto\OrderTransmissionStatus.class
+br\com\anymarket\sdk\order\dto\TrackingResource.class
+br\com\anymarket\sdk\order\dto\OrderItemShippingResource.class

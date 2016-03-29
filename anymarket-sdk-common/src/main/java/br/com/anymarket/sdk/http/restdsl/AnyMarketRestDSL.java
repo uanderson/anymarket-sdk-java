@@ -1,0 +1,15 @@
+package br.com.anymarket.sdk.http.restdsl;
+
+import com.mashape.unirest.http.Unirest;
+
+public class AnyMarketRestDSL {
+    public static RestGetRequest get(String url){
+        return new RestGetRequest(Unirest.get(url));
+    }
+    public static RestRequestWithBody post(String url){
+        return new RestRequestWithBody(Unirest.post(url));
+    }
+    public static RestRequestWithBody put(String url){
+        return new RestRequestWithBody(Unirest.put(url));
+    }
+}
