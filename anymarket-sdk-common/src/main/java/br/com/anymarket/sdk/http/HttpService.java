@@ -40,6 +40,13 @@ public class HttpService {
         return post.body(writeValueAsJson(body));
     }
 
+    protected HttpRequestWithBody delete(String url, IntegrationHeader... headers) {
+        HttpRequestWithBody delete = Unirest.delete(url);
+        addHeaders(delete, headers);
+
+        return delete;
+    }
+
     public <T> T readValue(String value, TypeReference<T> valueType) {
         try {
             return Mapper.get().readValue(value, valueType);
@@ -65,25 +72,25 @@ public class HttpService {
     protected Response execute(BaseRequest request) {
         try {
             HttpResponse<String> response = request.asString();
-            checkGenericErrorToThrowGenericException(response.getStatus(), response.getBody());
+            checkGenericErrorToThrowGenericException(response);
             return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
-            checkGenericErrorToThrowGenericException(500, e.getMessage());
             return null;
         }
     }
 
-    private void checkGenericErrorToThrowGenericException(int status, String message) {
-        int statusCode = status;
+    private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
+        int statusCode = response.getStatus();
         if(statusCode >= 500){
-            throw new HttpServerException(message);
+            throw new HttpServerException(response.getBody());
         }
         else if(statusCode == 401){
-            throw new UnauthorizedException(message);
+            throw new UnauthorizedException(response.getBody());
         }
         else if(statusCode >= 400 && statusCode != 404){
-            throw new HttpClientException(message);
+            throw new HttpClientException(response.getBody());
         }
+
     }
 
 }
