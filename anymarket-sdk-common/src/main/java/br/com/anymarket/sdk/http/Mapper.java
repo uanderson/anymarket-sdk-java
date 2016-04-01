@@ -20,6 +20,9 @@ public class Mapper {
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
+    private Mapper() {
+    }
+
     public static ObjectMapper get() {
         return MAPPER;
     }

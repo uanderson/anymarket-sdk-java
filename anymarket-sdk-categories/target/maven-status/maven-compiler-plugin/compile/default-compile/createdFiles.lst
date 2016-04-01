@@ -1,0 +1,5 @@
+br\com\anymarket\sdk\categories\dto\Category.class
+br\com\anymarket\sdk\categories\dto\Category$Builder.class
+br\com\anymarket\sdk\categories\CategoryService.class
+br\com\anymarket\sdk\categories\dto\Category$1.class
+br\com\anymarket\sdk\categories\CategoryService$1.class
