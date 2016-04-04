@@ -17,6 +17,9 @@ public class Order {
     @JsonProperty("marketPlace")
     private MarketPlace marketPlace;
 
+    @JsonProperty("partnerId")
+    private String partnerId;
+
     @JsonProperty("createdAt")
     private Date createdAt;
 
@@ -87,6 +90,14 @@ public class Order {
 
     public void setMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
+    }
+
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
     }
 
     public Date getCreatedAt() {

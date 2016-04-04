@@ -8,6 +8,9 @@ public class AnymarketTokenHeader implements IntegrationHeader {
     private static final String key = "gumgaToken";
     private String token;
 
+    public AnymarketTokenHeader() {
+    }
+
     public AnymarketTokenHeader(String token) {
         this.token = token;
     }

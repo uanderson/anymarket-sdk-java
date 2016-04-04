@@ -1,7 +1,9 @@
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\InvoiceResource.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\filters\IGetOrderFilter.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\Order.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\OrderItemShippingResource.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\PaymentResource.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\filters\GetOrderFilterStatus.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\MarketPlace.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\OrderService.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-order\src\main\java\br\com\anymarket\sdk\order\dto\TrackingResource.java
