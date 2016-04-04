@@ -2,8 +2,8 @@ package br.com.anymarket.sdk.stock;
 
 import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.http.HttpService;
-import br.com.anymarket.sdk.http.restdsl.RestResponse;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.http.restdsl.RestResponse;
 import br.com.anymarket.sdk.stock.dto.Stock;
 import br.com.anymarket.sdk.stock.dto.StockCollection;
 import com.google.common.collect.Lists;
@@ -17,10 +17,8 @@ public class StockService extends HttpService {
     private String apiEndPoint;
 
     public StockService(String apiEndPoint) {
-        if (isNullOrEmpty(apiEndPoint)) {
-            apiEndPoint = SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
-        }
-        this.apiEndPoint = apiEndPoint;
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+            SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
     public RestResponse updateStock(Stock stock, IntegrationHeader... headers) {
@@ -35,7 +33,7 @@ public class StockService extends HttpService {
 
     public RestResponse updateStock(StockCollection stocks, IntegrationHeader... headers) {
         return executeWithBody(stocks.getStocks(),
-                put(apiEndPoint + stocks.getPathURI(), headers)
+            put(apiEndPoint + stocks.getPathURI(), headers)
         );
     }
 }

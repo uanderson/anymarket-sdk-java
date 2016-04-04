@@ -1,10 +1,12 @@
 package br.com.anymarket.sdk.http.restdsl;
 
+import br.com.anymarket.sdk.http.filters.ApiFilter;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RestGetRequest {
@@ -18,6 +20,17 @@ public class RestGetRequest {
     public RestGetRequest queryString(String key, String value) {
         request.queryString(key, value);
         return this;
+    }
+
+    public RestGetRequest filters(List<? extends ApiFilter> filters) {
+        for (ApiFilter filter : filters) {
+            request.queryString(filter.getKey(), filter.getValue());
+        }
+        return this;
+    }
+
+    public RestGetRequest filters(ApiFilter[] filters) {
+        return filters(Arrays.asList(filters));
     }
 
     public RestGetRequest headers(IntegrationHeader[] headers) {
