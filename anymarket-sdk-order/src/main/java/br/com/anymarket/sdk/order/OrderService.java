@@ -5,6 +5,7 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.order.dto.Order;
 import br.com.anymarket.sdk.order.filters.OrderFilter;
 import br.com.anymarket.sdk.paging.Page;
+import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -15,6 +16,9 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 public class OrderService {
 
+    public static final TypeReference<Page<Order>> PAGED_TYPE_REFERENCE = new TypeReference<Page<Order>>() {
+    };
+    public static final String NEXT_PAGE = "next";
     private String apiEndPointForResource;
 
     public OrderService(String apiEndPoint) {
@@ -36,8 +40,24 @@ public class OrderService {
             .headers(headers)
             .filters(filters)
             .getResponse()
-            .to(new TypeReference<Page<Order>>() {
-            });
+            .to(PAGED_TYPE_REFERENCE);
+    }
+
+    public Page<Order> getNextPage(Page<Order> actualPagedOrders, IntegrationHeader... headers) {
+        String nextPageUrl = null;
+        for (Link link : actualPagedOrders.getLinks()) {
+            if (link.getRel().equals(NEXT_PAGE)) {
+                nextPageUrl = link.getHref();
+                break;
+            }
+        }
+        if (nextPageUrl != null) {
+            return get(nextPageUrl)
+                .headers(headers)
+                .getResponse()
+                .to(PAGED_TYPE_REFERENCE);
+        }
+        return new Page<Order>();
     }
 
     public Order createOrder(Order order, IntegrationHeader... headers) {

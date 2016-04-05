@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import java.util.Date;
 
@@ -81,6 +82,19 @@ public class TrackingResource {
 
     public void setDeliveredDate(Date deliveredDate) {
         this.deliveredDate = deliveredDate;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("url", url)
+            .add("number", number)
+            .add("carrier", carrier)
+            .add("date", date)
+            .add("estimateDate", estimateDate)
+            .add("shippedDate", shippedDate)
+            .add("deliveredDate", deliveredDate)
+            .toString();
     }
 }
 
