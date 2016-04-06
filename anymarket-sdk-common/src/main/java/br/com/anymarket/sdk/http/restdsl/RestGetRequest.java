@@ -23,8 +23,10 @@ public class RestGetRequest {
     }
 
     public RestGetRequest filters(List<? extends ApiFilter> filters) {
-        for (ApiFilter filter : filters) {
-            request.queryString(filter.getKey(), filter.getValue());
+        if (filters != null) {
+            for (ApiFilter filter : filters) {
+                request.queryString(filter.getKey(), filter.getValue());
+            }
         }
         return this;
     }

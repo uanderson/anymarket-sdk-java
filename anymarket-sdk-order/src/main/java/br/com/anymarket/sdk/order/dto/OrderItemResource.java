@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -83,5 +84,18 @@ public class OrderItemResource {
 
     public void setShippings(List<OrderItemShippingResource> shippings) {
         this.shippings = shippings;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("sku", sku)
+            .add("amount", amount)
+            .add("unit", unit)
+            .add("gross", gross)
+            .add("total", total)
+            .add("discount", discount)
+            .add("shippings", shippings)
+            .toString();
     }
 }

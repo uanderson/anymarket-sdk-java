@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -228,4 +229,28 @@ public class Order {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("id", id)
+            .add("marketPlaceId", marketPlaceId)
+            .add("marketPlace", marketPlace)
+            .add("createdAt", createdAt)
+            .add("transmissionStatus", transmissionStatus)
+            .add("status", status)
+            .add("marketPlaceUrl", marketPlaceUrl)
+            .add("marketPlaceShipmentStatus", marketPlaceShipmentStatus)
+            .add("invoice", invoice)
+            .add("marketPlaceStatus", marketPlaceStatus)
+            .add("discount", discount)
+            .add("freight", freight)
+            .add("gross", gross)
+            .add("total", total)
+//            .add("shipping", shipping)
+//            .add("buyer", buyer)
+            .add("tracking", tracking)
+//            .add("payments", payments)
+            .add("items", items)
+            .toString();
+    }
 }

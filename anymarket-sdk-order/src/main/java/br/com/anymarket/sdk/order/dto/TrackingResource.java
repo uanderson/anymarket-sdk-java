@@ -1,6 +1,9 @@
 package br.com.anymarket.sdk.order.dto;
 
+import br.com.anymarket.sdk.serializer.SDKDateSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.MoreObjects;
 
 import java.util.Date;
 
@@ -16,15 +19,19 @@ public class TrackingResource {
     private String carrier;
 
     @JsonProperty("date")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date date;
 
     @JsonProperty("estimateDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date estimateDate;
 
     @JsonProperty("shippedDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date shippedDate;
 
     @JsonProperty("deliveredDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date deliveredDate;
 
     public String getUrl() {
@@ -81,6 +88,19 @@ public class TrackingResource {
 
     public void setDeliveredDate(Date deliveredDate) {
         this.deliveredDate = deliveredDate;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("url", url)
+            .add("number", number)
+            .add("carrier", carrier)
+            .add("date", date)
+            .add("estimateDate", estimateDate)
+            .add("shippedDate", shippedDate)
+            .add("deliveredDate", deliveredDate)
+            .toString();
     }
 }
 

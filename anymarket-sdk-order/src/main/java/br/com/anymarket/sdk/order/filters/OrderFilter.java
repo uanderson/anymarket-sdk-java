@@ -4,6 +4,9 @@ import br.com.anymarket.sdk.http.filters.ApiFilter;
 
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 /**
  *
  */
@@ -12,6 +15,7 @@ public abstract class OrderFilter implements ApiFilter {
     private String value;
 
     public OrderFilter(String value) {
+        checkArgument(!isNullOrEmpty(value), "Passed filter can't be null or empty");
         this.value = value;
     }
 
