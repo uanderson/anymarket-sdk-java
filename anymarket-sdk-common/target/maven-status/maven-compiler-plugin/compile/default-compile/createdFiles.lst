@@ -12,4 +12,5 @@ br\com\anymarket\sdk\http\HttpService.class
 br\com\anymarket\sdk\http\restdsl\RestResponse.class
 br\com\anymarket\sdk\ClientException.class
 br\com\anymarket\sdk\http\restdsl\RestRequestWithBody.class
+br\com\anymarket\sdk\http\filters\ApiFilter.class
 br\com\anymarket\sdk\http\Mapper.class
