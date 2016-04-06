@@ -63,6 +63,7 @@ public class OrderService {
     public Order createOrder(Order order, IntegrationHeader... headers) {
         checkNotNull(order, "Erro ao criar pedido: Dados enão encontrados.");
         return post(apiEndPointForResource.concat("/orders"))
+            .body(order)
             .headers(headers)
             .getResponse()
             .to(Order.class);
@@ -72,6 +73,7 @@ public class OrderService {
         checkNotNull(order, "Erro ao atualizar pedido: Dados enão encontrados.");
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         return put(apiEndPointForResource.concat("/orders/{id}"))
+            .body(order)
             .headers(headers)
             .routeParam("id", order.getId().toString())
             .getResponse()
