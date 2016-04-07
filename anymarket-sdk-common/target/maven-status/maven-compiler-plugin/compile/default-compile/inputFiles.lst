@@ -4,6 +4,7 @@ C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\Cli
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\filters\ApiFilter.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\paging\PageMetadata.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\headers\AnymarketTokenHeader.java
+C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\serializer\SDKDateSerializer.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\RestGetRequest.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\restdsl\RestResponse.java
 C:\DB1\AnyMarket SDK\anymarket-sdk-common\src\main\java\br\com\anymarket\sdk\http\HttpService.java

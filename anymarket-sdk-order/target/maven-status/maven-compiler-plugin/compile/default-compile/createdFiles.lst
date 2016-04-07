@@ -1,6 +1,7 @@
 br\com\anymarket\sdk\order\filters\OrderFilter.class
 br\com\anymarket\sdk\order\dto\Order.class
 br\com\anymarket\sdk\order\dto\SimpleSkuResource.class
+br\com\anymarket\sdk\order\OrderService$1.class
 br\com\anymarket\sdk\order\filters\OrderMarketplaceFilter.class
 br\com\anymarket\sdk\order\dto\PaymentResource.class
 br\com\anymarket\sdk\order\dto\OrderStatus.class
@@ -14,5 +15,6 @@ br\com\anymarket\sdk\order\dto\MarketPlace.class
 br\com\anymarket\sdk\order\filters\IGetOrderFilter.class
 br\com\anymarket\sdk\order\dto\OrderTransmissionStatus.class
 br\com\anymarket\sdk\order\dto\TrackingResource.class
+br\com\anymarket\sdk\order\filters\OrderPartnerIdFilter.class
 br\com\anymarket\sdk\order\dto\OrderItemShippingResource.class
 br\com\anymarket\sdk\order\filters\OrderStatusFilter.class

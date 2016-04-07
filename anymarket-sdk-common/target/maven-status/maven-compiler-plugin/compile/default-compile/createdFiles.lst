@@ -4,6 +4,7 @@ br\com\anymarket\sdk\SDKConstants.class
 br\com\anymarket\sdk\paging\PageMetadata.class
 br\com\anymarket\sdk\http\restdsl\RestGetRequest.class
 br\com\anymarket\sdk\AnymarketPojo.class
+br\com\anymarket\sdk\serializer\SDKDateSerializer.class
 br\com\anymarket\sdk\http\headers\AnymarketTokenHeader.class
 br\com\anymarket\sdk\http\restdsl\AnyMarketRestDSL.class
 br\com\anymarket\sdk\http\PageableService.class
