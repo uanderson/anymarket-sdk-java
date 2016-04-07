@@ -75,7 +75,7 @@ public class HttpService {
             checkGenericErrorToThrowGenericException(response);
             return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
-            return null;
+            throw new HttpServerException("Could not connect to ANYMARKET.");
         }
     }
 
