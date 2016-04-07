@@ -1,5 +1,7 @@
 package br.com.anymarket.sdk.http.headers;
 
+import java.util.Objects;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
@@ -27,5 +29,22 @@ public class AnymarketTokenHeader implements IntegrationHeader {
     @Override
     public String getValue() {
         return token;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AnymarketTokenHeader that = (AnymarketTokenHeader) o;
+        return Objects.equals(KEY, that.getKey()) && Objects.equals(token, that.token);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(KEY, token);
     }
 }
