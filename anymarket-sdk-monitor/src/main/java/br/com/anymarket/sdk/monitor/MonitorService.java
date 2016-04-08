@@ -1,12 +1,13 @@
 package br.com.anymarket.sdk.monitor;
 
 import br.com.anymarket.sdk.SDKConstants;
-import br.com.anymarket.sdk.http.restdsl.RestResponse;
+import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.monitor.dto.Monitor;
 
+import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.post;
+import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.put;
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.*;
 
 public class MonitorService{
 
@@ -19,14 +20,14 @@ public class MonitorService{
         this.apiEndPoint = apiEndPoint;
     }
 
-    public RestResponse insert(Monitor monitor, IntegrationHeader... headers) {
+    public Response insert(Monitor monitor, IntegrationHeader... headers) {
         return post(apiEndPoint + monitor.getPathURI())
                 .headers(headers)
                 .body(monitor)
                 .getResponse();
     }
 
-    public RestResponse update(Monitor monitor, IntegrationHeader... headers) {
+    public Response update(Monitor monitor, IntegrationHeader... headers) {
         return put(apiEndPoint.concat("{pathUri}/{id}"))
                 .headers(headers)
                 .routeParam("pathUri", monitor.getPathURI())

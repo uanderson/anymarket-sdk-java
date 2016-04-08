@@ -1,18 +1,17 @@
-package br.com.anymarket.sdk.http.restdsl;
+package br.com.anymarket.sdk.http;
 
-import br.com.anymarket.sdk.http.Mapper;
 import br.com.anymarket.sdk.paging.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 
 import java.io.IOException;
 
-public class RestResponse {
+public class Response {
 
     private int status;
     private String message;
 
-    public RestResponse(int status, String message) {
+    public Response(int status, String message) {
         this.status = status;
         this.message = message;
     }

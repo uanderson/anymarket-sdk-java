@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.http.restdsl;
 
+import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.filters.ApiFilter;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.mashape.unirest.http.HttpResponse;
@@ -47,10 +48,10 @@ public class RestGetRequest {
         return this;
     }
 
-    public RestResponse getResponse() {
+    public Response getResponse() {
         try {
             HttpResponse<String> response = request.asString();
-            return new RestResponse(response.getStatus(), response.getBody());
+            return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
             throw new RuntimeException(e);
         }

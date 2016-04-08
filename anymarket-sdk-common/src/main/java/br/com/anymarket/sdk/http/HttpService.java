@@ -1,7 +1,6 @@
 package br.com.anymarket.sdk.http;
 
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
-import br.com.anymarket.sdk.http.restdsl.RestResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.http.HttpResponse;
@@ -36,19 +35,19 @@ public class HttpService {
         return post;
     }
 
-    protected RestResponse execute(BaseRequest request) {
+    protected Response execute(BaseRequest request) {
         try {
             HttpResponse<String> response = request.asString();
-            return new RestResponse(response.getStatus(), response.getBody());
+            return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
             return null;
         }
     }
 
-    protected RestResponse executeWithBody(Object body, HttpRequestWithBody request) {
+    protected Response executeWithBody(Object body, HttpRequestWithBody request) {
         try {
             HttpResponse<String> response = request.body(writeValue(body)).asString();
-            return new RestResponse(response.getStatus(), response.getBody());
+            return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
             return null;
         }

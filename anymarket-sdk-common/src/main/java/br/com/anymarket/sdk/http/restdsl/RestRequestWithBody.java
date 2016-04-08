@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.http.restdsl;
 
 import br.com.anymarket.sdk.http.Mapper;
+import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mashape.unirest.http.HttpResponse;
@@ -37,11 +38,11 @@ public class RestRequestWithBody {
         return this;
     }
 
-    public RestResponse getResponse() {
+    public Response getResponse() {
         try {
             String bodyAsString = Mapper.get().writeValueAsString(body);
             HttpResponse<String> response = request.body(bodyAsString).asString();
-            return new RestResponse(response.getStatus(), response.getBody());
+            return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
             throw new RuntimeException(e);
         } catch (JsonProcessingException e) {
