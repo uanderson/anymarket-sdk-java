@@ -1,29 +1,20 @@
 package br.com.anymarket.sdk.http.headers;
 
-import java.util.Objects;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Strings.isNullOrEmpty;
-
 /**
  * Created by marcio.scharam on 18/02/2016.
  */
 public class AnymarketTokenHeader implements IntegrationHeader {
 
-    private static final String KEY = "gumgaToken";
+    private static final String key = "gumgaToken";
     private String token;
 
-    public AnymarketTokenHeader() {
-    }
-
     public AnymarketTokenHeader(String token) {
-        checkArgument(!isNullOrEmpty(token), "Passed token can't be null or empty");
         this.token = token;
     }
 
     @Override
     public String getKey() {
-        return KEY;
+        return key;
     }
 
     @Override
@@ -39,12 +30,22 @@ public class AnymarketTokenHeader implements IntegrationHeader {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         AnymarketTokenHeader that = (AnymarketTokenHeader) o;
-        return Objects.equals(KEY, that.getKey()) && Objects.equals(token, that.token);
+
+        return token.equals(that.token);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(KEY, token);
+        return token.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "AnymarketTokenHeader{" +
+            "token='" + token + '\'' +
+            '}';
     }
 }

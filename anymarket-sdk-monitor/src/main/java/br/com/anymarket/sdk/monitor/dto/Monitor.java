@@ -110,6 +110,59 @@ public class Monitor implements AnymarketPojo {
         return "/monitorings";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Monitor monitor = (Monitor) o;
+
+        if (id != null ? !id.equals(monitor.id) : monitor.id != null) {
+            return false;
+        }
+        if (!partnerId.equals(monitor.partnerId)) {
+            return false;
+        }
+        if (!origin.equals(monitor.origin)) {
+            return false;
+        }
+        if (!message.equals(monitor.message)) {
+            return false;
+        }
+        if (!details.equals(monitor.details)) {
+            return false;
+        }
+        if (type != monitor.type) {
+            return false;
+        }
+        if (retryCallbackURL != null ? !retryCallbackURL.equals(monitor.retryCallbackURL) : monitor.retryCallbackURL != null) {
+            return false;
+        }
+        if (!createdAt.equals(monitor.createdAt)) {
+            return false;
+        }
+        return status == monitor.status;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = MAGICAL_HASH_CODE * result + partnerId.hashCode();
+        result = MAGICAL_HASH_CODE * result + origin.hashCode();
+        result = MAGICAL_HASH_CODE * result + message.hashCode();
+        result = MAGICAL_HASH_CODE * result + details.hashCode();
+        result = MAGICAL_HASH_CODE * result + type.hashCode();
+        result = MAGICAL_HASH_CODE * result + (retryCallbackURL != null ? retryCallbackURL.hashCode() : 0);
+        result = MAGICAL_HASH_CODE * result + createdAt.hashCode();
+        result = MAGICAL_HASH_CODE * result + status.hashCode();
+        return result;
+    }
+
     public static class Builder {
         private Long id;
         private String partnerId;
