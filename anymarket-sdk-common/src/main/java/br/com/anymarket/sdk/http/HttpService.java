@@ -1,5 +1,8 @@
 package br.com.anymarket.sdk.http;
 
+import br.com.anymarket.sdk.exception.HttpClientException;
+import br.com.anymarket.sdk.exception.HttpServerException;
+import br.com.anymarket.sdk.exception.UnauthorizedException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,47 +13,39 @@ import com.mashape.unirest.request.BaseRequest;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.HttpRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
+import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import java.io.IOException;
 
 public class HttpService {
 
-    protected HttpRequestWithBody put(String url, IntegrationHeader... headers) {
+    protected RequestBodyEntity put(String url, Object body, IntegrationHeader... headers) {
         HttpRequestWithBody put = Unirest.put(url);
         addHeaders(put, headers);
-        return put;
+
+        String bodyJson = writeValueAsJson(body);
+        return put.body(bodyJson);
     }
 
     protected GetRequest get(String url, IntegrationHeader... headers) {
         GetRequest unirest = Unirest.get(url);
         addHeaders(unirest, headers);
-
+        
         return unirest;
     }
 
-    protected HttpRequestWithBody post(String url, Object body, IntegrationHeader... headers) {
+    protected RequestBodyEntity post(String url, Object body, IntegrationHeader... headers) {
         HttpRequestWithBody post = Unirest.post(url);
         addHeaders(post, headers);
 
-        return post;
+        return post.body(writeValueAsJson(body));
     }
 
-    protected Response execute(BaseRequest request) {
-        try {
-            HttpResponse<String> response = request.asString();
-            return new Response(response.getStatus(), response.getBody());
-        } catch (UnirestException e) {
-            return null;
-        }
-    }
+    protected HttpRequestWithBody delete(String url, IntegrationHeader... headers) {
+        HttpRequestWithBody delete = Unirest.delete(url);
+        addHeaders(delete, headers);
 
-    protected Response executeWithBody(Object body, HttpRequestWithBody request) {
-        try {
-            HttpResponse<String> response = request.body(writeValue(body)).asString();
-            return new Response(response.getStatus(), response.getBody());
-        } catch (UnirestException e) {
-            return null;
-        }
+        return delete;
     }
 
     public <T> T readValue(String value, TypeReference<T> valueType) {
@@ -61,7 +56,7 @@ public class HttpService {
         }
     }
 
-    public String writeValue(Object value) {
+    public String writeValueAsJson(Object value) {
         try {
             return Mapper.get().writeValueAsString(value);
         } catch (JsonProcessingException ex) {
@@ -73,6 +68,30 @@ public class HttpService {
         for (IntegrationHeader header : headers) {
             request.header(header.getKey(), header.getValue());
         }
+    }
+
+    protected Response execute(BaseRequest request) {
+        try {
+            HttpResponse<String> response = request.asString();
+            checkGenericErrorToThrowGenericException(response);
+            return new Response(response.getStatus(), response.getBody());
+        } catch (UnirestException e) {
+            throw new HttpServerException("Could not connect to ANYMARKET.");
+        }
+    }
+
+    private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
+        int statusCode = response.getStatus();
+        if(statusCode >= 500){
+            throw new HttpServerException(response.getBody());
+        }
+        else if(statusCode == 401){
+            throw new UnauthorizedException(response.getBody());
+        }
+        else if(statusCode >= 400 && statusCode != 404){
+            throw new HttpClientException(response.getBody());
+        }
+
     }
 
 }

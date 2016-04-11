@@ -5,6 +5,5 @@ package br.com.anymarket.sdk;
  */
 public interface AnymarketPojo {
     int MAGICAL_HASH_CODE = 31;
-
     String getPathURI();
 }
