@@ -7,6 +7,7 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.stock.dto.Stock;
 import br.com.anymarket.sdk.stock.dto.StockCollection;
 import com.google.common.collect.Lists;
+import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import java.util.List;
 
@@ -32,8 +33,7 @@ public class StockService extends HttpService {
     }
 
     public Response updateStock(StockCollection stocks, IntegrationHeader... headers) {
-        return executeWithBody(stocks.getStocks(),
-            put(apiEndPoint + stocks.getPathURI(), headers)
-        );
+        RequestBodyEntity putRequest = put(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), headers);
+        return execute(putRequest);
     }
 }
