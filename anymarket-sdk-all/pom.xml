@@ -36,6 +36,11 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-order</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-categories</artifactId>
       <version>${project.version}</version>
     </dependency>

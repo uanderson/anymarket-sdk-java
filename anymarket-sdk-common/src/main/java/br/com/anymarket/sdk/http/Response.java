@@ -1,6 +1,8 @@
 package br.com.anymarket.sdk.http;
 
+import br.com.anymarket.sdk.paging.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 
 import java.io.IOException;
 
@@ -29,7 +31,19 @@ public class Response {
             throw new RuntimeException(e);
         }
     }
-    
+
+    public <T> Page<T> toPage(Class<T> clazz) {
+        JavaType pageType = Mapper
+                .get()
+                .getTypeFactory()
+                .constructParametrizedType(Page.class, Page.class, clazz);
+        try {
+            return Mapper.get().readValue(message, pageType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public int getStatus() {
         return status;
     }

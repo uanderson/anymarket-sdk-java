@@ -30,6 +30,7 @@ public class HttpService {
     protected GetRequest get(String url, IntegrationHeader... headers) {
         GetRequest unirest = Unirest.get(url);
         addHeaders(unirest, headers);
+        
         return unirest;
     }
 

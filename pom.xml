@@ -7,6 +7,7 @@
   <version>0.2.0-SNAPSHOT</version>
   <modules>
     <module>anymarket-sdk-stock</module>
+    <module>anymarket-sdk-order</module>
     <module>anymarket-sdk-common</module>
     <module>anymarket-sdk-product</module>
     <module>anymarket-sdk-all</module>
@@ -88,6 +89,7 @@
   </dependencyManagement>
 
   <build>
+    <finalName>anymarket-sdk-java</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -100,7 +102,6 @@
           <compilerArgument>-parameters</compilerArgument>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 

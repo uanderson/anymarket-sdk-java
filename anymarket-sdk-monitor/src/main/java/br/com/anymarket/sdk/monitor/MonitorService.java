@@ -1,18 +1,15 @@
 package br.com.anymarket.sdk.monitor;
 
 import br.com.anymarket.sdk.SDKConstants;
-import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.monitor.dto.Monitor;
-import com.mashape.unirest.request.body.RequestBodyEntity;
 
+import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.post;
+import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.put;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-/**
- * Created by marcio.scharam on 08/03/2016.
- */
-public class MonitorService extends HttpService {
+public class MonitorService{
 
     private String apiEndPoint;
 
@@ -24,12 +21,18 @@ public class MonitorService extends HttpService {
     }
 
     public Response insert(Monitor monitor, IntegrationHeader... headers) {
-        RequestBodyEntity postRequest = post(apiEndPoint + monitor.getPathURI(), monitor, headers);
-        return execute(postRequest);
+        return post(apiEndPoint + monitor.getPathURI())
+                .headers(headers)
+                .body(monitor)
+                .getResponse();
     }
 
     public Response update(Monitor monitor, IntegrationHeader... headers) {
-        RequestBodyEntity putRequest = put(apiEndPoint + monitor.getPathURI() + "/" + monitor.getId(), monitor, headers);
-        return execute(putRequest);
+        return put(apiEndPoint.concat("{pathUri}/{id}"))
+                .headers(headers)
+                .routeParam("pathUri", monitor.getPathURI())
+                .routeParam("id", monitor.getId().toString())
+                .body(monitor)
+                .getResponse();
     }
 }

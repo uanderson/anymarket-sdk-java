@@ -16,20 +16,15 @@ public class ProductFeedClient extends HttpService {
         super();
     }
 
-//    public ProductFeedClient(CredentialsProvider credentialsProvider) {
-//        super(credentialsProvider);
-//    }
-
     public List<Feed> list() {
         Response response = execute(get("/products/feeds"));
         return response.to(new TypeReference<List<Feed>>() {
         });
     }
 
-
     public MarkFeedAsReadResponse markAsRead(Feed feed) {
         MarkFeedAsReadRequest request = new MarkFeedAsReadRequest(feed.getToken());
-        Response response = execute(put("/products/feeds/" + feed.getId(), request));
+        Response response = executeWithBody(request, put("/products/feeds/" + feed.getId()));
         return response.to(MarkFeedAsReadResponse.class);
     }
 }
