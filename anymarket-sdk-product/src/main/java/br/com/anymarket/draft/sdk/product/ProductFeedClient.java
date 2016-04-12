@@ -24,7 +24,7 @@ public class ProductFeedClient extends HttpService {
 
     public MarkFeedAsReadResponse markAsRead(Feed feed) {
         MarkFeedAsReadRequest request = new MarkFeedAsReadRequest(feed.getToken());
-        Response response = executeWithBody(request, put("/products/feeds/" + feed.getId()));
+        Response response = execute(put("/products/feeds/" + feed.getId(), request));
         return response.to(MarkFeedAsReadResponse.class);
     }
 }

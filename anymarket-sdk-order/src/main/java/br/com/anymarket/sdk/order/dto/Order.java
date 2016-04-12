@@ -18,7 +18,7 @@ public class Order {
     @JsonProperty("marketPlace")
     private MarketPlace marketPlace;
 
-    @JsonProperty("partnerId")
+    @JsonProperty("idInClient")
     private String partnerId;
 
     @JsonProperty("createdAt")
