@@ -1,10 +1,12 @@
 package br.com.anymarket.sdk.http;
 
-import br.com.anymarket.sdk.paging.Page;
+import br.com.anymarket.sdk.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
+import org.apache.http.HttpStatus;
 
 import java.io.IOException;
+
+import static java.lang.String.format;
 
 public class Response {
 
@@ -18,6 +20,7 @@ public class Response {
 
     public <T> T to(TypeReference<T> typeReference) {
         try {
+            checkNotFound(typeReference.getClass());
             return Mapper.get().readValue(message, typeReference);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -26,21 +29,16 @@ public class Response {
 
     public <T> T to(Class<T> clazz) {
         try {
+            checkNotFound(clazz);
             return Mapper.get().readValue(message, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public <T> Page<T> toPage(Class<T> clazz) {
-        JavaType pageType = Mapper
-                .get()
-                .getTypeFactory()
-                .constructParametrizedType(Page.class, Page.class, clazz);
-        try {
-            return Mapper.get().readValue(message, pageType);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private <T> void checkNotFound(Class<T> clazz) {
+        if (status == HttpStatus.SC_NOT_FOUND) {
+            throw new NotFoundException(format("%s não encontrado", clazz.getSimpleName()));
         }
     }
 
