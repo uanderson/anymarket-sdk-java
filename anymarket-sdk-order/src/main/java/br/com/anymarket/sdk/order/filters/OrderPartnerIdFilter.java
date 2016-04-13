@@ -8,6 +8,6 @@ public class OrderPartnerIdFilter extends OrderFilter {
 
     @Override
     public String getKey() {
-        return "idinclient";
+        return "partnerId";
     }
 }
