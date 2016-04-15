@@ -25,13 +25,13 @@ import static java.lang.String.format;
  */
 public class CategoryService extends HttpService {
 
+    private static final String NEXT = "next";
+    public static final String CATEGORIES_URI = "/categories/";
     private String apiEndPoint;
 
     public CategoryService(String apiEndPoint) {
-        if (isNullOrEmpty(apiEndPoint)) {
-            apiEndPoint = SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
-        }
-        this.apiEndPoint = apiEndPoint;
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+            SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
     public Category updateCategory(Category category, IntegrationHeader... headers) {
@@ -51,7 +51,7 @@ public class CategoryService extends HttpService {
     }
 
     public void deleteCategory(Long id, IntegrationHeader... headers) {
-        HttpRequestWithBody deleteRequest = delete(apiEndPoint + "/categories/" + id, headers);
+        HttpRequestWithBody deleteRequest = delete(apiEndPoint + CATEGORIES_URI + id, headers);
         Response response = execute(deleteRequest);
         if (response.getStatus() != HttpStatus.SC_NO_CONTENT) {
             throw new NotFoundException(format("Category with id %s not found.", id));
@@ -59,8 +59,8 @@ public class CategoryService extends HttpService {
     }
 
 
-    public Category getCategory(Long id, IntegrationHeader... headers) throws NotFoundException {
-        GetRequest getRequest = get(apiEndPoint + "/categories/" + id, headers);
+    public Category getCategory(Long id, IntegrationHeader... headers) {
+        GetRequest getRequest = get(apiEndPoint + CATEGORIES_URI + id, headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Category.class);
@@ -68,23 +68,24 @@ public class CategoryService extends HttpService {
         throw new NotFoundException(format("Category with id %s not found.", id));
     }
 
-    public List<Category> getAllCategories(IntegrationHeader... headers) throws NotFoundException {
+    public List<Category> getAllCategories(IntegrationHeader... headers) {
         boolean hasMoreElements;
         ArrayList<Category> allCategories = new ArrayList<Category>();
 
-        String urlToGet = apiEndPoint + "/categories/";
+        String urlToGet = apiEndPoint + CATEGORIES_URI;
 
         do {
             GetRequest getRequest = get(urlToGet, headers);
             Response response = execute(getRequest);
             if (response.getStatus() == HttpStatus.SC_OK) {
-                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>(){});
+                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {
+                });
                 for (Category root : rootResponse.getContent()) {
                     List<Category> completeRootHierarchy = getCompleteCategory(root, headers);
                     allCategories.addAll(completeRootHierarchy);
                 }
                 for (Link link : rootResponse.getLinks()) {
-                    if (link.getRel().equals("next")) {
+                    if (link.getRel().equals(NEXT)) {
                         urlToGet = link.getHref();
                         break;
                     }

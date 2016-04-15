@@ -17,6 +17,10 @@
       <artifactId>anymarket-sdk-common</artifactId>
     </dependency>
     <dependency>
+      <groupId>br.com.anymarket.sdk</groupId>
+      <artifactId>anymarket-sdk-categories</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
