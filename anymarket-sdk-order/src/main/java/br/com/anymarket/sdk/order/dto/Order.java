@@ -20,7 +20,7 @@ public class Order {
     @JsonProperty("marketPlace")
     private MarketPlace marketPlace;
 
-    @JsonProperty("idInClient")
+    @JsonProperty("partnerId")
     private String partnerId;
 
     @JsonProperty("createdAt")
