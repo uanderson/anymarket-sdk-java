@@ -1,25 +1,28 @@
-package br.com.anymarket.sdk.categories.dto;
-
+package br.com.anymarket.sdk.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
 
-public class SimpleCategory {
 
-    @JsonProperty("id")
-    private Long id;
+public class Characteristics {
+
+    @JsonProperty("index")
+    private int index;
 
     @JsonProperty("name")
     private String name;
 
-    public Long getId() {
-        return id;
+    @JsonProperty("value")
+    private String value;
+
+    public int getIndex() {
+        return index;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getName() {
@@ -30,6 +33,14 @@ public class SimpleCategory {
         this.name = name;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -38,21 +49,22 @@ public class SimpleCategory {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SimpleCategory category = (SimpleCategory) o;
-        return Objects.equals(id, category.id) &&
-            Objects.equals(name, category.name);
+        Characteristics that = (Characteristics) o;
+        return Objects.equals(name, that.name) &&
+            Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name, value);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-            .add("id", id)
+            .add("index", index)
             .add("name", name)
+            .add("value", value)
             .toString();
     }
 }

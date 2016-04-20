@@ -38,7 +38,7 @@ public class ProductService extends HttpService {
     }
 
     public Product getProduct(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat(id.toString()), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Product.class);

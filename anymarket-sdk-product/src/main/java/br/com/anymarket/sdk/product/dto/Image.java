@@ -7,6 +7,13 @@ import java.net.URL;
 
 public class Image {
 
+    public Image() {
+    }
+
+    public Image(URL url) {
+        this.url = url;
+    }
+
     @JsonProperty("id")
     private Long id;
 

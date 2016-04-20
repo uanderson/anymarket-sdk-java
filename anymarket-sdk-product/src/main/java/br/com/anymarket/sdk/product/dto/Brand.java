@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.categories.dto;
+package br.com.anymarket.sdk.product.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
 
-public class SimpleCategory {
+public class Brand {
 
     @JsonProperty("id")
     private Long id;
@@ -38,9 +38,9 @@ public class SimpleCategory {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SimpleCategory category = (SimpleCategory) o;
-        return Objects.equals(id, category.id) &&
-            Objects.equals(name, category.name);
+        Brand brand = (Brand) o;
+        return Objects.equals(id, brand.id) &&
+            Objects.equals(name, brand.name);
     }
 
     @Override
