@@ -9,6 +9,7 @@
     <module>anymarket-sdk-stock</module>
     <module>anymarket-sdk-order</module>
     <module>anymarket-sdk-common</module>
+    <module>anymarket-sdk-brand</module>
     <module>anymarket-sdk-product</module>
     <module>anymarket-sdk-all</module>
     <module>anymarket-sdk-monitor</module>
@@ -35,6 +36,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>anymarket-sdk-brand</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

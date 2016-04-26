@@ -18,6 +18,10 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-brand</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-product</artifactId>
     </dependency>
     <dependency>

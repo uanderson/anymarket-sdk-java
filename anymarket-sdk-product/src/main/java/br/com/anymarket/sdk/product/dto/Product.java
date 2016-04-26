@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.product.dto;
 
 
+import br.com.anymarket.sdk.brand.dto.Brand;
 import br.com.anymarket.sdk.categories.dto.SimpleCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

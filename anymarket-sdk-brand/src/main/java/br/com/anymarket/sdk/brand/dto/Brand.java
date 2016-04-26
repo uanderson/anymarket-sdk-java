@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.product.dto;
+package br.com.anymarket.sdk.brand.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +28,10 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Brand(final String name) {
+        this.setName(name);
     }
 
     @Override
