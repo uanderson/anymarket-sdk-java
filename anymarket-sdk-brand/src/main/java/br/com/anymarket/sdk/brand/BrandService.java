@@ -14,7 +14,7 @@ import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
-import java.util.ArrayList;
+import java.net.URLEncoder;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -36,11 +36,14 @@ public class BrandService extends HttpService {
     }
 
     public Brand insertBrandIfNotExists(final String brandName, IntegrationHeader... headers) {
-        final List<Brand> brands = getBrandByName(brandName, headers);
+        final List<Brand> brands = getBrandsByName(brandName, headers);
         if (brands.isEmpty()) {
             return insertBrand(new Brand(brandName), headers);
         }
-        return brands.stream().findFirst().get();
+        if (brands.size() > 1) {
+            throw new IllegalStateException("More than one brand found for name " + brandName);
+        }
+        return brands.get(0);
     }
 
     public Brand updateBrand(Brand brand, IntegrationHeader... headers) {
@@ -59,12 +62,12 @@ public class BrandService extends HttpService {
         throw new NotFoundException(format("Brand with id %s not found.", id));
     }
 
-    public List<Brand> getBrandByName(final String name, IntegrationHeader... headers) {
-        return getAllBrands(apiEndPoint.concat(BRANDS_URI).concat("?name=").concat(name), headers);
+    public List<Brand> getBrandsByName(final String name, IntegrationHeader... headers) {
+        return getAllBrands(apiEndPoint.concat(BRANDS_URI).concat("?name=").concat(URLEncoder.encode(name)), headers);
     }
 
     public List<Brand> getAllBrands(IntegrationHeader... headers) {
-        return getAllBrands(apiEndPoint.concat(BRANDS_URI).concat("/"), headers);
+        return getAllBrands(apiEndPoint.concat(BRANDS_URI), headers);
     }
 
     private List<Brand> getAllBrands(final String url, IntegrationHeader... headers) {

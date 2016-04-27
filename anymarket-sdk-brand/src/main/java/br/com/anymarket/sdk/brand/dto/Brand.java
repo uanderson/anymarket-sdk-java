@@ -8,11 +8,21 @@ import java.util.Objects;
 
 public class Brand {
 
+    public Brand() {
+    }
+
+    public Brand(final String name) {
+        this.setName(name);
+    }
+
     @JsonProperty("id")
     private Long id;
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("partnerId")
+    private String partnerId;
 
     public Long getId() {
         return id;
@@ -30,8 +40,12 @@ public class Brand {
         this.name = name;
     }
 
-    public Brand(final String name) {
-        this.setName(name);
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
     }
 
     @Override
@@ -43,7 +57,7 @@ public class Brand {
             return false;
         }
         Brand brand = (Brand) o;
-        return Objects.equals(id, brand.id) &&
+        return Objects.equals(id, brand.id) ||
             Objects.equals(name, brand.name);
     }
 
@@ -57,6 +71,7 @@ public class Brand {
         return MoreObjects.toStringHelper(this)
             .add("id", id)
             .add("name", name)
+            .add("partnerId", partnerId)
             .toString();
     }
 }
