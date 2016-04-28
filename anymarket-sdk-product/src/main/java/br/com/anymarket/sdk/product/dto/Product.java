@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -59,7 +60,7 @@ public class Product {
     private BigDecimal weight;
 
     @JsonProperty("images")
-    private List<Image> images;
+    private List<Image> images = Lists.newArrayList();
 
     @JsonProperty("brand")
     private Brand brand;

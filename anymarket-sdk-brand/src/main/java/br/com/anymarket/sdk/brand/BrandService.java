@@ -7,6 +7,7 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
+import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -63,7 +64,7 @@ public class BrandService extends HttpService {
     }
 
     public List<Brand> getBrandsByName(final String name, IntegrationHeader... headers) {
-        return getAllBrands(apiEndPoint.concat(BRANDS_URI).concat("?name=").concat(URLEncoder.encode(name)), headers);
+        return getAllBrands(apiEndPoint.concat(BRANDS_URI).concat("?name=").concat(SDKUrlEncoder.encodeParameterToUTF8(name)), headers);
     }
 
     public List<Brand> getAllBrands(IntegrationHeader... headers) {

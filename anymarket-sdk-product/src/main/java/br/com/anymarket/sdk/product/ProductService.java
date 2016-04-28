@@ -7,6 +7,7 @@ import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Product;
+import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
@@ -51,7 +52,7 @@ public class ProductService extends HttpService {
     }
 
     public Product getProductBySku(final String sku, IntegrationHeader... headers) {
-        final List<Product> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=").concat(sku), headers);
+        final List<Product> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=").concat(SDKUrlEncoder.encodeParameterToUTF8(sku)), headers);
         if (!products.isEmpty()) {
             return products.stream().findFirst().get();
         }

@@ -10,8 +10,14 @@ public class Image {
     public Image() {
     }
 
-    public Image(URL url) {
+    public Image(final URL url) {
         this.url = url;
+    }
+
+    public Image(final URL url, final String variation, final boolean main) {
+        this.url = url;
+        this.variation = variation;
+        this.main = main;
     }
 
     @JsonProperty("id")
