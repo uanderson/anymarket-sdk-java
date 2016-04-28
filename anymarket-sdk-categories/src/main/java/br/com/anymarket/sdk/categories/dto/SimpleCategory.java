@@ -8,6 +8,13 @@ import java.util.Objects;
 
 public class SimpleCategory {
 
+    public SimpleCategory() {
+    }
+
+    public SimpleCategory(Long id) {
+        this.id = id;
+    }
+
     @JsonProperty("id")
     private Long id;
 

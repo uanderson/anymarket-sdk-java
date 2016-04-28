@@ -11,6 +11,7 @@ import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,7 +36,7 @@ public class Product {
     private URL youtubeVideoUrl;
 
     @JsonProperty("characteristics")
-    private List<Characteristics> characteristics;
+    private List<Characteristics> characteristics = new ArrayList<Characteristics>();
 
     @JsonProperty("origin")
     @JsonDeserialize(using = OriginDeserializer.class)
