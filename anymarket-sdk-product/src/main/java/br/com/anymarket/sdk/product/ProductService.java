@@ -56,7 +56,7 @@ public class ProductService extends HttpService {
         if (!products.isEmpty()) {
             return products.stream().findFirst().get();
         }
-        return null;
+        throw new NotFoundException(format("Product with partnerId %s not found.", sku));
     }
 
     public List<Product> getAllProducts(IntegrationHeader... headers) {
