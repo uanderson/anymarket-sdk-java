@@ -6,10 +6,12 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
+import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
+import com.mashape.unirest.request.HttpRequestWithBody;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
@@ -40,6 +42,34 @@ public class ProductService extends HttpService {
             .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         return response.to(Product.class);
+    }
+
+    public Product updateProductAndImages(Product product, IntegrationHeader... headers) {
+        RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+            .concat(product.getId().toString()), product, headers);
+        Response response = execute(put);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            if (product.getImages() != null) {
+                for (Image image : product.getImages()) {
+                    if (image.getId() == null) {
+                        RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                        execute(post);
+                    }
+                }
+            }
+
+            if (product.getImagesForDelete() != null) {
+                for (Image image : product.getImagesForDelete()) {
+                    if (image.getId() != null) {
+                        HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+                            .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                        execute(delete);
+                    }
+                }
+            }
+        }
+        return getProduct(product.getId(), headers);
     }
 
     public Product getProduct(Long id, IntegrationHeader... headers) {

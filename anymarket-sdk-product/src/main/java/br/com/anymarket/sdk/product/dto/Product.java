@@ -62,6 +62,8 @@ public class Product {
     @JsonProperty("images")
     private List<Image> images = Lists.newArrayList();
 
+    private List<Image> imagesForDelete = Lists.newArrayList();
+
     @JsonProperty("brand")
     private Brand brand;
 
@@ -249,6 +251,14 @@ public class Product {
 
     public void setHasVariations(boolean hasVariations) {
         this.hasVariations = hasVariations;
+    }
+
+    public List<Image> getImagesForDelete() {
+        return imagesForDelete;
+    }
+
+    public void setImagesForDelete(List<Image> imagesForDelete) {
+        this.imagesForDelete = imagesForDelete;
     }
 
     @Override
