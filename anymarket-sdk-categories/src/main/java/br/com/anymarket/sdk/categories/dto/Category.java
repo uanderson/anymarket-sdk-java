@@ -33,7 +33,7 @@ public class Category implements AnymarketPojo {
     private Boolean calculatedPrice;
 
     @JsonProperty("children")
-    private List<Category> children = new ArrayList();
+    private List<Category> children = new ArrayList<Category>();
 
     @JsonProperty("parent")
     private Category parent;
@@ -187,8 +187,12 @@ public class Category implements AnymarketPojo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Category category = (Category) o;
         return Objects.equals(id, category.id);
     }
