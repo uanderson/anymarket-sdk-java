@@ -7,7 +7,9 @@ public enum DeliveryStatus {
     UNKNOWN("Desconhecido"),
     IN_TRANSIT("Em trânsito"),
     DELIVERED("Entregue"),
-    HOLD_FOR_PICKUP("Aguardando retirada");
+    HOLD_FOR_PICKUP("Aguardando retirada"),
+    DELAYED("Atrasado"),
+    DELIVERED_LATE("Entregue atrasado");
 
     private final String description;
 
