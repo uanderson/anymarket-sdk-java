@@ -1,6 +1,6 @@
 package br.com.anymarket.sdk.order.filters;
 
-import br.com.anymarket.sdk.order.dto.MarketPlace;
+import br.com.anymarket.sdk.MarketPlace;
 
 /**
  *

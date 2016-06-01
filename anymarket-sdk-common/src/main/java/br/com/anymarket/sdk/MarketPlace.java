@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.order.dto;
+package br.com.anymarket.sdk;
 
 public enum MarketPlace {
     CNOVA("Cnova"),
@@ -6,7 +6,8 @@ public enum MarketPlace {
     MERCADO_LIVRE("Mercado Livre"),
     B2W("B2W"),
     ECOMMERCE("E-Commerce"),
-    WALMART("Walmart");
+    WALMART("Walmart"),
+    GFG("Global Fashion Group");
 
     private String name;
 
