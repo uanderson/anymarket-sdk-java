@@ -23,7 +23,7 @@ public class SkuMarketPlace {
     private MarketPlace marketPlace;
 
     @JsonProperty("index")
-    private Long index;
+    private Integer index;
 
     @JsonProperty("publicationStatus")
     private String publicationStatus;
@@ -34,8 +34,14 @@ public class SkuMarketPlace {
     @JsonProperty("price")
     private BigDecimal price;
 
+    @JsonProperty("priceFactor")
+    private BigDecimal priceFactor;
+
     @JsonProperty("discountPrice")
     private BigDecimal discountPrice;
+
+    @JsonProperty(value = "skuInMarketplace")
+    private String skuInMarketplace;
 
     @JsonProperty(value = "fields")
     @JsonDeserialize(using = VariationDeserializer.class)
@@ -48,7 +54,9 @@ public class SkuMarketPlace {
         setPublicationStatus(builder.publicationStatus);
         setMarketplaceStatus(builder.marketplaceStatus);
         setPrice(builder.price);
+        setPriceFactor(builder.priceFactor);
         setDiscountPrice(builder.discountPrice);
+        setIdInMarketplace(builder.idInMarketplace);
         setFields(builder.fields);
     }
 
@@ -80,11 +88,11 @@ public class SkuMarketPlace {
         this.marketPlace = marketPlace;
     }
 
-    public Long getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public void setIndex(Long index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
@@ -112,12 +120,28 @@ public class SkuMarketPlace {
         this.price = price;
     }
 
+    public BigDecimal getPriceFactor() {
+        return priceFactor;
+    }
+
+    public void setPriceFactor(BigDecimal priceFactor) {
+        this.priceFactor = priceFactor;
+    }
+
     public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
     public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
+    }
+
+    public String getSkuInMarketplace() {
+        return skuInMarketplace;
+    }
+
+    public void setSkuInMarketplace(String skuInMarketplace) {
+        this.skuInMarketplace = skuInMarketplace;
     }
 
     public Map<String, String> getFields() {
@@ -146,11 +170,13 @@ public class SkuMarketPlace {
     public static final class Builder {
         private String idInMarketplace;
         private MarketPlace marketPlace;
-        private Long index;
+        private Integer index;
         private String publicationStatus;
         private String marketplaceStatus;
         private BigDecimal price;
+        private BigDecimal priceFactor;
         private BigDecimal discountPrice;
+        private String skuInMarketplace;
         private Map<String, String> fields;
 
         private Builder() {
@@ -166,7 +192,7 @@ public class SkuMarketPlace {
             return this;
         }
 
-        public Builder withIndex(Long val) {
+        public Builder withIndex(Integer val) {
             index = val;
             return this;
         }
@@ -186,8 +212,18 @@ public class SkuMarketPlace {
             return this;
         }
 
+        public Builder withPriceFactor(BigDecimal val) {
+            priceFactor = val;
+            return this;
+        }
+
         public Builder withDiscountPrice(BigDecimal val) {
             discountPrice = val;
+            return this;
+        }
+
+        public Builder withSkuInMarketplace(String val) {
+            skuInMarketplace = val;
             return this;
         }
 
