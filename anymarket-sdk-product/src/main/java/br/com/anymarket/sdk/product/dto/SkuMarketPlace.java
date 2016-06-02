@@ -41,6 +41,21 @@ public class SkuMarketPlace {
     @JsonDeserialize(using = VariationDeserializer.class)
     private Map<String, String> fields = new HashMap<String, String>();
 
+    private SkuMarketPlace(Builder builder) {
+        setIdInMarketplace(builder.idInMarketplace);
+        setMarketPlace(builder.marketPlace);
+        setIndex(builder.index);
+        setPublicationStatus(builder.publicationStatus);
+        setMarketplaceStatus(builder.marketplaceStatus);
+        setPrice(builder.price);
+        setDiscountPrice(builder.discountPrice);
+        setFields(builder.fields);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public Long getId() {
         return id;
     }
@@ -126,5 +141,63 @@ public class SkuMarketPlace {
             ", discountPrice=" + discountPrice +
             ", fields=" + fields +
             '}';
+    }
+
+    public static final class Builder {
+        private String idInMarketplace;
+        private MarketPlace marketPlace;
+        private Long index;
+        private String publicationStatus;
+        private String marketplaceStatus;
+        private BigDecimal price;
+        private BigDecimal discountPrice;
+        private Map<String, String> fields;
+
+        private Builder() {
+        }
+
+        public Builder withIdInMarketplace(String val) {
+            idInMarketplace = val;
+            return this;
+        }
+
+        public Builder withMarketPlace(MarketPlace val) {
+            marketPlace = val;
+            return this;
+        }
+
+        public Builder withIndex(Long val) {
+            index = val;
+            return this;
+        }
+
+        public Builder withPublicationStatus(String val) {
+            publicationStatus = val;
+            return this;
+        }
+
+        public Builder withMarketplaceStatus(String val) {
+            marketplaceStatus = val;
+            return this;
+        }
+
+        public Builder withPrice(BigDecimal val) {
+            price = val;
+            return this;
+        }
+
+        public Builder withDiscountPrice(BigDecimal val) {
+            discountPrice = val;
+            return this;
+        }
+
+        public Builder withFields(Map<String, String> val) {
+            fields = val;
+            return this;
+        }
+
+        public SkuMarketPlace build() {
+            return new SkuMarketPlace(this);
+        }
     }
 }
