@@ -21,7 +21,7 @@ import static java.lang.String.format;
 
 public class SkuMarketPlaceService extends HttpService {
 
-    private static final String SKU_URI = "/skus/%s/marketplaces/";
+    private static final String SKUMP_URI = "/skus/%s/marketplaces/";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -29,35 +29,38 @@ public class SkuMarketPlaceService extends HttpService {
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
-    public SkuMarketPlace insert(final SkuMarketPlace skuMp, IntegrationHeader... headers) {
+    public SkuMarketPlace insert(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser persistido.");
-        RequestBodyEntity post = post(getURL(), skuMp, headers);
+        Objects.requireNonNull(idSku, "Informe o id do SKU");
+        RequestBodyEntity post = post(getURLFormated(idSku), skuMp, headers);
         Response response = execute(post);
         return response.to(SkuMarketPlace.class);
     }
 
-    public SkuMarketPlace update(final SkuMarketPlace skuMp,IntegrationHeader... headers) {
+    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
-        RequestBodyEntity put = put(getURL().concat("/").concat(skuMp.getId().toString()), skuMp, headers);
+        Objects.requireNonNull(idSku, "Informe o id do SKU");
+        RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(skuMp.getId().toString()), skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
     }
 
-    private String getURL() {
-        return String.format(apiEndPoint.concat(SKU_URI));
+    private String getURLFormated(final Long idSku) {
+        return String.format(apiEndPoint.concat(SKUMP_URI), idSku.toString());
     }
 
-    public SkuMarketPlace save(final SkuMarketPlace skuMp, IntegrationHeader... headers) {
+    public SkuMarketPlace save(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
         if (skuMp.getId() != null) {
-            return update(skuMp, headers);
+            return update(skuMp, idSku, headers);
         } else {
-            return insert(skuMp, headers);
+            return insert(skuMp, idSku, headers);
         }
     }
 
-    public SkuMarketPlace getSkuMarketPlace(Long idSkuMp, IntegrationHeader... headers) {
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
-        GetRequest getRequest = get(getURL().concat("/").concat(idSkuMp.toString()), headers);
+        Objects.requireNonNull(idSku, "Informe o id do SKU");
+        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
@@ -65,9 +68,9 @@ public class SkuMarketPlaceService extends HttpService {
         throw new NotFoundException(format("Sku with id %s not found.", idSkuMp));
     }
 
-    public List<SkuMarketPlace> getAllSkuMps(IntegrationHeader... headers) {
+    public List<SkuMarketPlace> getAllSkuMps(Long idSku, IntegrationHeader... headers) {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
-        final GetRequest getRequest = get(getURL().concat("/"), headers);
+        final GetRequest getRequest = get(getURLFormated(idSku).concat("/"), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {
