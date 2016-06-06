@@ -36,9 +36,6 @@ public class Sku {
     @JsonDeserialize(using = VariationDeserializer.class)
     private Map<String, String> variations = new HashMap<String, String>();
 
-    @JsonProperty("product")
-    private Product product;
-
     public Long getId() {
         return id;
     }
@@ -93,14 +90,6 @@ public class Sku {
 
     public void setVariations(Map<String, String> variations) {
         this.variations = variations;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @Override
