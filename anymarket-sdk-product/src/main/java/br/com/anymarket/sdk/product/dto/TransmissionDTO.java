@@ -10,6 +10,10 @@ public class TransmissionDTO {
     private String publicationStatus;
     @JsonProperty("marketplaceStatus")
     private String marketplaceStatus;
+    @JsonProperty("transmissionStatus")
+    private String transmissionStatus;
+    @JsonProperty("errorMsg")
+    private String errorMsg;
     @JsonProperty("permalink")
     private String permalink;
     @JsonProperty("marketPlaceCode")
@@ -18,6 +22,8 @@ public class TransmissionDTO {
 
     private TransmissionDTO(Builder builder) {
         setPublicationStatus(builder.publicationStatus);
+        setTransmissionStatus(builder.transmissionStatus);
+        setErrorMsg(builder.errorMsg);
         setMarketplaceStatus(builder.marketplaceStatus);
         setMarketPlaceCode(builder.marketPlaceCode);
         setPermalink(builder.permalink);
@@ -33,6 +39,22 @@ public class TransmissionDTO {
 
     public void setPublicationStatus(String publicationStatus) {
         this.publicationStatus = publicationStatus;
+    }
+
+    public String getTransmissionStatus() {
+        return transmissionStatus;
+    }
+
+    public void setTransmissionStatus(String transmissionStatus) {
+        this.transmissionStatus = transmissionStatus;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     public String getMarketplaceStatus() {
@@ -68,6 +90,8 @@ public class TransmissionDTO {
     }
 
     public static final class Builder {
+        private String transmissionStatus;
+        private String errorMsg;
         private String publicationStatus;
         private String marketplaceStatus;
         private String marketPlaceCode;
@@ -78,6 +102,16 @@ public class TransmissionDTO {
 
         public Builder withPublicationStatus(String val) {
             publicationStatus = val;
+            return this;
+        }
+
+        public Builder withTransmissionStatus(String val) {
+            transmissionStatus = val;
+            return this;
+        }
+
+        public Builder withErrorMsg(String val) {
+            errorMsg = val;
             return this;
         }
 
