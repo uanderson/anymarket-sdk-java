@@ -36,12 +36,17 @@ public class SkuMarketPlaceService extends HttpService {
         return response.to(SkuMarketPlace.class);
     }
 
-    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
+    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, Long idSkuMP, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
+        Objects.requireNonNull(idSkuMP, "Informe o id do SkuMarketplace a ser atualizado.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
-        RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(skuMp.getId().toString()), skuMp, headers);
+        RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(idSkuMP.toString()), skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
+    }
+
+    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
+        return update(skuMp, idSku, skuMp.getId(), headers);
     }
 
     private String getURLFormated(final Long idSku) {

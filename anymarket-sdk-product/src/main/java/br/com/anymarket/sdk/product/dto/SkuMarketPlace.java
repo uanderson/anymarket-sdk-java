@@ -29,6 +29,12 @@ public class SkuMarketPlace {
     @JsonProperty("marketplaceStatus")
     private String marketplaceStatus;
 
+    @JsonProperty(value = "transmissionStatus")
+    private String transmissionStatus;
+
+    @JsonProperty(value = "errorMsg")
+    private String errorMsg;
+
     @JsonProperty("price")
     private BigDecimal price;
 
@@ -44,7 +50,8 @@ public class SkuMarketPlace {
     @JsonProperty(value = "fields")
     private Map<String, String> fields = new HashMap<String, String>();
 
-    public SkuMarketPlace() {
+    protected SkuMarketPlace() {
+        //to serialize
     }
 
     private SkuMarketPlace(Builder builder) {
@@ -52,6 +59,8 @@ public class SkuMarketPlace {
         setMarketPlace(builder.marketPlace);
         setIndex(builder.index);
         setPublicationStatus(builder.publicationStatus);
+        setTransmissionStatus(builder.transmissionStatus);
+        setErrorMsg(builder.errorMsg);
         setMarketplaceStatus(builder.marketplaceStatus);
         setPrice(builder.price);
         setPriceFactor(builder.priceFactor);
@@ -102,6 +111,22 @@ public class SkuMarketPlace {
 
     public void setPublicationStatus(String publicationStatus) {
         this.publicationStatus = publicationStatus;
+    }
+
+    public String getTransmissionStatus() {
+        return transmissionStatus;
+    }
+
+    public void setTransmissionStatus(String transmissionStatus) {
+        this.transmissionStatus = transmissionStatus;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     public String getMarketplaceStatus() {
@@ -172,6 +197,8 @@ public class SkuMarketPlace {
         private MarketPlace marketPlace;
         private Integer index;
         private String publicationStatus;
+        private String transmissionStatus;
+        private String errorMsg;
         private String marketplaceStatus;
         private BigDecimal price;
         private BigDecimal priceFactor;
@@ -199,6 +226,16 @@ public class SkuMarketPlace {
 
         public Builder withPublicationStatus(String val) {
             publicationStatus = val;
+            return this;
+        }
+
+        public Builder withTransmissionStatus(String val) {
+            transmissionStatus = val;
+            return this;
+        }
+
+        public Builder withErrorMsg(String val) {
+            errorMsg = val;
             return this;
         }
 
