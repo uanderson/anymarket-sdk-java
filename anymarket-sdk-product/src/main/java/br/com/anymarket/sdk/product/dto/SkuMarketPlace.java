@@ -44,8 +44,10 @@ public class SkuMarketPlace {
     private String skuInMarketplace;
 
     @JsonProperty(value = "fields")
-    @JsonDeserialize(using = VariationDeserializer.class)
     private Map<String, String> fields = new HashMap<String, String>();
+
+    public SkuMarketPlace() {
+    }
 
     private SkuMarketPlace(Builder builder) {
         setIdInMarketplace(builder.idInMarketplace);
