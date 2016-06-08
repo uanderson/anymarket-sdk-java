@@ -82,4 +82,14 @@ public class SkuService extends HttpService {
         return allSkus;
     }
 
+    public Sku getSku(Long idSku, IntegrationHeader... headers) {
+        Objects.requireNonNull(idSku, "Informe o id do Sku.");
+        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()), headers);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(Sku.class);
+        }
+        throw new NotFoundException(format("Sku with id %s not found.", idSku));
+    }
+
 }
