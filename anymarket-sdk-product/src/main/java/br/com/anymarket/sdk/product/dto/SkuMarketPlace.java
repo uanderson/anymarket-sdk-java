@@ -56,7 +56,7 @@ public class SkuMarketPlace {
         setPrice(builder.price);
         setPriceFactor(builder.priceFactor);
         setDiscountPrice(builder.discountPrice);
-        setIdInMarketplace(builder.idInMarketplace);
+        setSkuInMarketplace(builder.skuInMarketplace);
         setFields(builder.fields);
     }
 
