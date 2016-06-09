@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
  * Informações de estoque disponível
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AvailableStockDTO implements Serializable{
 
     @JsonProperty("amount")

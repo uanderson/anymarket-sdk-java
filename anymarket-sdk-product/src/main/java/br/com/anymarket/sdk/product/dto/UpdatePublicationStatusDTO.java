@@ -3,10 +3,12 @@ package br.com.anymarket.sdk.product.dto;
 import br.com.anymarket.sdk.dto.AvailableStockDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by fernando.gomes on 31/05/2016.
  */
-public class UpdatePublicationStatusDTO {
+public class UpdatePublicationStatusDTO implements Serializable {
 
     @JsonProperty("actualPublication")
     private SkuMarketPlace actualPublication;
@@ -14,9 +16,10 @@ public class UpdatePublicationStatusDTO {
     private AvailableStockDTO actualStock;
     @JsonProperty("newStatus")
     private PublicationStatus newStatus;
-    @JsonProperty("newStatus")
+    @JsonProperty("oi")
     private String oi;
-
+    @JsonProperty("idSku")
+    private Long idSku;
 
     public SkuMarketPlace getActualPublication() {
         return actualPublication;
@@ -48,5 +51,13 @@ public class UpdatePublicationStatusDTO {
 
     public void setOi(String oi) {
         this.oi = oi;
+    }
+
+    public Long getIdSku() {
+        return idSku;
+    }
+
+    public void setIdSku(Long idSku) {
+        this.idSku = idSku;
     }
 }

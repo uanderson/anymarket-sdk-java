@@ -1,9 +1,11 @@
 package br.com.anymarket.sdk.product.dto;
 
+import java.io.Serializable;
+
 /**
  * Status da publicação no Market Place
  */
-public enum PublicationStatus {
+public enum PublicationStatus implements Serializable {
 
     UNPUBLISHED {
         public String getName() {

@@ -4,12 +4,13 @@ import br.com.anymarket.sdk.MarketPlace;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SkuMarketPlace {
+public class SkuMarketPlace implements Serializable {
 
     @JsonProperty("id")
     private Long id;
