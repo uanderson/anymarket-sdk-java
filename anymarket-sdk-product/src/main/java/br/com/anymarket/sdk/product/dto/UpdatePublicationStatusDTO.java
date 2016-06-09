@@ -20,6 +20,8 @@ public class UpdatePublicationStatusDTO implements Serializable {
     private String oi;
     @JsonProperty("idSku")
     private Long idSku;
+    @JsonProperty("onlySync")
+    private boolean onlySync;
 
     public SkuMarketPlace getActualPublication() {
         return actualPublication;
@@ -59,5 +61,13 @@ public class UpdatePublicationStatusDTO implements Serializable {
 
     public void setIdSku(Long idSku) {
         this.idSku = idSku;
+    }
+
+    public boolean isOnlySync() {
+        return onlySync;
+    }
+
+    public void setOnlySync(boolean onlySync) {
+        this.onlySync = onlySync;
     }
 }
