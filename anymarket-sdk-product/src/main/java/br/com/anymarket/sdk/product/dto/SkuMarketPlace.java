@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.product.dto;
 
 import br.com.anymarket.sdk.MarketPlace;
+import br.com.anymarket.sdk.dto.AvailableStockDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -51,6 +52,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty(value = "fields")
     private Map<String, String> fields = new HashMap<String, String>();
 
+    @JsonProperty(value = "availableStock")
+    private AvailableStockDTO availableStock;
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -68,6 +72,7 @@ public class SkuMarketPlace implements Serializable {
         setDiscountPrice(builder.discountPrice);
         setSkuInMarketplace(builder.skuInMarketplace);
         setFields(builder.fields);
+        setAvailableStock(builder.availableStock);
     }
 
     public static Builder builder() {
@@ -178,6 +183,14 @@ public class SkuMarketPlace implements Serializable {
         this.fields = fields;
     }
 
+    public AvailableStockDTO getAvailableStock() {
+        return availableStock;
+    }
+
+    public void setAvailableStock(AvailableStockDTO availableStockDTO) {
+        this.availableStock = availableStockDTO;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -190,6 +203,7 @@ public class SkuMarketPlace implements Serializable {
             ", price=" + price +
             ", discountPrice=" + discountPrice +
             ", fields=" + fields +
+            ", availableStock=" + availableStock +
             '}';
     }
 
@@ -206,6 +220,7 @@ public class SkuMarketPlace implements Serializable {
         private BigDecimal discountPrice;
         private String skuInMarketplace;
         private Map<String, String> fields;
+        private AvailableStockDTO availableStock;
 
         private Builder() {
         }
@@ -267,6 +282,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withFields(Map<String, String> val) {
             fields = val;
+            return this;
+        }
+
+        public Builder withAvailableStock(AvailableStockDTO val) {
+            availableStock = val;
             return this;
         }
 
