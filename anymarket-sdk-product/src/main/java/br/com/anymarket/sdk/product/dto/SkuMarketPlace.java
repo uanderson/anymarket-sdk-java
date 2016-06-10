@@ -191,6 +191,10 @@ public class SkuMarketPlace implements Serializable {
         this.availableStock = availableStockDTO;
     }
 
+    public Boolean hasEnabledDiscount(String enabledDiscountParamName) {
+        return "true".equals(getFields().get(enabledDiscountParamName));
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
