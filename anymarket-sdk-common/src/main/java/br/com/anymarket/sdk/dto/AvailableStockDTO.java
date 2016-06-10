@@ -21,6 +21,9 @@ public class AvailableStockDTO implements Serializable{
     @JsonProperty("cost")
     private BigDecimal cost;
 
+    @JsonProperty("totalReservation")
+    private BigDecimal totalReservation;
+
     @JsonProperty("physicalAmount")
     private BigDecimal physicalAmount;
 
@@ -87,6 +90,14 @@ public class AvailableStockDTO implements Serializable{
 
     public boolean hasStock() {
         return BigDecimal.ZERO.compareTo(this.availableAmount) < 0;
+    }
+
+    public BigDecimal getTotalReservation() {
+        return totalReservation;
+    }
+
+    public void setTotalReservation(BigDecimal totalReservation) {
+        this.totalReservation = totalReservation;
     }
 
     public BigDecimal getAvailableAmount() {
