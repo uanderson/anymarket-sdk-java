@@ -1,5 +1,8 @@
 package br.com.anymarket.sdk.order.dto;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 
 public class ShippingResource {
 
@@ -26,6 +29,9 @@ public class ShippingResource {
 
     @JsonProperty("zipCode")
     private String zipCode;
+
+    @JsonProperty("promisedShippingTime")
+    private Date promisedShippingTime;
 
     public String getCity() {
         return city;
@@ -89,5 +95,13 @@ public class ShippingResource {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public Date getPromisedShippingTime() {
+        return promisedShippingTime;
+    }
+
+    public void setPromisedShippingTime(Date promisedShippingTime) {
+        this.promisedShippingTime = promisedShippingTime;
     }
 }
