@@ -18,6 +18,9 @@ public class Order {
     @JsonProperty("marketPlaceId")
     private String marketPlaceId;
 
+    @JsonProperty("orderNumberInMarketplace")
+    private String marketplaceNumber;
+
     @JsonProperty("marketPlace")
     private MarketPlace marketPlace;
 
@@ -243,11 +246,20 @@ public class Order {
         this.deliveryStatus = deliveryStatus;
     }
 
+    public String getMarketplaceNumber() {
+        return marketplaceNumber;
+    }
+
+    public void setMarketplaceNumber(String marketplaceNumber) {
+        this.marketplaceNumber = marketplaceNumber;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
             .add("id", id)
             .add("marketPlaceId", marketPlaceId)
+            .add("marketplaceNumber", marketplaceNumber)
             .add("marketPlace", marketPlace)
             .add("createdAt", createdAt)
             .add("transmissionStatus", transmissionStatus)
