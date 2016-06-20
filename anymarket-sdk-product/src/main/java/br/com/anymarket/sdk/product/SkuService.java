@@ -6,16 +6,13 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
-import br.com.anymarket.sdk.product.dto.Product;
 import br.com.anymarket.sdk.product.dto.Sku;
-import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -84,4 +81,15 @@ public class SkuService extends HttpService {
         }
         return allSkus;
     }
+
+    public Sku getSku(Long idSku, IntegrationHeader... headers) {
+        Objects.requireNonNull(idSku, "Informe o id do Sku.");
+        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()), headers);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(Sku.class);
+        }
+        throw new NotFoundException(format("Sku with id %s not found.", idSku));
+    }
+
 }
