@@ -70,10 +70,10 @@ public class Order {
     private TrackingResource tracking;
 
     @JsonProperty("payments")
-    private List<PaymentResource> payments = new ArrayList();
+    private List<PaymentResource> payments = new ArrayList<PaymentResource>();
 
     @JsonProperty("items")
-    private List<OrderItemResource> items = new ArrayList();
+    private List<OrderItemResource> items = new ArrayList<OrderItemResource>();
 
     @JsonProperty("deliveryStatus")
     private DeliveryStatus deliveryStatus;
