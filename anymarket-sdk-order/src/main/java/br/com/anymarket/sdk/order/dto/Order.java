@@ -51,6 +51,9 @@ public class Order {
     @JsonProperty("marketPlaceStatus")
     private String marketPlaceStatus;
 
+    @JsonProperty("marketPlaceStatusComplement")
+    private String marketPlaceStatusComplement;
+
     @JsonProperty("discount")
     private BigDecimal discount;
 
@@ -169,6 +172,14 @@ public class Order {
         this.marketPlaceStatus = marketPlaceStatus;
     }
 
+    public String getMarketPlaceStatusComplement() {
+        return marketPlaceStatusComplement;
+    }
+
+    public void setMarketPlaceStatusComplement(String marketPlaceStatusComplement) {
+        this.marketPlaceStatusComplement = marketPlaceStatusComplement;
+    }
+
     public BigDecimal getDiscount() {
         return discount;
     }
@@ -271,6 +282,7 @@ public class Order {
             .add("marketPlaceShipmentStatus", marketPlaceShipmentStatus)
             .add("invoice", invoice)
             .add("marketPlaceStatus", marketPlaceStatus)
+            .add("marketPlaceStatusComplement", marketPlaceStatusComplement)
             .add("discount", discount)
             .add("freight", freight)
             .add("gross", gross)
