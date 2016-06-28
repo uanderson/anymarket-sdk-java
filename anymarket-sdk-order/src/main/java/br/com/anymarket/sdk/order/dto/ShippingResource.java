@@ -1,6 +1,8 @@
 package br.com.anymarket.sdk.order.dto;
 
+import br.com.anymarket.sdk.serializer.SDKDateSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;
 
@@ -31,6 +33,7 @@ public class ShippingResource {
     private String zipCode;
 
     @JsonProperty("promisedShippingTime")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date promisedShippingTime;
 
     public String getCity() {
