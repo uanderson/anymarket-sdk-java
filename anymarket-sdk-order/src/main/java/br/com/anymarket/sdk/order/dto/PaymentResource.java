@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 /**
  * Dados do pagamento
  */
-public class PaymentResource{
+public class PaymentResource {
 
     @JsonProperty("method")
     private String method;
@@ -17,6 +17,9 @@ public class PaymentResource{
 
     @JsonProperty("value")
     private BigDecimal value;
+
+    @JsonProperty("marketplaceId")
+    private String marketplaceId;
 
     public String getMethod() {
         return method;
@@ -40,5 +43,13 @@ public class PaymentResource{
 
     public void setValue(BigDecimal value) {
         this.value = value;
+    }
+
+    public String getMarketplaceId() {
+        return marketplaceId;
+    }
+
+    public void setMarketplaceId(String marketplaceId) {
+        this.marketplaceId = marketplaceId;
     }
 }

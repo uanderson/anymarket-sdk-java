@@ -7,7 +7,7 @@ public enum MarketPlace {
     B2W("B2W"),
     ECOMMERCE("E-Commerce"),
     WALMART("Walmart"),
-    GFG("Global Fashion Group"),
+    GFG("GFG - Dafiti"),
     NETSHOES("Netshoes");
 
     private String name;

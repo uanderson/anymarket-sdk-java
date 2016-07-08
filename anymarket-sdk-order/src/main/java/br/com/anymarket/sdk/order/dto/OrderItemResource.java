@@ -30,6 +30,9 @@ public class OrderItemResource {
     @JsonProperty("shippings")
     private List<OrderItemShippingResource> shippings = new ArrayList();
 
+    @JsonProperty("marketPlaceId")
+    private String marketPlaceId;
+
     public SimpleSkuResource getSku() {
         return sku;
     }
@@ -86,6 +89,14 @@ public class OrderItemResource {
         this.shippings = shippings;
     }
 
+    public String getMarketPlaceId() {
+        return marketPlaceId;
+    }
+
+    public void setMarketPlaceId(String marketPlaceId) {
+        this.marketPlaceId = marketPlaceId;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -96,6 +107,7 @@ public class OrderItemResource {
             .add("total", total)
             .add("discount", discount)
             .add("shippings", shippings)
+            .add("marketPlaceId", marketPlaceId)
             .toString();
     }
 }
