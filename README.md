@@ -1,5 +1,2 @@
 # Update
-This repository is no longer mantained. Please acess [ANYMARKET SDK repository](https://github.com/AnyMarket/anymarket-sdk-java).
-
-# anymarket-java-api
-AnyMarket API client for Java
+This repository is no longer mantained. For an updated version, please access [ANYMARKET SDK repository](https://github.com/AnyMarket/anymarket-sdk-java).
