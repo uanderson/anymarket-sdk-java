@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.order.dto;
 
+import br.com.anymarket.sdk.MarketPlace;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -70,6 +71,9 @@ public class Order {
 
     @JsonProperty("items")
     private List<OrderItemResource> items = new ArrayList();
+
+    @JsonProperty("deliveryStatus")
+    private DeliveryStatus deliveryStatus;
 
     public Long getId() {
         return id;
@@ -229,6 +233,14 @@ public class Order {
 
     public void setItems(List<OrderItemResource> items) {
         this.items = items;
+    }
+
+    public DeliveryStatus getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 
     @Override
