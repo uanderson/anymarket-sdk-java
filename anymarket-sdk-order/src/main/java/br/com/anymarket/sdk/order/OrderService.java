@@ -6,6 +6,7 @@ import br.com.anymarket.sdk.exception.HttpClientException;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.order.dto.Order;
+import br.com.anymarket.sdk.order.dto.OrderTransmissionStatusResource;
 import br.com.anymarket.sdk.order.filters.OrderFilter;
 import br.com.anymarket.sdk.order.filters.OrderMarketplaceFilter;
 import br.com.anymarket.sdk.order.filters.OrderMarketplaceIdFilter;
@@ -87,7 +88,7 @@ public class OrderService {
     }
 
     public Order createOrder(Order order, IntegrationHeader... headers) {
-        checkNotNull(order, "Erro ao criar pedido: Dados enão encontrados.");
+        checkNotNull(order, "Erro ao criar pedido: Dados não encontrados.");
         return post(apiEndPointForResource.concat("/orders"))
             .body(order)
             .headers(headers)
@@ -96,12 +97,23 @@ public class OrderService {
     }
 
     public Order updateOrder(Order order, IntegrationHeader... headers) {
-        checkNotNull(order, "Erro ao atualizar pedido: Dados enão encontrados.");
+        checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         return put(apiEndPointForResource.concat("/orders/{id}"))
             .body(order)
             .headers(headers)
             .routeParam("id", order.getId().toString())
+            .getResponse()
+            .to(Order.class);
+    }
+
+    public Order transmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
+        checkNotNull(idOrder, "Erro ao atualizar pedido: Id não informado");
+        checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
+        return put(apiEndPointForResource.concat("/orders/{id}/transmissionStatus"))
+            .body(resource)
+            .headers(headers)
+            .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
     }
