@@ -52,11 +52,11 @@ public class OrderService {
 
         Page<Order> ordersPage = getOrders(Lists.newArrayList(marketplaceFilter, marketplaceIdFilter), headers);
         if (ordersPage.getContent() == null || ordersPage.getContent().isEmpty()) {
-            throw new NotFoundException(format("Não foi encotrado pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
+            throw new NotFoundException(format("Não foi encontrado pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
         }
 
         if (ordersPage.getContent().size() > 1) {
-            throw new HttpClientException(format("Foi encotrado mais de um pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
+            throw new HttpClientException(format("Foi encontrado mais de um pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
         }
 
         return ordersPage.getContent().get(0);
