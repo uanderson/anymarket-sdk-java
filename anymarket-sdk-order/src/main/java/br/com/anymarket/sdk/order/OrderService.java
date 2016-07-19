@@ -107,7 +107,7 @@ public class OrderService {
             .to(Order.class);
     }
 
-    public Order transmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
+    public Order updateTransmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
         checkNotNull(idOrder, "Erro ao atualizar pedido: Id não informado");
         checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
         return put(apiEndPointForResource.concat("/orders/{id}/transmissionStatus"))
