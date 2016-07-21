@@ -7,7 +7,7 @@ public enum MarketPlace {
     B2W("B2W"),
     ECOMMERCE("E-Commerce"),
     WALMART("Walmart"),
-    VTEX("VTEX");
+    VTEX("VTEX"),
     GFG("GFG - Dafiti"),
     NETSHOES("Netshoes");
 
