@@ -1,18 +1,26 @@
 package br.com.anymarket.sdk.order;
 
+import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
+import br.com.anymarket.sdk.exception.HttpClientException;
+import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.order.dto.Order;
+import br.com.anymarket.sdk.order.dto.OrderTransmissionStatusResource;
 import br.com.anymarket.sdk.order.filters.OrderFilter;
+import br.com.anymarket.sdk.order.filters.OrderMarketplaceFilter;
+import br.com.anymarket.sdk.order.filters.OrderMarketplaceIdFilter;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.collect.Lists;
 
 import java.util.List;
 
 import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.*;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static java.lang.String.format;
 
 public class OrderService {
 
@@ -33,6 +41,25 @@ public class OrderService {
             .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
+    }
+
+    public Order getOrderByIdInMarketplace(String idInMarketplace, MarketPlace marketplace, IntegrationHeader... headers) {
+        checkNotNull(idInMarketplace, "Erro ao recuperar pedido: idInMarketplace não informado");
+        checkNotNull(idInMarketplace, "Erro ao recuperar pedido: marketplace não informado");
+
+        OrderMarketplaceFilter marketplaceFilter = new OrderMarketplaceFilter(marketplace);
+        OrderMarketplaceIdFilter marketplaceIdFilter = new OrderMarketplaceIdFilter(idInMarketplace);
+
+        Page<Order> ordersPage = getOrders(Lists.newArrayList(marketplaceFilter, marketplaceIdFilter), headers);
+        if (ordersPage.getContent() == null || ordersPage.getContent().isEmpty()) {
+            throw new NotFoundException(format("Não foi encontrado pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
+        }
+
+        if (ordersPage.getContent().size() > 1) {
+            throw new HttpClientException(format("Foi encontrado mais de um pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
+        }
+
+        return ordersPage.getContent().get(0);
     }
 
     public Page<Order> getOrders(List<OrderFilter> filters, IntegrationHeader... headers) {
@@ -61,7 +88,7 @@ public class OrderService {
     }
 
     public Order createOrder(Order order, IntegrationHeader... headers) {
-        checkNotNull(order, "Erro ao criar pedido: Dados enão encontrados.");
+        checkNotNull(order, "Erro ao criar pedido: Dados não encontrados.");
         return post(apiEndPointForResource.concat("/orders"))
             .body(order)
             .headers(headers)
@@ -70,12 +97,23 @@ public class OrderService {
     }
 
     public Order updateOrder(Order order, IntegrationHeader... headers) {
-        checkNotNull(order, "Erro ao atualizar pedido: Dados enão encontrados.");
+        checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         return put(apiEndPointForResource.concat("/orders/{id}"))
             .body(order)
             .headers(headers)
             .routeParam("id", order.getId().toString())
+            .getResponse()
+            .to(Order.class);
+    }
+
+    public Order updateTransmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
+        checkNotNull(idOrder, "Erro ao atualizar pedido: Id não informado");
+        checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
+        return put(apiEndPointForResource.concat("/orders/{id}/transmissionStatus"))
+            .body(resource)
+            .headers(headers)
+            .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
     }

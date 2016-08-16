@@ -6,8 +6,6 @@ import org.apache.http.HttpStatus;
 
 import java.io.IOException;
 
-import static java.lang.String.format;
-
 public class Response {
 
     private int status;
@@ -38,7 +36,7 @@ public class Response {
 
     private <T> void checkNotFound(Class<T> clazz) {
         if (status == HttpStatus.SC_NOT_FOUND) {
-            throw new NotFoundException(format("%s não encontrado", clazz.getSimpleName()));
+            throw new NotFoundException(message);
         }
     }
 
