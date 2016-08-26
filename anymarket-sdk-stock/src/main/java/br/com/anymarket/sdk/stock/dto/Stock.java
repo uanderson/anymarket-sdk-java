@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Objects.isNull;
+
 
 /**
  * This class represents Stock info to be sent to AnyMarket by API v2
@@ -28,8 +28,10 @@ public class Stock implements AnymarketPojo {
             throw new IllegalArgumentException(
                 "It must be filled the id or partnerId");
         }
-        checkNotNull(builder.quantity, "Quantity must be filled");
-        checkNotNull(builder.costPrice, "Cost must be filled");
+        if (isNull(builder.quantity) && isNull(builder.costPrice)) {
+            throw new IllegalArgumentException(
+                "It must be filled the quantity or cost");
+        }
         this.id = builder.id;
         this.partnerId = builder.partnerId;
         this.quantity = builder.quantity;
