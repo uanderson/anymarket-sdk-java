@@ -84,6 +84,9 @@ public class Order {
     @JsonProperty("deliveryStatus")
     private DeliveryStatus deliveryStatus;
 
+    @JsonProperty("observation")
+    private String observation;
+
     public Long getId() {
         return id;
     }
@@ -268,6 +271,14 @@ public class Order {
         this.marketPlaceNumber = marketPlaceNumber;
     }
 
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -292,6 +303,7 @@ public class Order {
             .add("tracking", tracking)
 //            .add("payments", payments)
             .add("items", items)
+            .add("observation", observation)
             .toString();
     }
 }
