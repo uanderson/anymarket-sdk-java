@@ -28,6 +28,14 @@ public enum OrderStatus {
         }
     }
 
+    public static OrderStatus fromDescription(String description) {
+        for (OrderStatus status: OrderStatus.values())
+            if(status.getDescription().equals(description))
+                return status;
+
+        throw new IllegalArgumentException(description + " não é um status de pedido válido.");
+    }
+
     public Boolean acceptTransitionFrom(OrderStatus status) {
         return equals(status) || incomes.contains(status);
     }
