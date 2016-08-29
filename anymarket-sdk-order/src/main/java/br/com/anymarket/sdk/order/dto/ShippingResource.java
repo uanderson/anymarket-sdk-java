@@ -1,11 +1,13 @@
 package br.com.anymarket.sdk.order.dto;
 
 import br.com.anymarket.sdk.serializer.SDKDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ShippingResource {
 
     @JsonProperty("city")

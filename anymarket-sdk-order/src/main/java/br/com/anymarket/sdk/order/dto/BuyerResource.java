@@ -1,7 +1,9 @@
 package br.com.anymarket.sdk.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BuyerResource{
 
     @JsonProperty("id")
@@ -24,6 +26,9 @@ public class BuyerResource{
 
     @JsonProperty("phone")
     private String phone;
+
+    @JsonProperty("address")
+    private BuyerAddressResource address;
 
     public Long getId() {
         return id;
@@ -79,5 +84,9 @@ public class BuyerResource{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public BuyerAddressResource getAddress() {
+        return address;
     }
 }
