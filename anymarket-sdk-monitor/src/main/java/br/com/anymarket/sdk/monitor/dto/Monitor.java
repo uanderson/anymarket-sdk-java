@@ -105,6 +105,10 @@ public class Monitor implements AnymarketPojo {
         return status;
     }
 
+    public void concatRetryCallbackPathWithModule(String module, String retryCallbackPath) {
+        this.retryCallbackURL = module + retryCallbackPath;
+    }
+
     @Override
     public String getPathURI() {
         return "/monitorings";

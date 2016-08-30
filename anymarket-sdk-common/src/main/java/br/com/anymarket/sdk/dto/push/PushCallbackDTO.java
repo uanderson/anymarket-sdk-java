@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PushCallbackDTO {
 
     public static final int MAGIC_HASH = 31;
-    @JsonProperty("oi")
+    @JsonProperty("type")
     private PushType type;
 
     @JsonProperty("content")
