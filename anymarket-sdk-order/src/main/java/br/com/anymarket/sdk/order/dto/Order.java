@@ -283,6 +283,14 @@ public class Order {
         this.paymentDate = paymentDate;
     }
 
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -303,6 +311,7 @@ public class Order {
             .add("freight", freight)
             .add("gross", gross)
             .add("total", total)
+            .add("observation", observation)
 //            .add("shipping", shipping)
 //            .add("buyer", buyer)
             .add("tracking", tracking)
