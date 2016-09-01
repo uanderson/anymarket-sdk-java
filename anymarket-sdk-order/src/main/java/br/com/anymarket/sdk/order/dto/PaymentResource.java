@@ -20,6 +20,9 @@ public class PaymentResource {
     @JsonProperty("value")
     private BigDecimal value;
 
+    @JsonProperty("installments")
+    private Long installments;
+
     @JsonProperty("marketplaceId")
     private String marketplaceId;
 
@@ -53,5 +56,13 @@ public class PaymentResource {
 
     public void setMarketplaceId(String marketplaceId) {
         this.marketplaceId = marketplaceId;
+    }
+
+    public Long getInstallments() {
+        return installments;
+    }
+
+    public void setInstallments(Long installments) {
+        this.installments = installments;
     }
 }
