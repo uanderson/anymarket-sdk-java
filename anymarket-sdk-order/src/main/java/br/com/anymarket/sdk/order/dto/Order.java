@@ -33,6 +33,10 @@ public class Order {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date createdAt;
 
+    @JsonProperty("paymentDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
+    private Date paymentDate;
+
     @JsonProperty("transmissionStatus")
     private OrderTransmissionStatus transmissionStatus;
 
@@ -83,6 +87,9 @@ public class Order {
 
     @JsonProperty("deliveryStatus")
     private DeliveryStatus deliveryStatus;
+
+    @JsonProperty("observation")
+    private String observation;
 
     public Long getId() {
         return id;
@@ -268,6 +275,14 @@ public class Order {
         this.marketPlaceNumber = marketPlaceNumber;
     }
 
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -276,6 +291,7 @@ public class Order {
             .add("marketPlaceNumber", marketPlaceNumber)
             .add("marketPlace", marketPlace)
             .add("createdAt", createdAt)
+            .add("paymentDate", paymentDate)
             .add("transmissionStatus", transmissionStatus)
             .add("status", status)
             .add("marketPlaceUrl", marketPlaceUrl)
