@@ -35,12 +35,18 @@ public class PushCallbackContentDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PushCallbackContentDTO that = (PushCallbackContentDTO) o;
 
-        if (!oi.equals(that.oi)) return false;
+        if (!oi.equals(that.oi)) {
+            return false;
+        }
         return resourceId.equals(that.resourceId);
 
     }
