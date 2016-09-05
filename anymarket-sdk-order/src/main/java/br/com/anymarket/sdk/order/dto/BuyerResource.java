@@ -27,9 +27,6 @@ public class BuyerResource{
     @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("address")
-    private BuyerAddressResource address;
-
     public Long getId() {
         return id;
     }
@@ -84,9 +81,5 @@ public class BuyerResource{
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public BuyerAddressResource getAddress() {
-        return address;
     }
 }

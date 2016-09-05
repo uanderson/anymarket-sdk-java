@@ -38,6 +38,9 @@ public class ShippingResource {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date promisedShippingTime;
 
+    @JsonProperty("receiverName")
+    private String receiverName;
+
     public String getCity() {
         return city;
     }
@@ -108,5 +111,13 @@ public class ShippingResource {
 
     public void setPromisedShippingTime(Date promisedShippingTime) {
         this.promisedShippingTime = promisedShippingTime;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 }
