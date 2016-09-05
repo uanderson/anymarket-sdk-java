@@ -25,6 +25,14 @@ public class PushCallbackDTO {
         return contentDTO;
     }
 
+    public void setType(PushType type) {
+        this.type = type;
+    }
+
+    public void setContentDTO(PushCallbackContentDTO contentDTO) {
+        this.contentDTO = contentDTO;
+    }
+
     @Override
     public String toString() {
         return "PushCallbackDTO{" +

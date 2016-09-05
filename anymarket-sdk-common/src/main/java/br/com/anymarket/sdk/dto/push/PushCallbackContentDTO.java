@@ -17,12 +17,19 @@ public class PushCallbackContentDTO {
     private String resourceId;
 
     public String getOi() {
-
         return oi;
+    }
+
+    public void setOi(String oi) {
+        this.oi = oi;
     }
 
     public String getResourceId() {
         return resourceId;
+    }
+
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
     }
 
     @Override
