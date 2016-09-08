@@ -70,6 +70,9 @@ public class Order {
     @JsonProperty("total")
     private BigDecimal total;
 
+    @JsonProperty("interestValue")
+    private BigDecimal interestValue;
+
     @JsonProperty("shipping")
     private ShippingResource shipping;
 
@@ -291,6 +294,14 @@ public class Order {
         this.observation = observation;
     }
 
+    public BigDecimal getInterestValue() {
+        return interestValue;
+    }
+
+    public void setInterestValue(BigDecimal interestValue) {
+        this.interestValue = interestValue;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -311,11 +322,9 @@ public class Order {
             .add("freight", freight)
             .add("gross", gross)
             .add("total", total)
+            .add("interestValue", interestValue)
             .add("observation", observation)
-//            .add("shipping", shipping)
-//            .add("buyer", buyer)
             .add("tracking", tracking)
-//            .add("payments", payments)
             .add("items", items)
             .toString();
     }
