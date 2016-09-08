@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.dto.push;
+package br.com.anymarket.sdk.callback;
 
 public enum PushType {
 

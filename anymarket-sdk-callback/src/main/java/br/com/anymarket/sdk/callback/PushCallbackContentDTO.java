@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.dto.push;
+package br.com.anymarket.sdk.callback;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,7 +34,7 @@ public class PushCallbackContentDTO {
 
     @Override
     public String toString() {
-        return "PushCallbackContentDTO{" +
+        return "br.com.anymarket.sdk.callback.PushCallbackContentDTO{" +
             "oi='" + oi + '\'' +
             ", resourceId='" + resourceId + '\'' +
             '}';
