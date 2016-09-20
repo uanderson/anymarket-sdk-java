@@ -1,5 +1,7 @@
 package br.com.anymarket.sdk.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +40,8 @@ public class StateCodes {
     };
 
     public static String getStateCode(String name) {
-        return STATES.get( name.toUpperCase() );
+        String state = StringUtils.stripAccents( name );
+        return STATES.get( state.toUpperCase() );
     }
 
 }
