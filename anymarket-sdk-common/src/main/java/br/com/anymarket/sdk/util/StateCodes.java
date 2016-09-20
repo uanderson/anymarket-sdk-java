@@ -38,7 +38,7 @@ public class StateCodes {
     };
 
     public static String getStateCode(String name) {
-        return STATES.get(name);
+        return STATES.get( name.toUpperCase() );
     }
 
 }
