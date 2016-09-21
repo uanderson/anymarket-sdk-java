@@ -1,5 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
+import com.google.common.base.Strings;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +28,15 @@ public enum OrderStatus {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(status + " não é um status de pedido válido.", e);
         }
+    }
+
+    public static OrderStatus fromDescription(String description) {
+        if (!Strings.isNullOrEmpty(description))
+            for (OrderStatus status : OrderStatus.values())
+                if (status.getDescription().equalsIgnoreCase(description))
+                    return status;
+
+        throw new IllegalArgumentException(description + " não é um status de pedido válido.");
     }
 
     public Boolean acceptTransitionFrom(OrderStatus status) {

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Objects.isNull;
+
 
 /**
  * This class represents Stock info to be sent to AnyMarket by API v2

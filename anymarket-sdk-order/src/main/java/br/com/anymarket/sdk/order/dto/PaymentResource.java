@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 /**
  * Dados do pagamento
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentResource {
 
     @JsonProperty("method")
@@ -17,6 +19,9 @@ public class PaymentResource {
 
     @JsonProperty("value")
     private BigDecimal value;
+
+    @JsonProperty("installments")
+    private Long installments;
 
     @JsonProperty("marketplaceId")
     private String marketplaceId;
@@ -51,5 +56,13 @@ public class PaymentResource {
 
     public void setMarketplaceId(String marketplaceId) {
         this.marketplaceId = marketplaceId;
+    }
+
+    public Long getInstallments() {
+        return installments;
+    }
+
+    public void setInstallments(Long installments) {
+        this.installments = installments;
     }
 }

@@ -33,6 +33,10 @@ public class Order {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date createdAt;
 
+    @JsonProperty("paymentDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
+    private Date paymentDate;
+
     @JsonProperty("transmissionStatus")
     private OrderTransmissionStatus transmissionStatus;
 
@@ -66,6 +70,9 @@ public class Order {
     @JsonProperty("total")
     private BigDecimal total;
 
+    @JsonProperty("interestValue")
+    private BigDecimal interestValue;
+
     @JsonProperty("shipping")
     private ShippingResource shipping;
 
@@ -83,6 +90,9 @@ public class Order {
 
     @JsonProperty("deliveryStatus")
     private DeliveryStatus deliveryStatus;
+
+    @JsonProperty("observation")
+    private String observation;
 
     public Long getId() {
         return id;
@@ -268,6 +278,30 @@ public class Order {
         this.marketPlaceNumber = marketPlaceNumber;
     }
 
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public BigDecimal getInterestValue() {
+        return interestValue;
+    }
+
+    public void setInterestValue(BigDecimal interestValue) {
+        this.interestValue = interestValue;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -276,6 +310,7 @@ public class Order {
             .add("marketPlaceNumber", marketPlaceNumber)
             .add("marketPlace", marketPlace)
             .add("createdAt", createdAt)
+            .add("paymentDate", paymentDate)
             .add("transmissionStatus", transmissionStatus)
             .add("status", status)
             .add("marketPlaceUrl", marketPlaceUrl)
@@ -287,10 +322,9 @@ public class Order {
             .add("freight", freight)
             .add("gross", gross)
             .add("total", total)
-//            .add("shipping", shipping)
-//            .add("buyer", buyer)
+            .add("interestValue", interestValue)
+            .add("observation", observation)
             .add("tracking", tracking)
-//            .add("payments", payments)
             .add("items", items)
             .toString();
     }
