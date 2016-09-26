@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
 import br.com.anymarket.sdk.serializer.SDKDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
@@ -10,6 +11,7 @@ import java.util.Date;
 /**
  * Dados da nota vindo do ERP
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceResource {
 
     @JsonProperty("accessKey")

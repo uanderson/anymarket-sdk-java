@@ -1,10 +1,12 @@
 package br.com.anymarket.sdk.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by heidi.kussakawa on 14/07/2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderTransmissionStatusResource {
 
     @JsonProperty("transmissionStatus")
