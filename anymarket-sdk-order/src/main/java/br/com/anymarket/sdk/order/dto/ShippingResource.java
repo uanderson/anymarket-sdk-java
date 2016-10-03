@@ -19,6 +19,12 @@ public class ShippingResource {
     @JsonProperty("country")
     private String country;
 
+    @JsonProperty("countryAcronymNormalized")
+    private String countryAcronymNormalized;
+
+    @JsonProperty("countryNameNormalized")
+    private String countryNameNormalized;
+
     @JsonProperty("address")
     private String address;
 
@@ -66,6 +72,22 @@ public class ShippingResource {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getCountryAcronymNormalized() {
+        return countryAcronymNormalized;
+    }
+
+    public void setCountryAcronymNormalized(String countryAcronymNormalized) {
+        this.countryAcronymNormalized = countryAcronymNormalized;
+    }
+
+    public String getCountryNameNormalized() {
+        return countryNameNormalized;
+    }
+
+    public void setCountryNameNormalized(String countryNameNormalized) {
+        this.countryNameNormalized = countryNameNormalized;
     }
 
     public String getStreet() {

@@ -12,6 +12,12 @@ public class OrderItemShippingResource {
     @JsonProperty("shippingtype")
     private String shippingtype;
 
+    @JsonProperty("shippingCarrierNormalized")
+    private String shippingCarrierNormalized;
+
+    @JsonProperty("shippingCarrierTypeNormalized")
+    private String shippingCarrierTypeNormalized;
+
     public Long getId() {
         return id;
     }
@@ -26,5 +32,21 @@ public class OrderItemShippingResource {
 
     public void setShippingtype(String shippingtype) {
         this.shippingtype = shippingtype;
+    }
+
+    public String getShippingCarrierNormalized() {
+        return shippingCarrierNormalized;
+    }
+
+    public void setShippingCarrierNormalized(String shippingCarrierNormalized) {
+        this.shippingCarrierNormalized = shippingCarrierNormalized;
+    }
+
+    public String getShippingCarrierTypeNormalized() {
+        return shippingCarrierTypeNormalized;
+    }
+
+    public void setShippingCarrierTypeNormalized(String shippingCarrierTypeNormalized) {
+        this.shippingCarrierTypeNormalized = shippingCarrierTypeNormalized;
     }
 }

@@ -27,6 +27,9 @@ public class BuyerResource{
     @JsonProperty("phone")
     private String phone;
 
+    @JsonProperty("documentNumberNormalized")
+    private String documentNumberNormalized;
+
     public Long getId() {
         return id;
     }
@@ -81,5 +84,13 @@ public class BuyerResource{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getDocumentNumberNormalized() {
+        return documentNumberNormalized;
+    }
+
+    public void setDocumentNumberNormalized(String documentNumberNormalized) {
+        this.documentNumberNormalized = documentNumberNormalized;
     }
 }

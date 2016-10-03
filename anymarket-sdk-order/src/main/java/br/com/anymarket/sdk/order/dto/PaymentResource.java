@@ -26,6 +26,12 @@ public class PaymentResource {
     @JsonProperty("marketplaceId")
     private String marketplaceId;
 
+    @JsonProperty("paymentMethodNormalized")
+    private String paymentMethodNormalized;
+
+    @JsonProperty("paymentDetailNormalized")
+    private String paymentDetailNormalized;
+
     public String getMethod() {
         return method;
     }
@@ -64,5 +70,21 @@ public class PaymentResource {
 
     public void setInstallments(Long installments) {
         this.installments = installments;
+    }
+
+    public String getPaymentMethodNormalized() {
+        return paymentMethodNormalized;
+    }
+
+    public void setPaymentMethodNormalized(String paymentMethodNormalized) {
+        this.paymentMethodNormalized = paymentMethodNormalized;
+    }
+
+    public String getPaymentDetailNormalized() {
+        return paymentDetailNormalized;
+    }
+
+    public void setPaymentDetailNormalized(String paymentDetailNormalized) {
+        this.paymentDetailNormalized = paymentDetailNormalized;
     }
 }
