@@ -1,9 +1,10 @@
 package br.com.anymarket.sdk.util;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.util.Objects.*;
 
 public class StateCodes {
     private static final Map<String, String> STATES = new HashMap<String, String>() {
@@ -40,8 +41,12 @@ public class StateCodes {
     };
 
     public static String getStateCode(String name) {
-        String state = StringUtils.stripAccents( name );
-        return STATES.get( state.toUpperCase() );
+        if(isNull(name)) {
+            return null;
+        } else {
+            String state = StringUtils.stripAccents(name);
+            return STATES.get(state.toUpperCase());
+        }
     }
 
 }
