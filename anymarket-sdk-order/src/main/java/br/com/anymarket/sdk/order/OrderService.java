@@ -10,6 +10,7 @@ import br.com.anymarket.sdk.order.dto.OrderTransmissionStatusResource;
 import br.com.anymarket.sdk.order.filters.OrderFilter;
 import br.com.anymarket.sdk.order.filters.OrderMarketplaceFilter;
 import br.com.anymarket.sdk.order.filters.OrderMarketplaceIdFilter;
+import br.com.anymarket.sdk.order.filters.OrderPartnerIdFilter;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -41,6 +42,23 @@ public class OrderService {
             .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
+    }
+
+    public Order getOrderByPartnerID(String partnerId, IntegrationHeader... headers) {
+        checkNotNull(partnerId, "Erro ao recuperar pedido: partnerId não informado");
+
+        OrderPartnerIdFilter partnerIdFilter = new OrderPartnerIdFilter(partnerId);
+
+        Page<Order> ordersPage = getOrders(Lists.<OrderFilter>newArrayList(partnerIdFilter), headers);
+        if (ordersPage.getContent() == null || ordersPage.getContent().isEmpty()) {
+            throw new NotFoundException(format("Não foi encontrado pedido com partnerId %s", partnerId));
+        }
+
+        if (ordersPage.getContent().size() > 1) {
+            throw new HttpClientException(format("Foi encontrado mais de um pedido com partnerId %s", partnerId));
+        }
+
+        return ordersPage.getContent().get(0);
     }
 
     public Order getOrderByIdInMarketplace(String idInMarketplace, MarketPlace marketplace, IntegrationHeader... headers) {
