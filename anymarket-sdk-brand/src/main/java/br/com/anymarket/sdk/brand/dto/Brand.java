@@ -3,8 +3,7 @@ package br.com.anymarket.sdk.brand.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-
-import java.util.Objects;
+import com.google.common.base.Objects;
 
 public class Brand {
 
@@ -57,13 +56,13 @@ public class Brand {
             return false;
         }
         Brand brand = (Brand) o;
-        return Objects.equals(id, brand.id) ||
-            Objects.equals(name, brand.name);
+        return Objects.equal(id, brand.id) ||
+            Objects.equal(name, brand.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hashCode(id, name);
     }
 
     @Override

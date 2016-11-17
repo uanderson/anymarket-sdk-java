@@ -1,8 +1,7 @@
 package br.com.anymarket.sdk.order.filters;
 
 import br.com.anymarket.sdk.http.filters.ApiFilter;
-
-import java.util.Objects;
+import com.google.common.base.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -36,11 +35,11 @@ public abstract class OrderFilter implements ApiFilter {
             return false;
         }
         OrderFilter that = (OrderFilter) o;
-        return Objects.equals(getKey(), that.getKey());
+        return Objects.equal(getKey(), that.getKey());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey());
+        return Objects.hashCode(getKey());
     }
 }
