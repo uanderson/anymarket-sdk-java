@@ -2,6 +2,7 @@ package br.com.anymarket.sdk.categories.dto.marketplace;
 
 import com.google.common.base.Objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Objects.equal;
@@ -17,8 +18,11 @@ public class MarketplaceCategoryDetails {
     private Boolean isReceivingItens;
     private Boolean variationsMandatory;
     private Boolean canBeSelected;
-    private List<MarketplaceCategory> path;
-    private List<MarketplaceCategory> children;
+    private List<MarketplaceCategory> path = new ArrayList<MarketplaceCategory>();
+    private List<MarketplaceCategory> children = new ArrayList<MarketplaceCategory>();
+
+    protected MarketplaceCategoryDetails() {
+    }
 
     public MarketplaceCategoryDetails(Builder builder) {
         this.codeInMarketPlace = builder.codeInMarketPlace;
