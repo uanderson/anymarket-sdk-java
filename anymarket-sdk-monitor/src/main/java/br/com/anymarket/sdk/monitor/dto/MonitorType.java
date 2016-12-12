@@ -5,5 +5,5 @@ package br.com.anymarket.sdk.monitor.dto;
  */
 public enum MonitorType {
 
-    ALERT, ERROR, INTERNAL_ERROR
+    ALERT, ERROR, INTERNAL_ERROR, CRITICAL_ERROR
 }
