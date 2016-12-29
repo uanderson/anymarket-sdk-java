@@ -85,6 +85,9 @@ public class Product {
     @JsonProperty("hasVariations")
     private boolean hasVariations = false;
 
+    @JsonProperty("gender")
+    private ProductGender gender;
+
     public Long getId() {
         return id;
     }
@@ -261,6 +264,14 @@ public class Product {
         this.imagesForDelete = imagesForDelete;
     }
 
+    public ProductGender getGender() {
+        return gender;
+    }
+
+    public void setGender(ProductGender gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -285,6 +296,7 @@ public class Product {
             .add("priceFactor", priceFactor)
             .add("calculatedPrice", calculatedPrice)
             .add("hasVariations", hasVariations)
+            .add("gender", gender)
             .toString();
     }
 }
