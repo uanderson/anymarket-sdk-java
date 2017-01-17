@@ -173,7 +173,7 @@ public class Monitor implements AnymarketPojo {
         private String origin;
         private String message;
         private String details;
-        private MonitorType monitorType = MonitorType.ERROR;
+        private MonitorType monitorType = MonitorType.ALERT;
         private String retryCallbackURL;
         private Date createdAt = new Date();
         private MonitorStatus monitorStatus = MonitorStatus.PENDING;

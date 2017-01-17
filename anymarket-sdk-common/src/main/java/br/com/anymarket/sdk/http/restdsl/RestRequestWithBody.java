@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.http.restdsl;
 
+import br.com.anymarket.sdk.dto.ErrorDTO;
 import br.com.anymarket.sdk.exception.HttpClientException;
 import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.UnauthorizedException;
@@ -11,9 +12,12 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
 
+import java.io.IOException;
+
 public class RestRequestWithBody {
     private HttpRequestWithBody request;
     private Object body;
+
 
     public RestRequestWithBody(HttpRequestWithBody request) {
         this.request = request;
@@ -56,14 +60,21 @@ public class RestRequestWithBody {
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
-        if(statusCode >= 500){
-            throw new HttpServerException(response.getBody());
+        String message = response.getBody();
+        String details = null;
+        try {
+            ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
+            message = errorDTO.getMessage();
+            details = errorDTO.getDetails();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        else if(statusCode == 401){
-            throw new UnauthorizedException(response.getBody());
-        }
-        else if(statusCode >= 400 && statusCode != 404){
-            throw new HttpClientException(response.getBody());
+        if (statusCode >= 500) {
+            throw new HttpServerException(message, details);
+        } else if (statusCode == 401) {
+            throw new UnauthorizedException(message);
+        } else if (statusCode >= 400 && statusCode != 404) {
+            throw new HttpClientException(message, details);
         }
 
     }

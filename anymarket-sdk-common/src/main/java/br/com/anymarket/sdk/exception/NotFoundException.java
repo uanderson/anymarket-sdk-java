@@ -8,4 +8,8 @@ public class NotFoundException extends AnymarketSDKException {
     public NotFoundException(String message) {
         super(message);
     }
+
+    public NotFoundException(String message, String details) {
+        super(message, details);
+    }
 }
