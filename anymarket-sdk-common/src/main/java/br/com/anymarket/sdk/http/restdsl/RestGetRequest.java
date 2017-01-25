@@ -66,7 +66,7 @@ public class RestGetRequest {
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
-        if (statusCode >= 400) {
+        if (statusCode >= 400 && statusCode != 404) {
             String message = response.getBody();
             String details = null;
             try {
@@ -80,9 +80,8 @@ public class RestGetRequest {
                 throw new HttpServerException(message, details);
             } else if (statusCode == 401) {
                 throw new UnauthorizedException(message);
-            } else if (statusCode >= 400 && statusCode != 404) {
-                throw new HttpClientException(message, details);
             }
+            throw new HttpClientException(message, details);
         }
     }
 
