@@ -60,21 +60,23 @@ public class RestRequestWithBody {
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
-        String message = response.getBody();
-        String details = null;
-        try {
-            ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
-            message = errorDTO.getMessage();
-            details = errorDTO.getDetails();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (statusCode >= 500) {
-            throw new HttpServerException(message, details);
-        } else if (statusCode == 401) {
-            throw new UnauthorizedException(message);
-        } else if (statusCode >= 400 && statusCode != 404) {
-            throw new HttpClientException(message, details);
+        if (statusCode >= 400) {
+            String message = response.getBody();
+            String details = null;
+            try {
+                ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
+                message = errorDTO.getMessage();
+                details = errorDTO.getDetails();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            if (statusCode >= 500) {
+                throw new HttpServerException(message, details);
+            } else if (statusCode == 401) {
+                throw new UnauthorizedException(message);
+            } else if (statusCode >= 400 && statusCode != 404) {
+                throw new HttpClientException(message, details);
+            }
         }
 
     }
