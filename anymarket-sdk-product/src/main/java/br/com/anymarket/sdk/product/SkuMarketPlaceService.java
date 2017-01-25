@@ -12,6 +12,7 @@ import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,9 +41,19 @@ public class SkuMarketPlaceService extends HttpService {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
         Objects.requireNonNull(idSkuMP, "Informe o id do SkuMarketplace a ser atualizado.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
+
+        if (skuMp.getPrice() != null && skuMp.getDiscountPrice() != null) {
+            skuMp.getFields().put("HAS_DISCOUNT",
+                Boolean.toString(skuMp.getPrice().compareTo(skuMp.getDiscountPrice()) != 0));
+        }
+
         RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(idSkuMP.toString()), skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
+    }
+
+    public static void main(String []args) {
+        System.out.println(new BigDecimal(120).compareTo(null));
     }
 
     public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
