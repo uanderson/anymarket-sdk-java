@@ -1,8 +1,10 @@
 package br.com.anymarket.sdk.http.restdsl;
 
+import br.com.anymarket.sdk.dto.ErrorDTO;
 import br.com.anymarket.sdk.exception.HttpClientException;
 import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.UnauthorizedException;
+import br.com.anymarket.sdk.http.Mapper;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.filters.ApiFilter;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
@@ -10,6 +12,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,16 +66,23 @@ public class RestGetRequest {
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
-        if(statusCode >= 500){
-            throw new HttpServerException(response.getBody());
+        if (statusCode >= 400 && statusCode != 404) {
+            String message = response.getBody();
+            String details = null;
+            try {
+                ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
+                message = errorDTO.getMessage();
+                details = errorDTO.getDetails();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            if (statusCode >= 500) {
+                throw new HttpServerException(message, details);
+            } else if (statusCode == 401) {
+                throw new UnauthorizedException(message);
+            }
+            throw new HttpClientException(message, details);
         }
-        else if(statusCode == 401){
-            throw new UnauthorizedException(response.getBody());
-        }
-        else if(statusCode >= 400 && statusCode != 404){
-            throw new HttpClientException(response.getBody());
-        }
-
     }
 
 }

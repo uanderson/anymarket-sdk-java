@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.http;
 
+import br.com.anymarket.sdk.dto.ErrorDTO;
 import br.com.anymarket.sdk.exception.HttpClientException;
 import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.UnauthorizedException;
@@ -30,7 +31,7 @@ public class HttpService {
     protected GetRequest get(String url, IntegrationHeader... headers) {
         GetRequest unirest = Unirest.get(url);
         addHeaders(unirest, headers);
-        
+
         return unirest;
     }
 
@@ -82,14 +83,22 @@ public class HttpService {
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
-        if(statusCode >= 500){
-            throw new HttpServerException(response.getBody());
-        }
-        else if(statusCode == 401){
-            throw new UnauthorizedException(response.getBody());
-        }
-        else if(statusCode >= 400 && statusCode != 404){
-            throw new HttpClientException(response.getBody());
+        if (statusCode >= 400 && statusCode != 404) {
+            String message = response.getBody();
+            String details = null;
+            try {
+                ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
+                message = errorDTO.getMessage();
+                details = errorDTO.getDetails();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            if (statusCode >= 500) {
+                throw new HttpServerException(message, details);
+            } else if (statusCode == 401) {
+                throw new UnauthorizedException(message);
+            }
+            throw new HttpClientException(message, details);
         }
 
     }

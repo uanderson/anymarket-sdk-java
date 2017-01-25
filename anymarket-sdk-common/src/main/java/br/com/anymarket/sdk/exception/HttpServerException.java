@@ -8,4 +8,8 @@ public class HttpServerException extends AnymarketSDKException {
     public HttpServerException(String message) {
         super(message);
     }
+
+    public HttpServerException(String message, String details) {
+        super(message, details);
+    }
 }
