@@ -7,16 +7,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Product extends ProductBase {
+public class ProductComplete extends ProductBase {
 
     @JsonProperty("skus")
-    private List<Sku> skus;
+    private List<SkuComplete> skus;
 
-    public List<Sku> getSkus() {
+    public List<SkuComplete> getSkus() {
         return skus;
     }
 
-    public void setSkus(List<Sku> skus) {
+    public void setSkus(List<SkuComplete> skus) {
         this.skus = skus;
     }
 

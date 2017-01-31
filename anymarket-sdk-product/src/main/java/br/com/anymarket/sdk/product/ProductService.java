@@ -8,6 +8,7 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
+import br.com.anymarket.sdk.product.dto.ProductComplete;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
@@ -73,18 +74,30 @@ public class ProductService extends HttpService {
     }
 
     public Product getProduct(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), headers);
-        Response response = execute(getRequest);
+        Response response = getProductById(id, headers);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Product.class);
         }
         throw new NotFoundException(format("Product with id %s not found.", id));
     }
 
+    public ProductComplete getProductComplete(Long id, IntegrationHeader... headers) {
+        Response response = getProductById(id, headers);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(ProductComplete.class);
+        }
+        throw new NotFoundException(format("Product with id %s not found.", id));
+    }
+
+    private Response getProductById(Long id, IntegrationHeader... headers) {
+        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), headers);
+        return execute(getRequest);
+    }
+
     public Product getProductBySku(final String sku, IntegrationHeader... headers) {
         final List<Product> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=").concat(SDKUrlEncoder.encodeParameterToUTF8(sku)), headers);
         if (!products.isEmpty()) {
-            return products.stream().findFirst().get();
+            return products.get(0);
         }
         throw new NotFoundException(format("Product with partnerId %s not found.", sku));
     }
