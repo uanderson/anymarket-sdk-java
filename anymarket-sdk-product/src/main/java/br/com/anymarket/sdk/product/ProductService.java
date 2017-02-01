@@ -8,7 +8,6 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
-import br.com.anymarket.sdk.product.dto.ProductComplete;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
@@ -74,28 +73,25 @@ public class ProductService extends HttpService {
     }
 
     public Product getProduct(Long id, IntegrationHeader... headers) {
-        Response response = getProductById(id, headers);
-        if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(Product.class);
-        }
-        throw new NotFoundException(format("Product with id %s not found.", id));
+        return getProduct(id, Product.class, headers);
     }
 
-    public ProductComplete getProductComplete(Long id, IntegrationHeader... headers) {
-        Response response = getProductById(id, headers);
-        if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(ProductComplete.class);
-        }
-        throw new NotFoundException(format("Product with id %s not found.", id));
-    }
-
-    private Response getProductById(Long id, IntegrationHeader... headers) {
+    public <T> T getProduct(Long id, Class<T> clazz, IntegrationHeader... headers) {
         GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), headers);
-        return execute(getRequest);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(clazz);
+        }
+        throw new NotFoundException(format("Product with id %s not found.", id));
     }
 
     public Product getProductBySku(final String sku, IntegrationHeader... headers) {
-        final List<Product> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=").concat(SDKUrlEncoder.encodeParameterToUTF8(sku)), headers);
+        return getProductBySku(sku, Product.class, headers);
+    }
+
+    public <T> T getProductBySku(final String sku, Class<T> clazz, IntegrationHeader... headers) {
+        final List<T> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=")
+            .concat(SDKUrlEncoder.encodeParameterToUTF8(sku)), clazz, headers);
         if (!products.isEmpty()) {
             return products.get(0);
         }
@@ -103,15 +99,19 @@ public class ProductService extends HttpService {
     }
 
     public List<Product> getAllProducts(IntegrationHeader... headers) {
-        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), headers);
+        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), Product.class, headers);
     }
 
-    private List<Product> getAllProducts(final String url, IntegrationHeader... headers) {
-        final List<Product> allProducts = new ArrayList<Product>();
+    public <T> List<T> getAllProducts(Class<T> clazz, IntegrationHeader... headers) {
+        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), clazz, headers);
+    }
+
+    private <T> List<T> getAllProducts(final String url, Class<T> clazz, IntegrationHeader... headers) {
+        final List<T> allProducts = new ArrayList<T>();
         final GetRequest getRequest = get(url, headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            Page<Product> rootResponse = response.to(new TypeReference<Page<Product>>() {
+            Page<T> rootResponse = response.to(new TypeReference<Page<T>>() {
             });
             allProducts.addAll(rootResponse.getContent());
         } else {
