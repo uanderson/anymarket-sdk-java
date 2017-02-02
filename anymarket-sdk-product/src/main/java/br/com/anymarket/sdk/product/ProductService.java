@@ -8,6 +8,7 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
+import br.com.anymarket.sdk.product.dto.ProductComplete;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
@@ -86,32 +87,32 @@ public class ProductService extends HttpService {
     }
 
     public Product getProductBySku(final String sku, IntegrationHeader... headers) {
-        return getProductBySku(sku, Product.class, headers);
-    }
-
-    public <T> T getProductBySku(final String sku, Class<T> clazz, IntegrationHeader... headers) {
-        final List<T> products = getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("?sku=")
-            .concat(SDKUrlEncoder.encodeParameterToUTF8(sku)), clazz, headers);
+        final List<Product> products = getAllProducts(getUrlForProductsWithSku(sku), headers);
         if (!products.isEmpty()) {
             return products.get(0);
         }
         throw new NotFoundException(format("Product with partnerId %s not found.", sku));
     }
 
-    public List<Product> getAllProducts(IntegrationHeader... headers) {
-        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), Product.class, headers);
+    public ProductComplete getProductCompleteBySku(final String sku, IntegrationHeader... headers) {
+        final List<ProductComplete> products = getAllCompleteProducts(getUrlForProductsWithSku(sku), headers);
+        if (!products.isEmpty()) {
+            return products.get(0);
+        }
+        throw new NotFoundException(format("Product with partnerId %s not found.", sku));
     }
 
-    public <T> List<T> getAllProducts(Class<T> clazz, IntegrationHeader... headers) {
-        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), clazz, headers);
+    private String getUrlForProductsWithSku(String sku) {
+        return apiEndPoint.concat(PRODUCTS_URI).concat("?sku=")
+            .concat(SDKUrlEncoder.encodeParameterToUTF8(sku));
     }
 
-    private <T> List<T> getAllProducts(final String url, Class<T> clazz, IntegrationHeader... headers) {
-        final List<T> allProducts = new ArrayList<T>();
+    public List<Product> getAllProducts(final String url, IntegrationHeader... headers) {
+        final List<Product> allProducts = new ArrayList<Product>();
         final GetRequest getRequest = get(url, headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            Page<T> rootResponse = response.to(new TypeReference<Page<T>>() {
+            Page<Product> rootResponse = response.to(new TypeReference<Page<Product>>() {
             });
             allProducts.addAll(rootResponse.getContent());
         } else {
@@ -119,4 +120,36 @@ public class ProductService extends HttpService {
         }
         return allProducts;
     }
+
+    public List<ProductComplete> getAllCompleteProducts(final String url, IntegrationHeader... headers) {
+        final List<ProductComplete> allProducts = new ArrayList<ProductComplete>();
+        final GetRequest getRequest = get(url, headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            Page<ProductComplete> rootResponse = response.to(new TypeReference<Page<ProductComplete>>() {
+            });
+            allProducts.addAll(rootResponse.getContent());
+        } else {
+            throw new NotFoundException("Products not found.");
+        }
+        return allProducts;
+    }
+
+//    public <T> List<T> getAllProducts(Class<T> clazz, IntegrationHeader... headers) {
+//        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), clazz, headers);
+//    }
+//
+//    private <T> List<T> getAllProducts(final String url, Class<T> clazz, IntegrationHeader... headers) {
+//        final List<T> allProducts = new ArrayList<T>();
+//        final GetRequest getRequest = get(url, headers);
+//        final Response response = execute(getRequest);
+//        if (response.getStatus() == HttpStatus.SC_OK) {
+//            Page rootResponse = response.to(new TypeReference<Page<String>>() {
+//            });
+//            allProducts.addAll(rootResponse.getContent());
+//        } else {
+//            throw new NotFoundException("Products not found.");
+//        }
+//        return allProducts;
+//    }
 }
