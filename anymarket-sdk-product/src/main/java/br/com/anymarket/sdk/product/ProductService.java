@@ -135,21 +135,4 @@ public class ProductService extends HttpService {
         return allProducts;
     }
 
-//    public <T> List<T> getAllProducts(Class<T> clazz, IntegrationHeader... headers) {
-//        return getAllProducts(apiEndPoint.concat(PRODUCTS_URI).concat("/"), clazz, headers);
-//    }
-//
-//    private <T> List<T> getAllProducts(final String url, Class<T> clazz, IntegrationHeader... headers) {
-//        final List<T> allProducts = new ArrayList<T>();
-//        final GetRequest getRequest = get(url, headers);
-//        final Response response = execute(getRequest);
-//        if (response.getStatus() == HttpStatus.SC_OK) {
-//            Page rootResponse = response.to(new TypeReference<Page<String>>() {
-//            });
-//            allProducts.addAll(rootResponse.getContent());
-//        } else {
-//            throw new NotFoundException("Products not found.");
-//        }
-//        return allProducts;
-//    }
 }

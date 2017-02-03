@@ -223,7 +223,7 @@ public class SkuMarketPlace implements Serializable {
         private BigDecimal priceFactor;
         private BigDecimal discountPrice;
         private String skuInMarketplace;
-        private Map<String, String> fields;
+        private Map<String, String> fields = new HashMap<String, String>();
         private AvailableStockDTO availableStock;
 
         private Builder() {
