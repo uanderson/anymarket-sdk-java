@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.product;
 
+import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
@@ -8,6 +9,7 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
 import br.com.anymarket.sdk.product.dto.TransmissionDTO;
+import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
@@ -24,6 +26,9 @@ public class TransmissionService extends HttpService {
 
     private static final String TRANSMISSION_URI = "/transmissions/%s";
     private static final String TRANSMISSIONS_URI = "/transmissions";
+    private static final String TRANSMISSIONS_BY_MARKETPLACE_URI = "/transmissions/marketplace/%s";
+    public static final String NEXT = "next";
+
     private final String apiEndPoint;
 
     public TransmissionService(final String apiEndPoint) {
@@ -69,5 +74,44 @@ public class TransmissionService extends HttpService {
             throw new NotFoundException("SkuMps not found.");
         }
         return allSkuMps;
+    }
+
+    public List<SkuMarketPlace> getAllSkuMpsPublishedIn(MarketPlace marketplace, IntegrationHeader... headers) {
+        boolean hasMoreElements;
+
+        final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
+        String urlToGet = String.format(apiEndPoint.concat(TRANSMISSIONS_BY_MARKETPLACE_URI), marketplace.toString());
+        do {
+            final GetRequest getRequest = get(urlToGet, headers);
+            final Response response = execute(getRequest);
+            if (response.getStatus() == HttpStatus.SC_OK) {
+                Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {});
+                allSkuMps.addAll(rootResponse.getContent());
+
+                hasMoreElements = !rootResponse.getContent().isEmpty();
+                if(hasMoreElements) {
+                    String nextURL = findNextURL(urlToGet, rootResponse);
+                    if(urlToGet.equals(nextURL)) {
+                        hasMoreElements = false;
+                    } else {
+                        urlToGet = nextURL;
+                    }
+                }
+            } else {
+                throw new NotFoundException("SkuMps not found.");
+            }
+
+        } while (hasMoreElements);
+
+        return allSkuMps;
+    }
+
+    private String findNextURL(String urlToGet, Page<SkuMarketPlace> rootResponse) {
+        for (Link link : rootResponse.getLinks()) {
+            if (link.getRel().equals(NEXT)) {
+                return link.getHref();
+            }
+        }
+        return urlToGet;
     }
 }

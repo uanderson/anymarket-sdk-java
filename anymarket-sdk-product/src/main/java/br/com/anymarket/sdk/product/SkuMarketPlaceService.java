@@ -12,7 +12,6 @@ import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,10 +51,6 @@ public class SkuMarketPlaceService extends HttpService {
         return response.to(SkuMarketPlace.class);
     }
 
-    public static void main(String []args) {
-        System.out.println(new BigDecimal(120).compareTo(null));
-    }
-
     public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
         return update(skuMp, idSku, skuMp.getId(), headers);
     }
@@ -88,12 +83,13 @@ public class SkuMarketPlaceService extends HttpService {
         final GetRequest getRequest = get(getURLFormated(idSku).concat("/"), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {
-            });
+            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
             allSkuMps.addAll(rootResponse);
         } else {
             throw new NotFoundException("SkuMps not found.");
         }
         return allSkuMps;
     }
+
+
 }

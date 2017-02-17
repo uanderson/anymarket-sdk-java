@@ -55,6 +55,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty(value = "availableStock")
     private AvailableStockDTO availableStock;
 
+    @JsonProperty(value = "sku")
+    private Sku sku;
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -73,6 +76,7 @@ public class SkuMarketPlace implements Serializable {
         setSkuInMarketplace(builder.skuInMarketplace);
         setFields(builder.fields);
         setAvailableStock(builder.availableStock);
+        setSku(builder.sku);
     }
 
     public static Builder builder() {
@@ -195,6 +199,14 @@ public class SkuMarketPlace implements Serializable {
         return "true".equals(getFields().get(enabledDiscountParamName));
     }
 
+    public Sku getSku() {
+        return sku;
+    }
+
+    public void setSku(Sku sku) {
+        this.sku = sku;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -225,6 +237,7 @@ public class SkuMarketPlace implements Serializable {
         private String skuInMarketplace;
         private Map<String, String> fields;
         private AvailableStockDTO availableStock;
+        private Sku sku;
 
         private Builder() {
         }
@@ -291,6 +304,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withAvailableStock(AvailableStockDTO val) {
             availableStock = val;
+            return this;
+        }
+
+        public Builder withSku(Sku sku) {
+            sku = sku;
             return this;
         }
 
