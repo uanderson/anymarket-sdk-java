@@ -76,6 +76,9 @@ public class Order {
     @JsonProperty("shipping")
     private ShippingResource shipping;
 
+    @JsonProperty("billingShipping")
+    private BillingShippingResource billingShipping;
+
     @JsonProperty("buyer")
     private BuyerResource buyer;
 
@@ -228,6 +231,14 @@ public class Order {
 
     public void setShipping(ShippingResource shipping) {
         this.shipping = shipping;
+    }
+
+    public BillingShippingResource getBillingShipping() {
+        return billingShipping;
+    }
+
+    public void setBillingShipping(BillingShippingResource billingShipping) {
+        this.billingShipping = billingShipping;
     }
 
     public BuyerResource getBuyer() {
