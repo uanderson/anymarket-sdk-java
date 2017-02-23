@@ -76,7 +76,7 @@ public class TransmissionService extends HttpService {
         return allSkuMps;
     }
 
-    public List<SkuMarketPlace> getAllSkuMpsPublishedIn(MarketPlace marketplace, IntegrationHeader... headers) {
+    public List<SkuMarketPlace> getAllSkuMPsFor(MarketPlace marketplace, IntegrationHeader... headers) {
         boolean hasMoreElements;
 
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
