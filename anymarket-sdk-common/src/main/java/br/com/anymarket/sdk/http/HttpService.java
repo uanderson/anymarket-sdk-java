@@ -77,7 +77,7 @@ public class HttpService {
             checkGenericErrorToThrowGenericException(response);
             return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
-            throw new HttpServerException("Could not connect to ANYMARKET.");
+            throw new HttpServerException(500, "Could not connect to ANYMARKET.");
         }
     }
 
@@ -94,7 +94,7 @@ public class HttpService {
                 System.out.println(e.getMessage());
             }
             if (statusCode >= 500) {
-                throw new HttpServerException(message, details);
+                throw new HttpServerException(statusCode, message, details);
             } else if (statusCode == 401) {
                 throw new UnauthorizedException(message);
             }
