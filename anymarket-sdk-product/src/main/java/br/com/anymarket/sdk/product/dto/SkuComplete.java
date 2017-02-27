@@ -1,20 +1,16 @@
 package br.com.anymarket.sdk.product.dto;
 
 
-import br.com.anymarket.sdk.product.dto.deserializer.VariationDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Sku {
+public class SkuComplete {
 
     @JsonProperty("id")
     private Long id;
@@ -34,9 +30,8 @@ public class Sku {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty(value = "variations", access = JsonProperty.Access.WRITE_ONLY)
-    @JsonDeserialize(using = VariationDeserializer.class)
-    private Map<String, String> variations = new HashMap<String, String>();
+    @JsonProperty(value = "variations")
+    private List<Variation> variations = new ArrayList<Variation>();
 
     public Long getId() {
         return id;
@@ -86,11 +81,11 @@ public class Sku {
         this.partnerId = partnerId;
     }
 
-    public Map<String, String> getVariations() {
+    public List<Variation> getVariations() {
         return variations;
     }
 
-    public void setVariations(Map<String, String> variations) {
+    public void setVariations(List<Variation> variations) {
         this.variations = variations;
     }
 

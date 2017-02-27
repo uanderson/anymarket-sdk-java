@@ -1,31 +1,31 @@
-package br.com.anymarket.sdk.categories.dto;
+package br.com.anymarket.sdk.product.dto.marketplace;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-public class SimpleCategory {
+public class MarketplaceVariationValue {
 
-    public SimpleCategory() {
+    public MarketplaceVariationValue() {
     }
 
-    public SimpleCategory(Long id) {
-        this.id = id;
+    public MarketplaceVariationValue(String codeInMarketplace) {
+        this.codeInMarketplace = codeInMarketplace;
     }
 
-    @JsonProperty("id")
-    private Long id;
+    @JsonProperty("codeInMarketplace")
+    private String codeInMarketplace;
 
     @JsonProperty("name")
     private String name;
 
-    public Long getId() {
-        return id;
+    public String getCodeInMarketplace() {
+        return codeInMarketplace;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCodeInMarketplace(String codeInMarketplace) {
+        this.codeInMarketplace = codeInMarketplace;
     }
 
     public String getName() {
@@ -44,20 +44,20 @@ public class SimpleCategory {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SimpleCategory category = (SimpleCategory) o;
-        return Objects.equal(id, category.id) &&
+        MarketplaceVariationValue category = (MarketplaceVariationValue) o;
+        return Objects.equal(codeInMarketplace, category.codeInMarketplace) &&
             Objects.equal(name, category.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name);
+        return Objects.hashCode(codeInMarketplace, name);
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-            .add("id", id)
+            .add("codeInMarketplace", codeInMarketplace)
             .add("name", name)
             .toString();
     }
