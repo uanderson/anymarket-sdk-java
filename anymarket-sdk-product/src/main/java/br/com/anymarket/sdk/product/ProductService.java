@@ -145,7 +145,7 @@ public class ProductService extends HttpService {
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(HashMap.class);
         }
-        throw new NotFoundException(format("Product(id: %is) active attributes not found to this marketplace(%s).", idProduct, marketPlace.name()));
+        throw new NotFoundException(format("Product(id: %s) active attributes not found to this marketplace(%s).", idProduct, marketPlace.name()));
     }
 
 }
