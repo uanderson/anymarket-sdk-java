@@ -37,6 +37,10 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, Long idSkuMP, IntegrationHeader... headers) {
+        return update(skuMp, idSku, idSkuMP, true, headers);
+    }
+
+    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, Long idSkuMP, boolean syncChanges, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
         Objects.requireNonNull(idSkuMP, "Informe o id do SkuMarketplace a ser atualizado.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
@@ -46,7 +50,8 @@ public class SkuMarketPlaceService extends HttpService {
                 Boolean.toString(skuMp.getPrice().compareTo(skuMp.getDiscountPrice()) != 0));
         }
 
-        RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(idSkuMP.toString()), skuMp, headers);
+        String url = getURLFormated(idSku).concat("/").concat(idSkuMP.toString()).concat("?syncChanges="+syncChanges);
+        RequestBodyEntity put = put(url, skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
     }

@@ -14,8 +14,8 @@ import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
 import java.util.List;
-import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
@@ -34,16 +34,16 @@ public class SkuService extends HttpService {
     }
 
     public Sku insertSku(final Sku sku, final Long idProduct, IntegrationHeader... headers) {
-        Objects.requireNonNull(sku, "Informe o Sku a ser persistido.");
-        Objects.requireNonNull(idProduct, "Informe o id do produto do Sku.");
+        checkNotNull(sku, "Informe o Sku a ser persistido.");
+        checkNotNull(idProduct, "Informe o id do produto do Sku.");
         RequestBodyEntity post = post(getURLFormated(idProduct), sku, headers);
         Response response = execute(post);
         return response.to(Sku.class);
     }
 
     public Sku updateSku(final Sku sku, final Long idProduct, IntegrationHeader... headers) {
-        Objects.requireNonNull(sku, "Informe o Sku a ser atualizado.");
-        Objects.requireNonNull(idProduct, "Informe o id do produto do Sku.");
+        checkNotNull(sku, "Informe o Sku a ser atualizado.");
+        checkNotNull(idProduct, "Informe o id do produto do Sku.");
         RequestBodyEntity put = put(getURLFormated(idProduct).concat("/").concat(sku.getId().toString()), sku, headers);
         Response response = execute(put);
         return response.to(Sku.class);
@@ -57,23 +57,16 @@ public class SkuService extends HttpService {
         }
     }
 
-    public Sku getSku(Long idSku, final Long idProduct, IntegrationHeader... headers) {
-        Objects.requireNonNull(idSku, "Informe o id do Sku.");
-        Objects.requireNonNull(idProduct, "Informe o id do produto do Sku.");
-        GetRequest getRequest = get(getURLFormated(idProduct).concat("/").concat(idSku.toString()), headers);
-        Response response = execute(getRequest);
-        if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(Sku.class);
-        }
-        throw new NotFoundException(format("Sku with id %s and product id %s not found.", idSku, idProduct));
+    public List<Sku> getAllSkus(final Long idProduct, IntegrationHeader... headers) {
+        return getAllSkus(idProduct, Sku.class, headers);
     }
 
-    public List<Sku> getAllSkus(final Long idProduct, IntegrationHeader... headers) {
-        final List<Sku> allSkus = Lists.newArrayList();
+    public <T> List<T> getAllSkus(final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
+        final List<T> allSkus = Lists.newArrayList();
         final GetRequest getRequest = get(getURLFormated(idProduct).concat("/"), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            Page<Sku> rootResponse = response.to(new TypeReference<Page<Sku>>() {
+            Page<T> rootResponse = response.to(new TypeReference<Page<T>>() {
             });
             allSkus.addAll(rootResponse.getContent());
         } else {
@@ -82,12 +75,31 @@ public class SkuService extends HttpService {
         return allSkus;
     }
 
+    public Sku getSku(Long idSku, final Long idProduct, IntegrationHeader... headers) {
+        return getSku(idSku, idProduct, Sku.class, headers);
+    }
+
+    public <T> T getSku(Long idSku, final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
+        checkNotNull(idSku, "Informe o id do Sku.");
+        checkNotNull(idProduct, "Informe o id do produto do Sku.");
+        GetRequest getRequest = get(getURLFormated(idProduct).concat("/").concat(idSku.toString()), headers);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(clazz);
+        }
+        throw new NotFoundException(format("Sku with id %s and product id %s not found.", idSku, idProduct));
+    }
+
     public Sku getSku(Long idSku, IntegrationHeader... headers) {
-        Objects.requireNonNull(idSku, "Informe o id do Sku.");
+        return getSku(idSku, Sku.class, headers);
+    }
+
+    public <T> T getSku(Long idSku, Class<T> clazz, IntegrationHeader... headers) {
+        checkNotNull(idSku, "Informe o id do Sku.");
         GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(Sku.class);
+            return response.to(clazz);
         }
         throw new NotFoundException(format("Sku with id %s not found.", idSku));
     }

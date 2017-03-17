@@ -2,8 +2,7 @@ package br.com.anymarket.sdk.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-
-import java.util.Objects;
+import com.google.common.base.Objects;
 
 
 public class Characteristics {
@@ -50,13 +49,13 @@ public class Characteristics {
             return false;
         }
         Characteristics that = (Characteristics) o;
-        return Objects.equals(name, that.name) &&
-            Objects.equals(value, that.value);
+        return Objects.equal(name, that.name) &&
+            Objects.equal(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, value);
+        return Objects.hashCode(name, value);
     }
 
     @Override

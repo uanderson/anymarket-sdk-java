@@ -77,7 +77,7 @@ public class RestGetRequest {
                 System.out.println(e.getMessage());
             }
             if (statusCode >= 500) {
-                throw new HttpServerException(message, details);
+                throw new HttpServerException(statusCode, message, details);
             } else if (statusCode == 401) {
                 throw new UnauthorizedException(message);
             }

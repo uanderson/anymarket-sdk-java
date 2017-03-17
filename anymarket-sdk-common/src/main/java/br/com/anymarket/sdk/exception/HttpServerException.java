@@ -5,11 +5,18 @@ package br.com.anymarket.sdk.exception;
  */
 public class HttpServerException extends AnymarketSDKException {
 
-    public HttpServerException(String message) {
-        super(message);
+    private final Integer statusCode;
+
+    public HttpServerException(Integer statusCode, String message) {
+        this(statusCode, message, null);
     }
 
-    public HttpServerException(String message, String details) {
+    public HttpServerException(Integer statusCode, String message, String details) {
         super(message, details);
+        this.statusCode = statusCode;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
     }
 }
