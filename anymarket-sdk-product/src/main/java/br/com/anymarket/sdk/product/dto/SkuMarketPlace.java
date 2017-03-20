@@ -55,6 +55,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty(value = "availableStock")
     private AvailableStockDTO availableStock;
 
+    @JsonProperty(value = "attributes")
+    private Map<String, String> attributes = new HashMap<String, String>();
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -73,6 +76,7 @@ public class SkuMarketPlace implements Serializable {
         setSkuInMarketplace(builder.skuInMarketplace);
         setFields(builder.fields);
         setAvailableStock(builder.availableStock);
+        setAttributes(builder.attributes);
     }
 
     public static Builder builder() {
@@ -195,6 +199,14 @@ public class SkuMarketPlace implements Serializable {
         return "true".equals(getFields().get(enabledDiscountParamName));
     }
 
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -208,6 +220,7 @@ public class SkuMarketPlace implements Serializable {
             ", discountPrice=" + discountPrice +
             ", fields=" + fields +
             ", availableStock=" + availableStock +
+            ", attributes=" + attributes +
             '}';
     }
 
@@ -223,8 +236,9 @@ public class SkuMarketPlace implements Serializable {
         private BigDecimal priceFactor;
         private BigDecimal discountPrice;
         private String skuInMarketplace;
-        private Map<String, String> fields;
+        private Map<String, String> fields = new HashMap<String, String>();
         private AvailableStockDTO availableStock;
+        private Map<String, String> attributes = new HashMap<String, String>();
 
         private Builder() {
         }
@@ -291,6 +305,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withAvailableStock(AvailableStockDTO val) {
             availableStock = val;
+            return this;
+        }
+
+        public Builder withAttributes(Map<String, String> val) {
+            fields = val;
             return this;
         }
 

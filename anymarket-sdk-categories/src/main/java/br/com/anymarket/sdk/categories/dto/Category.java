@@ -3,14 +3,13 @@ package br.com.anymarket.sdk.categories.dto;
 import br.com.anymarket.sdk.AnymarketPojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Objects.isNull;
 
 /**
  * Created by marcio.scharam on 17/03/2016.
@@ -43,7 +42,7 @@ public class Category implements AnymarketPojo {
     }
 
     private Category(Builder builder) {
-        if (isNull(builder.id) && isNull(builder.partnerId)) {
+        if (builder.id == null && builder.partnerId == null) {
             throw new IllegalArgumentException(
                 "It must be filled the id or partnerId");
         }
@@ -141,7 +140,7 @@ public class Category implements AnymarketPojo {
         private String partnerId;
         private BigDecimal priceFactor;
         private Boolean calculatedPrice;
-        private List<Category> children = new ArrayList();
+        private List<Category> children = new ArrayList<Category>();
         private Category parent;
 
         public Builder withId(Long id) {
@@ -194,11 +193,11 @@ public class Category implements AnymarketPojo {
             return false;
         }
         Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        return Objects.equal(id, category.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hashCode(id);
     }
 }
