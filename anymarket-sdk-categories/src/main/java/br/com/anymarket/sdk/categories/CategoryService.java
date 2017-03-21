@@ -68,6 +68,16 @@ public class CategoryService extends HttpService {
         throw new NotFoundException(format("Category with id %s not found.", id));
     }
 
+    public List<Category> findCategoryByPartnerId(String partnerId, IntegrationHeader... headers) {
+        String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(partnerId);
+        GetRequest getRequest = get(url, headers);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(new TypeReference<List<Category>>(){});
+        }
+        throw new NotFoundException(format("Category with partnerId %s not found.", partnerId));
+    }
+
     public List<Category> getAllCategories(IntegrationHeader... headers) {
         boolean hasMoreElements;
         ArrayList<Category> allCategories = new ArrayList<Category>();
