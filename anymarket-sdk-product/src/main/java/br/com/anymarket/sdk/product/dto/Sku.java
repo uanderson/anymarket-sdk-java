@@ -1,16 +1,14 @@
 package br.com.anymarket.sdk.product.dto;
 
 
-import br.com.anymarket.sdk.product.dto.deserializer.VariationDeserializer;
+import br.com.anymarket.sdk.variation.VariationDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

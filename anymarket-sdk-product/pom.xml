@@ -26,6 +26,10 @@
       <artifactId>anymarket-sdk-brand</artifactId>
     </dependency>
     <dependency>
+      <groupId>br.com.anymarket.sdk</groupId>
+      <artifactId>anymarket-sdk-variation</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>

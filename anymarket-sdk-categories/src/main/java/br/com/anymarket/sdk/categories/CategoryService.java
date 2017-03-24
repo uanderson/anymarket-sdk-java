@@ -8,6 +8,7 @@ import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.resource.Link;
+import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
@@ -69,27 +70,25 @@ public class CategoryService extends HttpService {
     }
 
     public List<Category> findCategoryByPartnerId(String partnerId, IntegrationHeader... headers) {
-        String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(partnerId);
-        GetRequest getRequest = get(url, headers);
-        Response response = execute(getRequest);
-        if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(new TypeReference<List<Category>>(){});
-        }
-        throw new NotFoundException(format("Category with partnerId %s not found.", partnerId));
+        String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(SDKUrlEncoder.encodeParameterToUTF8(partnerId));
+        return doGetAllCategories(url, headers);
     }
 
     public List<Category> getAllCategories(IntegrationHeader... headers) {
+        String urlToGet = apiEndPoint + CATEGORIES_URI;
+        return doGetAllCategories(urlToGet, headers);
+    }
+
+    private List<Category> doGetAllCategories(String urlToGet, IntegrationHeader[] headers) {
         boolean hasMoreElements;
         ArrayList<Category> allCategories = new ArrayList<Category>();
 
-        String urlToGet = apiEndPoint + CATEGORIES_URI;
 
         do {
             GetRequest getRequest = get(urlToGet, headers);
             Response response = execute(getRequest);
             if (response.getStatus() == HttpStatus.SC_OK) {
-                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {
-                });
+                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {});
                 for (Category root : rootResponse.getContent()) {
                     List<Category> completeRootHierarchy = getCompleteCategory(root, headers);
                     allCategories.addAll(completeRootHierarchy);
@@ -121,8 +120,10 @@ public class CategoryService extends HttpService {
 
     private List<Category> loadCompleteChildren(Category parent, IntegrationHeader... headers) {
         List<Category> completeChildren = new ArrayList<Category>();
-        for (Category child : parent.getChildren()) {
-            completeChildren.addAll(getCompleteCategory(child, headers));
+        if(parent.getChildren() != null) {
+            for (Category child : parent.getChildren()) {
+                completeChildren.addAll(getCompleteCategory(child, headers));
+            }
         }
         return completeChildren;
     }
