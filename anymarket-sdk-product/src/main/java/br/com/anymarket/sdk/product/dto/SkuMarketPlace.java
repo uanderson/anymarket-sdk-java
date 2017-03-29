@@ -323,7 +323,7 @@ public class SkuMarketPlace implements Serializable {
         }
 
         public Builder withAttributes(Map<String, String> val) {
-            fields = val;
+            attributes = val;
             return this;
         }
 
