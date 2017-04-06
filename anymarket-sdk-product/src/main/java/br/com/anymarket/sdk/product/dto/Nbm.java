@@ -3,8 +3,7 @@ package br.com.anymarket.sdk.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-
-import java.util.Objects;
+import com.google.common.base.Objects;
 
 public class Nbm {
 
@@ -39,13 +38,13 @@ public class Nbm {
             return false;
         }
         Nbm nbm = (Nbm) o;
-        return Objects.equals(id, nbm.id) &&
-            Objects.equals(description, nbm.description);
+        return Objects.equal(id, nbm.id) &&
+            Objects.equal(description, nbm.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description);
+        return Objects.hashCode(id, description);
     }
 
     @Override

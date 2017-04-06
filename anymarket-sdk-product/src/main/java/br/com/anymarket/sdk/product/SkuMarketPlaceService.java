@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.product;
 
+import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
@@ -12,7 +13,6 @@ import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ import static java.lang.String.format;
 
 public class SkuMarketPlaceService extends HttpService {
 
-    private static final String SKUMP_URI = "/skus/%s/marketplaces/";
+    private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -38,6 +38,10 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, Long idSkuMP, IntegrationHeader... headers) {
+        return update(skuMp, idSku, idSkuMP, true, headers);
+    }
+
+    public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, Long idSkuMP, boolean syncChanges, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
         Objects.requireNonNull(idSkuMP, "Informe o id do SkuMarketplace a ser atualizado.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
@@ -47,13 +51,10 @@ public class SkuMarketPlaceService extends HttpService {
                 Boolean.toString(skuMp.getPrice().compareTo(skuMp.getDiscountPrice()) != 0));
         }
 
-        RequestBodyEntity put = put(getURLFormated(idSku).concat("/").concat(idSkuMP.toString()), skuMp, headers);
+        String url = getURLFormated(idSku).concat("/").concat(idSkuMP.toString()).concat("?syncChanges="+syncChanges);
+        RequestBodyEntity put = put(url, skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
-    }
-
-    public static void main(String []args) {
-        System.out.println(new BigDecimal(120).compareTo(null));
     }
 
     public SkuMarketPlace update(final SkuMarketPlace skuMp, Long idSku, IntegrationHeader... headers) {
@@ -84,16 +85,21 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public List<SkuMarketPlace> getAllSkuMps(Long idSku, IntegrationHeader... headers) {
+        return getAllSkuMps(idSku, null, headers);
+     }
+    public List<SkuMarketPlace> getAllSkuMps(Long idSku, MarketPlace marketPlace, IntegrationHeader... headers) {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
-        final GetRequest getRequest = get(getURLFormated(idSku).concat("/"), headers);
+        String urlFormated = getURLFormated(idSku);
+        final GetRequest getRequest = get(marketPlace == null ? urlFormated : urlFormated.concat("?marketplace=").concat(marketPlace.name()), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {
-            });
+            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
             allSkuMps.addAll(rootResponse);
         } else {
             throw new NotFoundException("SkuMps not found.");
         }
         return allSkuMps;
     }
+
+
 }

@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.util.Objects.nonNull;
-
 /**
  * Created by marcio.scharam on 05/04/2016.
  */
@@ -19,7 +17,7 @@ public class SDKDateSerializer extends JsonSerializer<Date> {
 
     @Override
     public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-        if (nonNull(value)) {
+        if (value != null) {
             jgen.writeString(new SimpleDateFormat(FORMAT).format(value));
         }
     }

@@ -45,7 +45,7 @@ public class Image {
     private String statusMessage;
 
     @JsonProperty("status")
-    private String status;
+    private ImageStatus status;
 
     @JsonProperty("main")
     private boolean main;
@@ -114,11 +114,11 @@ public class Image {
         this.statusMessage = statusMessage;
     }
 
-    public String getStatus() {
+    public ImageStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ImageStatus status) {
         this.status = status;
     }
 

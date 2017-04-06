@@ -37,6 +37,10 @@ public class Order {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date paymentDate;
 
+    @JsonProperty("cancelDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
+    private Date cancelDate;
+
     @JsonProperty("transmissionStatus")
     private OrderTransmissionStatus transmissionStatus;
 
@@ -295,6 +299,14 @@ public class Order {
 
     public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public Date getCancelDate() {
+        return cancelDate;
+    }
+
+    public void setCancelDate(Date cancelDate) {
+        this.cancelDate = cancelDate;
     }
 
     public String getObservation() {
