@@ -32,7 +32,7 @@ public class Sku {
     @JsonProperty("price")
     private BigDecimal price;
 
-    @JsonProperty(value = "variations", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "variations")
     @JsonDeserialize(using = VariationDeserializer.class)
     private Map<String, String> variations = new HashMap<String, String>();
 

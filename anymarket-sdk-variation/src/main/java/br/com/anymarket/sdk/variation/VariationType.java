@@ -17,9 +17,9 @@ public class VariationType {
     @JsonProperty("partnerId")
     private String partnerId;
     @JsonPropertyOrder("visualVariation")
-    private Boolean visualVariation;
+    private Boolean visualVariation = false;
     @JsonProperty("values")
-    private List<Variation> values = new ArrayList();
+    private List<Variation> values = new ArrayList<Variation>();
 
     public Long getId() {
         return id;
