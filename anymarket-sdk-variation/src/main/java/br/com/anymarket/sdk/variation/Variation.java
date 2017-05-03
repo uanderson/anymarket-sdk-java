@@ -1,4 +1,4 @@
-package br.com.anymarket.sdk.product.dto;
+package br.com.anymarket.sdk.variation;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +13,9 @@ public class Variation {
 
     @JsonProperty("type")
     private VariationType type;
+
+    @JsonProperty("partnerId")
+    private String partnerId;
 
     public Long getId() {
         return id;
@@ -36,5 +39,13 @@ public class Variation {
 
     public void setType(VariationType type) {
         this.type = type;
+    }
+
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
     }
 }

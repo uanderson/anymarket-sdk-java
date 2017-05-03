@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.product.dto;
 
 
+import br.com.anymarket.sdk.variation.Variation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

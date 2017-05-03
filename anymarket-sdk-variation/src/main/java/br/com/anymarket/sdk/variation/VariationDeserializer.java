@@ -1,8 +1,6 @@
-package br.com.anymarket.sdk.product.dto.deserializer;
+package br.com.anymarket.sdk.variation;
 
-import br.com.anymarket.sdk.product.dto.Variation;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -22,7 +20,7 @@ public class VariationDeserializer extends JsonDeserializer<Map<String, String>>
     private static final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public Map<String, String> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Map<String, String> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
         Map<String, String> variations = new HashMap<String, String>();
 
