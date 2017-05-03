@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 /**
  * Informações de estoque disponível
- *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AvailableStockDTO implements Serializable{
+public class AvailableStockDTO implements Serializable {
 
     @JsonProperty("amount")
     private BigDecimal amount;
@@ -33,6 +33,9 @@ public class AvailableStockDTO implements Serializable{
     @JsonProperty("reservedPaid")
     private BigDecimal reservedPaid;
 
+    @JsonProperty("totalInInvoicedStatus")
+    private BigDecimal totalInInvoicedStatus;
+
     @JsonProperty("stockLocal")
     private String stockLocal;
 
@@ -45,7 +48,7 @@ public class AvailableStockDTO implements Serializable{
     }
 
     public BigDecimal getAmount() {
-       return amount;
+        return amount;
     }
 
     public BigDecimal getCost() {
@@ -101,11 +104,18 @@ public class AvailableStockDTO implements Serializable{
     }
 
     public BigDecimal getAvailableAmount() {
-        if(availableAmount.compareTo(BigDecimal.ZERO) < 0) {
+        if (availableAmount.compareTo(BigDecimal.ZERO) < 0) {
             return BigDecimal.ZERO;
         } else {
             return availableAmount;
         }
     }
 
+    public BigDecimal getTotalInInvoicedStatus() {
+        return totalInInvoicedStatus;
+    }
+
+    public void setTotalInInvoicedStatus(BigDecimal totalInInvoicedStatus) {
+        this.totalInInvoicedStatus = totalInInvoicedStatus;
+    }
 }
