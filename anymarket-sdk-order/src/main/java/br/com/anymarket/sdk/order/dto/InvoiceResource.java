@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.order.dto;
 
 import br.com.anymarket.sdk.serializer.SDKDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -26,6 +27,9 @@ public class InvoiceResource {
     @JsonProperty("date")
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date date;
+
+    @JsonProperty("linkNfe")
+    private String linkNfe;
 
     public String getAccessKey() {
         return accessKey;
@@ -59,6 +63,14 @@ public class InvoiceResource {
         this.date = date;
     }
 
+    public String getLinkNfe() {
+        return linkNfe;
+    }
+
+    public void setLinkNfe(String linkNfe) {
+        this.linkNfe = linkNfe;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -66,6 +78,7 @@ public class InvoiceResource {
             .add("series", series)
             .add("number", number)
             .add("date", date)
+            .add("linkNfe", linkNfe)
             .toString();
     }
 }
