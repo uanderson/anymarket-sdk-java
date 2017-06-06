@@ -101,6 +101,9 @@ public class Order {
     @JsonProperty("observation")
     private String observation;
 
+    @JsonProperty("anymarketAddress")
+    private AnymarketOrderAddress anymarketOrderAddress;
+
     public Long getId() {
         return id;
     }
@@ -325,6 +328,14 @@ public class Order {
         this.interestValue = interestValue;
     }
 
+    public AnymarketOrderAddress getAnymarketOrderAddress() {
+        return anymarketOrderAddress;
+    }
+
+    public void setAnymarketOrderAddress(AnymarketOrderAddress anymarketOrderAddress) {
+        this.anymarketOrderAddress = anymarketOrderAddress;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -349,6 +360,7 @@ public class Order {
             .add("observation", observation)
             .add("tracking", tracking)
             .add("items", items)
+            .add("anymarketAddress", anymarketOrderAddress)
             .toString();
     }
 }
