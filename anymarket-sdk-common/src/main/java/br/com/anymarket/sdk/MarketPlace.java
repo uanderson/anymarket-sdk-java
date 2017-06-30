@@ -9,7 +9,8 @@ public enum MarketPlace {
     WALMART("Walmart"),
     VTEX("VTEX"),
     GFG("GFG - Dafiti"),
-    NETSHOES("Netshoes");
+    NETSHOES("Netshoes"),
+    CARREFOUR("Carrefour");
 
     private String name;
 
