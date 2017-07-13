@@ -49,6 +49,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty(value = "skuInMarketplace")
     private String skuInMarketplace;
 
+    @JsonProperty(value = "marketplaceItemCode")
+    private String marketplaceItemCode;
+
     @JsonProperty(value = "fields")
     private Map<String, String> fields = new HashMap<String, String>();
 
@@ -77,6 +80,7 @@ public class SkuMarketPlace implements Serializable {
         setPriceFactor(builder.priceFactor);
         setDiscountPrice(builder.discountPrice);
         setSkuInMarketplace(builder.skuInMarketplace);
+        setMarketplaceItemCode(builder.marketplaceItemCode);
         setFields(builder.fields);
         setAvailableStock(builder.availableStock);
         setAttributes(builder.attributes);
@@ -101,6 +105,14 @@ public class SkuMarketPlace implements Serializable {
 
     public void setIdInMarketplace(String idInMarketplace) {
         this.idInMarketplace = idInMarketplace;
+    }
+
+    public String getMarketplaceItemCode() {
+        return marketplaceItemCode;
+    }
+
+    public void setMarketplaceItemCode(String marketplaceItemCode) {
+        this.marketplaceItemCode = marketplaceItemCode;
     }
 
     public MarketPlace getMarketPlace() {
@@ -249,6 +261,7 @@ public class SkuMarketPlace implements Serializable {
         private BigDecimal priceFactor;
         private BigDecimal discountPrice;
         private String skuInMarketplace;
+        private String marketplaceItemCode;
         private Map<String, String> fields = new HashMap<String, String>();
         private AvailableStockDTO availableStock;
         private Map<String, String> attributes = new HashMap<String, String>();
@@ -309,6 +322,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withSkuInMarketplace(String val) {
             skuInMarketplace = val;
+            return this;
+        }
+
+        public Builder withMarketplaceItemCode(String marketplaceItemCode) {
+            this.marketplaceItemCode = marketplaceItemCode;
             return this;
         }
 
