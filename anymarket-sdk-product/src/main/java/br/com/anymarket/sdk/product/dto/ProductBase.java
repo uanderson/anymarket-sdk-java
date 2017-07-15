@@ -36,6 +36,9 @@ class ProductBase {
     @JsonProperty("videoUrl")
     private URL youtubeVideoUrl;
 
+    @JsonProperty("definitionPriceScope")
+    private DefinitionPriceScope definitionPriceScope;
+
     @JsonProperty("characteristics")
     private List<Characteristics> characteristics = new ArrayList<Characteristics>();
 
@@ -261,6 +264,14 @@ class ProductBase {
         this.gender = gender;
     }
 
+    public DefinitionPriceScope getDefinitionPriceScope() {
+        return definitionPriceScope;
+    }
+
+    public void setDefinitionPriceScope(DefinitionPriceScope definitionPriceScope) {
+        this.definitionPriceScope = definitionPriceScope;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -270,6 +281,7 @@ class ProductBase {
             .add("model", model)
             .add("nbm", nbm)
             .add("youtubeVideoUrl", youtubeVideoUrl)
+            .add("definitionPriceScope", definitionPriceScope)
             .add("characteristics", characteristics)
             .add("origin", origin)
             .add("category", category)
