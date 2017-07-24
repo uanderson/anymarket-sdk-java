@@ -5,10 +5,13 @@ import br.com.anymarket.sdk.variation.Variation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductComplete extends ProductBase {
@@ -42,9 +45,33 @@ public class ProductComplete extends ProductBase {
                     break;
                 }
             }
-
         }
+
+        Collections.sort(images, getImageComparator());
         return images;
+    }
+
+    private Comparator<Image> getImageComparator() {
+        return new Comparator<Image>() {
+            @Override
+            public int compare(Image o1, Image o2) {
+                if (o1.getVariation() != null) {
+                    if (o2.getVariation() != null) {
+                        return Integer.valueOf(o1.getIndex()).compareTo(o2.getIndex());
+                    } else {
+                        return -1;
+                    }
+                }
+                if (o1.getVariation() == null) {
+                    if (o2.getVariation() != null) {
+                        return 1;
+                    } else {
+                        return Integer.valueOf(o1.getIndex()).compareTo(o2.getIndex());
+                    }
+                }
+                return 0;
+            }
+        };
     }
 
     public List<Image> getImagesWithoutVariationValue() {
