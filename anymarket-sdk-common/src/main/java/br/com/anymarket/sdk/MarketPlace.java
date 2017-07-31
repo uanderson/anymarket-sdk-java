@@ -10,7 +10,8 @@ public enum MarketPlace {
     VTEX("VTEX"),
     GFG("GFG - Dafiti"),
     NETSHOES("Netshoes"),
-    MAGAZINE_LUIZA("Magazine Luiza");
+    MAGAZINE_LUIZA("Magazine Luiza"),
+    CARREFOUR("Carrefour");
 
     private String name;
 
