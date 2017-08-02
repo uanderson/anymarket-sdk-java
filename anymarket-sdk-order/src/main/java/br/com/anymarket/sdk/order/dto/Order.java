@@ -69,7 +69,14 @@ public class Order {
     private BigDecimal freight;
 
     @JsonProperty("gross")
+    @Deprecated
     private BigDecimal gross;
+
+    @JsonProperty("productGross")
+    private BigDecimal productGross;
+
+    @JsonProperty("productNet")
+    private BigDecimal productNet;
 
     @JsonProperty("total")
     private BigDecimal total;
@@ -216,10 +223,12 @@ public class Order {
         this.freight = freight;
     }
 
+    @Deprecated
     public BigDecimal getGross() {
         return gross;
     }
 
+    @Deprecated
     public void setGross(BigDecimal gross) {
         this.gross = gross;
     }
@@ -355,6 +364,8 @@ public class Order {
             .add("discount", discount)
             .add("freight", freight)
             .add("gross", gross)
+            .add("productNet", productNet)
+            .add("productGross", productGross)
             .add("total", total)
             .add("interestValue", interestValue)
             .add("observation", observation)
