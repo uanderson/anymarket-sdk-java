@@ -77,8 +77,12 @@ public class HttpService {
             checkGenericErrorToThrowGenericException(response);
             return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
-            throw new HttpServerException(500, "Could not connect to ANYMARKET.");
+            throw getCouldNotConnectException();
         }
+    }
+
+    private HttpServerException getCouldNotConnectException() {
+        return new HttpServerException(500, "Could not connect to ANYMARKET.");
     }
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
@@ -93,8 +97,10 @@ public class HttpService {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-            if (statusCode >= 500) {
+            if (statusCode == 500) {
                 throw new HttpServerException(statusCode, message, details);
+            } else if (statusCode == 502 || statusCode == 503 || statusCode == 505) {
+                throw getCouldNotConnectException();
             } else if (statusCode == 401) {
                 throw new UnauthorizedException(message);
             }
