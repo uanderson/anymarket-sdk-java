@@ -88,6 +88,9 @@ class ProductBase {
     @JsonProperty("gender")
     private ProductGender gender;
 
+    @JsonProperty("allowAutomaticSkuMarketplaceCreation")
+    private boolean allowAutomaticSkuMarketplaceCreation;
+
     public Long getId() {
         return id;
     }
