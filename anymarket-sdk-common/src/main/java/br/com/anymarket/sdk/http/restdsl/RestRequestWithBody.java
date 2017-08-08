@@ -7,6 +7,7 @@ import br.com.anymarket.sdk.exception.UnauthorizedException;
 import br.com.anymarket.sdk.http.Mapper;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.http.headers.NewOrderTotalsPatternHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -32,6 +33,8 @@ public class RestRequestWithBody {
         for (IntegrationHeader header : headers) {
             request.header(header.getKey(), header.getValue());
         }
+        NewOrderTotalsPatternHeader newOrderPattern = new NewOrderTotalsPatternHeader();
+        request.header(newOrderPattern.getKey(), newOrderPattern.getValue());
         return this;
     }
 
