@@ -275,6 +275,14 @@ class ProductBase {
         this.definitionPriceScope = definitionPriceScope;
     }
 
+    public boolean isAllowAutomaticSkuMarketplaceCreation() {
+        return allowAutomaticSkuMarketplaceCreation;
+    }
+
+    public void setAllowAutomaticSkuMarketplaceCreation(boolean allowAutomaticSkuMarketplaceCreation) {
+        this.allowAutomaticSkuMarketplaceCreation = allowAutomaticSkuMarketplaceCreation;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
