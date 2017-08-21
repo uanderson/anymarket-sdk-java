@@ -11,7 +11,8 @@ public enum MarketPlace {
     GFG("GFG - Dafiti"),
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
-    CARREFOUR("Carrefour");
+    CARREFOUR("Carrefour"),
+    AMAZON("Amazon");
 
     private String name;
 
