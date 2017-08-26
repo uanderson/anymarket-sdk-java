@@ -17,6 +17,7 @@
     <module>anymarket-sdk-delegator</module>
     <module>anymarket-sdk-callback</module>
     <module>anymarket-sdk-variation</module>
+    <module>anymarket-sdk-question</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -84,6 +85,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-variation</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>br.com.anymarket.sdk</groupId>
+        <artifactId>anymarket-sdk-question</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
