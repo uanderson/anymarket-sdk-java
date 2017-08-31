@@ -11,7 +11,8 @@ public enum MarketPlace {
     GFG("GFG - Dafiti"),
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
-    CARREFOUR("Carrefour");
+    CARREFOUR("Carrefour"),
+    B2W_NEW_API("B2W Nova Api");
 
     private String name;
 
