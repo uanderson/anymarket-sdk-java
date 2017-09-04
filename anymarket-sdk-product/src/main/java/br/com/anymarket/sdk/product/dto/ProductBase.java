@@ -88,6 +88,9 @@ class ProductBase {
     @JsonProperty("gender")
     private ProductGender gender;
 
+    @JsonProperty("allowAutomaticSkuMarketplaceCreation")
+    private boolean allowAutomaticSkuMarketplaceCreation;
+
     public Long getId() {
         return id;
     }
@@ -270,6 +273,14 @@ class ProductBase {
 
     public void setDefinitionPriceScope(DefinitionPriceScope definitionPriceScope) {
         this.definitionPriceScope = definitionPriceScope;
+    }
+
+    public boolean isAllowAutomaticSkuMarketplaceCreation() {
+        return allowAutomaticSkuMarketplaceCreation;
+    }
+
+    public void setAllowAutomaticSkuMarketplaceCreation(boolean allowAutomaticSkuMarketplaceCreation) {
+        this.allowAutomaticSkuMarketplaceCreation = allowAutomaticSkuMarketplaceCreation;
     }
 
     @Override

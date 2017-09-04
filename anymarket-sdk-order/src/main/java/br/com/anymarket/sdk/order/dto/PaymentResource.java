@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Dados do pagamento
@@ -31,6 +32,9 @@ public class PaymentResource {
 
     @JsonProperty("paymentDetailNormalized")
     private String paymentDetailNormalized;
+
+    @JsonProperty("dueDate")
+    private Date dueDate;
 
     public String getMethod() {
         return method;
@@ -86,5 +90,13 @@ public class PaymentResource {
 
     public void setPaymentDetailNormalized(String paymentDetailNormalized) {
         this.paymentDetailNormalized = paymentDetailNormalized;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 }

@@ -14,6 +14,9 @@ public class OrderTransmissionStatusResource {
     @JsonProperty("errorMsg")
     private String errorMsg;
 
+    public OrderTransmissionStatusResource() {
+    }
+
     private OrderTransmissionStatusResource(Builder builder) {
         this.transmissionStatus = builder.transmissionStatus;
         this.errorMsg = builder.errorMsg;
