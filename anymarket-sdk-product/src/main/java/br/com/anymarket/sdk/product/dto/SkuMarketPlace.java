@@ -64,6 +64,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty(value = "sku")
     private Sku sku;
 
+    @JsonProperty("idAccount")
+    private Long idAccount;
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -85,6 +88,7 @@ public class SkuMarketPlace implements Serializable {
         setAvailableStock(builder.availableStock);
         setAttributes(builder.attributes);
         setSku(builder.sku);
+        setIdAccount(builder.idAccount);
     }
 
     public static Builder builder() {
@@ -231,6 +235,14 @@ public class SkuMarketPlace implements Serializable {
         this.attributes = attributes;
     }
 
+    public Long getIdAccount() {
+        return idAccount;
+    }
+
+    public void setIdAccount(final Long idAccount) {
+        this.idAccount = idAccount;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -246,6 +258,7 @@ public class SkuMarketPlace implements Serializable {
             ", availableStock=" + availableStock +
             ", attributes=" + attributes +
             ", sku=" + sku +
+            ", idAccount=" + idAccount +
             '}';
     }
 
@@ -266,6 +279,7 @@ public class SkuMarketPlace implements Serializable {
         private AvailableStockDTO availableStock;
         private Map<String, String> attributes = new HashMap<String, String>();
         private Sku sku;
+        private Long idAccount;
 
         private Builder() {
         }
@@ -346,7 +360,12 @@ public class SkuMarketPlace implements Serializable {
         }
 
         public Builder withSku(Sku sku) {
-            sku = sku;
+            this.sku = sku;
+            return this;
+        }
+
+        public Builder withIdAccount(Long idAccount) {
+            this.idAccount = idAccount;
             return this;
         }
 
