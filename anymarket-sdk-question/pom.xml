@@ -10,23 +10,16 @@
     <version>0.23.0-RC1</version>
   </parent>
 
-  <artifactId>anymarket-sdk-brand</artifactId>
+  <artifactId>anymarket-sdk-question</artifactId>
 
   <dependencies>
     <dependency>
-      <groupId>br.com.anymarket.sdk</groupId>
-      <artifactId>anymarket-sdk-common</artifactId>
+        <groupId>br.com.anymarket.sdk</groupId>
+        <artifactId>anymarket-sdk-common</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
     </dependency>
   </dependencies>
-
 </project>
