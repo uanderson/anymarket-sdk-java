@@ -31,6 +31,9 @@ public class SkuComplete {
     @JsonProperty("price")
     private BigDecimal price;
 
+    @JsonProperty("additionalTime")
+    private Integer additionalTime;
+
     @JsonProperty(value = "variations")
     private List<Variation> variations = new ArrayList<Variation>();
 
@@ -72,6 +75,14 @@ public class SkuComplete {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getAdditionalTime() {
+        return additionalTime;
+    }
+
+    public void setAdditionalTime(Integer additionalTime) {
+        this.additionalTime = additionalTime;
     }
 
     public String getPartnerId() {
