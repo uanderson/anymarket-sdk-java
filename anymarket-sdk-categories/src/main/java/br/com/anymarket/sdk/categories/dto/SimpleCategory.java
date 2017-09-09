@@ -20,6 +20,9 @@ public class SimpleCategory {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("path")
+    private String path;
+
     public Long getId() {
         return id;
     }
@@ -36,6 +39,14 @@ public class SimpleCategory {
         this.name = name;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -46,12 +57,13 @@ public class SimpleCategory {
         }
         SimpleCategory category = (SimpleCategory) o;
         return Objects.equal(id, category.id) &&
-            Objects.equal(name, category.name);
+            Objects.equal(name, category.name) &&
+            Objects.equal(path, category.path);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name);
+        return Objects.hashCode(id, name, path);
     }
 
     @Override
@@ -59,6 +71,7 @@ public class SimpleCategory {
         return MoreObjects.toStringHelper(this)
             .add("id", id)
             .add("name", name)
+            .add("path", path)
             .toString();
     }
 }
