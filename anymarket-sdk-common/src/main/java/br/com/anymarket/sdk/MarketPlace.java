@@ -12,7 +12,8 @@ public enum MarketPlace {
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
-    AMAZON("Amazon");
+    AMAZON("Amazon"),
+    B2W_NEW_API("B2W Nova API");
 
     private String name;
 
