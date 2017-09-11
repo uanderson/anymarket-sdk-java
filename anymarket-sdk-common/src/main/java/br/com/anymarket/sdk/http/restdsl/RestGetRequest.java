@@ -8,6 +8,7 @@ import br.com.anymarket.sdk.http.Mapper;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.filters.ApiFilter;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.http.headers.NewOrderTotalsPatternHeader;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
@@ -46,6 +47,8 @@ public class RestGetRequest {
         for (IntegrationHeader header : headers) {
             request.header(header.getKey(), header.getValue());
         }
+        NewOrderTotalsPatternHeader newOrderPattern = new NewOrderTotalsPatternHeader();
+        request.header(newOrderPattern.getKey(), newOrderPattern.getValue());
         return this;
     }
 
