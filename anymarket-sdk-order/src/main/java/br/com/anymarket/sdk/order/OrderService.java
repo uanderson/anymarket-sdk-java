@@ -107,6 +107,8 @@ public class OrderService {
 
     public Order createOrder(Order order, IntegrationHeader... headers) {
         checkNotNull(order, "Erro ao criar pedido: Dados não encontrados.");
+
+        order.setProductGross(null);
         return post(apiEndPointForResource.concat("/orders"))
             .body(order)
             .headers(headers)
