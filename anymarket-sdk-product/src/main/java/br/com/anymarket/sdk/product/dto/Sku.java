@@ -35,6 +35,9 @@ public class Sku {
     @JsonProperty("sellPrice")
     private BigDecimal sellPrice;
 
+    @JsonProperty("additionalTime")
+    private Integer additionalTime = 0;
+
     @JsonProperty(value = "variations")
     @JsonDeserialize(using = VariationDeserializer.class)
     private Map<String, String> variations = new HashMap<String, String>();
@@ -103,6 +106,14 @@ public class Sku {
         this.sellPrice = sellPrice;
     }
 
+    public Integer getAdditionalTime() {
+        return additionalTime;
+    }
+
+    public void setAdditionalTime(Integer additionalTime) {
+        this.additionalTime = additionalTime;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -113,6 +124,7 @@ public class Sku {
             .add("price", price)
             .add("sellPrice", sellPrice)
             .add("variations", variations)
+            .add("additionalTime", additionalTime)
             .toString();
     }
 

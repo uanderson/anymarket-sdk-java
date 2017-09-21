@@ -68,8 +68,18 @@ public class Order {
     @JsonProperty("freight")
     private BigDecimal freight;
 
+    /**
+     * @deprecated Use productNet to POST and productGross/productNet to GET
+     */
     @JsonProperty("gross")
+    @Deprecated
     private BigDecimal gross;
+
+    @JsonProperty("productGross")
+    private BigDecimal productGross;
+
+    @JsonProperty("productNet")
+    private BigDecimal productNet;
 
     @JsonProperty("total")
     private BigDecimal total;
@@ -216,10 +226,18 @@ public class Order {
         this.freight = freight;
     }
 
+    /**
+     * @deprecated Use productNet to POST and productGross/productNet to GET
+     */
+    @Deprecated
     public BigDecimal getGross() {
         return gross;
     }
 
+    /**
+     * @deprecated Use productNet to POST and productGross/productNet to GET
+     */
+    @Deprecated
     public void setGross(BigDecimal gross) {
         this.gross = gross;
     }
@@ -336,6 +354,22 @@ public class Order {
         this.anymarketOrderAddress = anymarketOrderAddress;
     }
 
+    public BigDecimal getProductGross() {
+        return productGross;
+    }
+
+    public void setProductGross(BigDecimal productGross) {
+        this.productGross = productGross;
+    }
+
+    public BigDecimal getProductNet() {
+        return productNet;
+    }
+
+    public void setProductNet(BigDecimal productNet) {
+        this.productNet = productNet;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -354,7 +388,8 @@ public class Order {
             .add("marketPlaceStatusComplement", marketPlaceStatusComplement)
             .add("discount", discount)
             .add("freight", freight)
-            .add("gross", gross)
+            .add("productNet", productNet)
+            .add("productGross", productGross)
             .add("total", total)
             .add("interestValue", interestValue)
             .add("observation", observation)

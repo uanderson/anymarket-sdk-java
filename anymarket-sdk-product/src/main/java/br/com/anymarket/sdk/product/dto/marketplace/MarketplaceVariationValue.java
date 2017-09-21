@@ -20,6 +20,15 @@ public class MarketplaceVariationValue {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("variationTypeCode")
+    private String variationTypeCode;
+
+    @JsonProperty("variationTypeName")
+    private String variationTypeName;
+
+    @JsonProperty("inputType")
+    private String inputType;
+
     public String getCodeInMarketplace() {
         return codeInMarketplace;
     }
@@ -34,6 +43,30 @@ public class MarketplaceVariationValue {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getVariationTypeCode() {
+        return variationTypeCode;
+    }
+
+    public void setVariationTypeCode(final String variationTypeCode) {
+        this.variationTypeCode = variationTypeCode;
+    }
+
+    public String getVariationTypeName() {
+        return variationTypeName;
+    }
+
+    public void setVariationTypeName(final String variationTypeName) {
+        this.variationTypeName = variationTypeName;
+    }
+
+    public String getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(final String inputType) {
+        this.inputType = inputType;
     }
 
     @Override
