@@ -114,6 +114,9 @@ public class Order {
     @JsonProperty("anymarketAddress")
     private AnymarketOrderAddress anymarketOrderAddress;
 
+    @JsonProperty("idAccount")
+    private Long idAccount;
+
     public Long getId() {
         return id;
     }
@@ -368,6 +371,14 @@ public class Order {
 
     public void setProductNet(BigDecimal productNet) {
         this.productNet = productNet;
+    }
+
+    public Long getIdAccount() {
+        return idAccount;
+    }
+
+    public void setIdAccount(final Long idAccount) {
+        this.idAccount = idAccount;
     }
 
     @Override
