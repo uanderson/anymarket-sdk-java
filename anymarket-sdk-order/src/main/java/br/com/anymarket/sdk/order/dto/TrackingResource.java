@@ -20,6 +20,9 @@ public class TrackingResource {
     @JsonProperty("carrier")
     private String carrier;
 
+    @JsonProperty("carrierDocument")
+    private String carrierDocument;
+
     @JsonProperty("date")
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date date;
@@ -60,6 +63,14 @@ public class TrackingResource {
         this.carrier = carrier;
     }
 
+    public String getCarrierDocument() {
+        return carrierDocument;
+    }
+
+    public void setCarrierDocument(String carrierDocument) {
+        this.carrierDocument = carrierDocument;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -98,6 +109,7 @@ public class TrackingResource {
             .add("url", url)
             .add("number", number)
             .add("carrier", carrier)
+            .add("carrierDocument", carrierDocument)
             .add("date", date)
             .add("estimateDate", estimateDate)
             .add("shippedDate", shippedDate)

@@ -12,7 +12,8 @@ public enum MarketPlace {
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
-    AMAZON("Amazon");
+    AMAZON("Amazon"),
+    BUSCAPE("Buscapé");
 
     private String name;
 
