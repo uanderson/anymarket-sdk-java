@@ -52,6 +52,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-question</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-freight</artifactId>
+    </dependency>
   </dependencies>
 
 
