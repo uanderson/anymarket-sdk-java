@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.freight.dto;
 
+import br.com.anymarket.sdk.freight.FreightType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public class FreightQuote {
     private Integer deliveryTime;
 
     @JsonProperty("freightType")
-    private String freightType;
+    private FreightType freightType;
 
     @JsonProperty("price")
     private BigDecimal price;
@@ -45,11 +46,11 @@ public class FreightQuote {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getFreightType() {
+    public FreightType getFreightType() {
         return freightType;
     }
 
-    public void setFreightType(String freightType) {
+    public void setFreightType(FreightType freightType) {
         this.freightType = freightType;
     }
 
