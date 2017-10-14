@@ -5,13 +5,12 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
-import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import org.apache.http.HttpStatus;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -33,14 +32,13 @@ public class ImageService extends HttpService {
         return getAllImages(idProduct, Image.class, headers);
     }
 
-    public <T> List<T> getAllImages(final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
-        final List<T> allimages = Lists.newArrayList();
+    public <T> List<Image> getAllImages(final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
+        List<Image> allimages = Lists.newArrayList();
         final GetRequest getRequest = get(getURLFormated(idProduct).concat("/"), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            Page<T> rootResponse = response.to(new TypeReference<Page<T>>() {
-            });
-            allimages.addAll(rootResponse.getContent());
+            Image[] lstImg = response.to(Image[].class);
+            allimages = Arrays.asList(lstImg);
         } else {
             throw new NotFoundException("Images not found.");
         }
