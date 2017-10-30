@@ -3,6 +3,7 @@ package br.com.anymarket.sdk.freight.dto;
 import br.com.anymarket.sdk.MarketPlace;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class FreightResponse {
     private List<FreightQuote> quotes = new ArrayList<FreightQuote>();
 
     @JsonProperty
-    private Map<String, Integer> missingSkus = new HashMap<String, Integer>();
+    private Map<String, BigDecimal> missingSkus = new HashMap<String, BigDecimal>();
 
     @JsonProperty
     private FreightQuote defaultFreight;
@@ -52,7 +53,7 @@ public class FreightResponse {
         return quotes;
     }
 
-    public Map<String, Integer> getMissingSkus() {
+    public Map<String, BigDecimal> getMissingSkus() {
         return missingSkus;
     }
 

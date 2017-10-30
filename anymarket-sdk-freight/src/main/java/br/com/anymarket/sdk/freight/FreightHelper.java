@@ -18,7 +18,7 @@ public final class FreightHelper {
         BigDecimal total = BigDecimal.ZERO;
         for (FreightProduct p: response.getProducts()) {
             if (p.getDimensions() != null) {
-                total = total.add(p.getDimensions().getWeight().multiply(BigDecimal.valueOf(p.getAmount())));
+                total = total.add(p.getDimensions().getWeight().multiply(p.getAmount()));
             }
         }
         return total;
@@ -31,7 +31,7 @@ public final class FreightHelper {
                 .divide(BIG_100, SCALE_5, BigDecimal.ROUND_HALF_UP);
 
         return priceOfTotal
-                .multiply(BigDecimal.valueOf(product.getAmount()))
+                .multiply(product.getAmount())
                 .divide(BigDecimal.ONE, SCALE_2, BigDecimal.ROUND_HALF_UP);
     }
 }

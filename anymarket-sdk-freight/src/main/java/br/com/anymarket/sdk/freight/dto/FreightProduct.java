@@ -10,7 +10,7 @@ public class FreightProduct {
     private String skuId;
 
     @JsonProperty("amount")
-    private Integer amount;
+    private BigDecimal amount;
 
     @JsonProperty("dimensions")
     private FreightDimension dimensions;
@@ -35,11 +35,11 @@ public class FreightProduct {
         this.skuId = skuId;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
