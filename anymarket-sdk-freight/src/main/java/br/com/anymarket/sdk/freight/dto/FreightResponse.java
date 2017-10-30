@@ -4,7 +4,9 @@ import br.com.anymarket.sdk.MarketPlace;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FreightResponse {
 
@@ -19,6 +21,12 @@ public class FreightResponse {
 
     @JsonProperty("quotes")
     private List<FreightQuote> quotes = new ArrayList<FreightQuote>();
+
+    @JsonProperty
+    private Map<String, Integer> missingSkus = new HashMap<String, Integer>();
+
+    @JsonProperty
+    private FreightQuote defaultFreight;
 
     public MarketPlace getMarketPlace() {
         return marketPlace;
@@ -43,4 +51,17 @@ public class FreightResponse {
     public List<FreightQuote> getQuotes() {
         return quotes;
     }
+
+    public Map<String, Integer> getMissingSkus() {
+        return missingSkus;
+    }
+
+    public FreightQuote getDefaultFreight() {
+        return defaultFreight;
+    }
+
+    public void setDefaultFreight(FreightQuote defaultFreight) {
+        this.defaultFreight = defaultFreight;
+    }
+
 }
