@@ -35,6 +35,9 @@ public class OrderItemResource {
     @JsonProperty("marketPlaceId")
     private String marketPlaceId;
 
+    @JsonProperty("orderItemId")
+    private Long orderItemId;
+
     public SimpleSkuResource getSku() {
         return sku;
     }
@@ -97,6 +100,14 @@ public class OrderItemResource {
 
     public void setMarketPlaceId(String marketPlaceId) {
         this.marketPlaceId = marketPlaceId;
+    }
+
+    public Long getOrderItemId() {
+        return orderItemId;
+    }
+
+    public void setOrderItemId(final Long orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
     @Override
