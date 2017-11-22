@@ -117,6 +117,9 @@ public class Order {
     @JsonProperty("idAccount")
     private Long idAccount;
 
+    @JsonProperty("accountName")
+    private String accountName;
+
     public Long getId() {
         return id;
     }
@@ -379,6 +382,14 @@ public class Order {
 
     public void setIdAccount(final Long idAccount) {
         this.idAccount = idAccount;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     @Override
