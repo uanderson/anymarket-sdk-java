@@ -24,6 +24,9 @@ public class FreightRequest {
     @JsonProperty("products")
     private List<FreightProduct> products = new ArrayList<FreightProduct>();
 
+    @JsonProperty("accountName")
+    private String accountName;
+
     public List<FreightProduct> getProducts() {
         return products;
     }
@@ -58,5 +61,13 @@ public class FreightRequest {
 
     public void setTimeout(Long timeout) {
         this.timeout = timeout;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }
