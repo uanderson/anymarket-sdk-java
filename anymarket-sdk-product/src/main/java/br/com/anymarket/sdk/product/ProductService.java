@@ -10,6 +10,7 @@ import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
 import br.com.anymarket.sdk.product.dto.ProductComplete;
+import br.com.anymarket.sdk.resource.Link;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
@@ -29,10 +30,11 @@ public class ProductService extends HttpService {
 
     private static final String PRODUCTS_URI = "/products";
     private final String apiEndPoint;
+    public static final String NEXT = "next";
 
     public ProductService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
-            SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
     public Product insertProduct(Product product, IntegrationHeader... headers) {
@@ -43,21 +45,21 @@ public class ProductService extends HttpService {
 
     public Product updateProduct(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-            .concat(product.getId().toString()), product, headers);
+                .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         return response.to(Product.class);
     }
 
     public Product updateProductAndImages(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-            .concat(product.getId().toString()), product, headers);
+                .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         if (response.getStatus() == HttpStatus.SC_OK) {
             if (product.getImages() != null) {
                 for (Image image : product.getImages()) {
                     if (image.getId() == null) {
                         RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                                .concat(product.getId().toString()).concat("/images/"), image, headers);
                         execute(post);
                     }
                 }
@@ -67,7 +69,7 @@ public class ProductService extends HttpService {
                 for (Image image : product.getImagesForDelete()) {
                     if (image.getId() != null) {
                         HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                                .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
                         execute(delete);
                     }
                 }
@@ -107,7 +109,7 @@ public class ProductService extends HttpService {
 
     private String getUrlForProductsWithSku(String sku) {
         return apiEndPoint.concat(PRODUCTS_URI).concat("?sku=")
-            .concat(SDKUrlEncoder.encodeParameterToUTF8(sku));
+                .concat(SDKUrlEncoder.encodeParameterToUTF8(sku));
     }
 
     public List<Product> getAllProducts(final String url, IntegrationHeader... headers) {
@@ -138,7 +140,35 @@ public class ProductService extends HttpService {
         return allProducts;
     }
 
-    public Map<String, String> getActiveAttributesByMarketPlace(Long idProduct, MarketPlace marketPlace, IntegrationHeader... headers){
+    public Page<Product> getProductPaged(IntegrationHeader... headers) {
+        Response response = execute(get(apiEndPoint.concat(PRODUCTS_URI), headers));
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(new TypeReference<Page<Product>>() {
+            });
+        } else {
+            throw new NotFoundException("Products not found.");
+        }
+    }
+
+    public Page<Product> getNextPageProduct(Page<Product> actualPaged, IntegrationHeader... headers) {
+        String nextPageUrl = null;
+        for (Link link : actualPaged.getLinks()) {
+            if (link.getRel().equals(NEXT)) {
+                nextPageUrl = link.getHref();
+                break;
+            }
+        }
+        if (nextPageUrl != null) {
+            Response response = execute(get(nextPageUrl, headers));
+            if (response.getStatus() == HttpStatus.SC_OK) {
+                return response.to(new TypeReference<Page<Product>>() {
+                });
+            }
+        }
+        return new Page<Product>();
+    }
+
+    public Map<String, String> getActiveAttributesByMarketPlace(Long idProduct, MarketPlace marketPlace, IntegrationHeader... headers) {
         String url = apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(idProduct.toString()).concat("/attributes/").concat(marketPlace.name());
         GetRequest getRequest = get(url, headers);
         Response response = execute(getRequest);
