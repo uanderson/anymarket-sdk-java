@@ -39,6 +39,9 @@ public class AvailableStockDTO implements Serializable {
     @JsonProperty("stockLocal")
     private String stockLocal;
 
+    @JsonProperty("additionalTime")
+    private Integer additionalTime;
+
     public BigDecimal getReservedPending() {
         return reservedPending;
     }
@@ -117,5 +120,13 @@ public class AvailableStockDTO implements Serializable {
 
     public void setTotalInInvoicedStatus(BigDecimal totalInInvoicedStatus) {
         this.totalInInvoicedStatus = totalInInvoicedStatus;
+    }
+
+    public Integer getAdditionalTime() {
+        return additionalTime;
+    }
+
+    public void setAdditionalTime(final Integer additionalTime) {
+        this.additionalTime = additionalTime;
     }
 }
