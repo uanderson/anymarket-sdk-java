@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 import static java.util.Objects.isNull;
 
-
 /**
  * This class represents Stock info to be sent to AnyMarket by API v2
  */
