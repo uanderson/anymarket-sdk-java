@@ -6,6 +6,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Question implements AnymarketPojo {
@@ -20,6 +21,8 @@ public class Question implements AnymarketPojo {
     private String question;
     @JsonProperty("answers")
     private List<Answer> answers = new ArrayList<Answer>();
+    @JsonProperty("questionDate")
+    private Date questionDate;
 
     public Long getId() {
         return id;
@@ -64,6 +67,14 @@ public class Question implements AnymarketPojo {
     @Override
     public String getPathURI() {
         return "/questions";
+    }
+
+    public Date getQuestionDate() {
+        return questionDate;
+    }
+
+    public void setQuestionDate(Date questionDate) {
+        this.questionDate = questionDate;
     }
 
     @Override
