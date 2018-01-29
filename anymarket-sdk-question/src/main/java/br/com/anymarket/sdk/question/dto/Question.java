@@ -1,7 +1,9 @@
 package br.com.anymarket.sdk.question.dto;
 
 import br.com.anymarket.sdk.AnymarketPojo;
+import br.com.anymarket.sdk.serializer.SDKDateSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
@@ -22,6 +24,7 @@ public class Question implements AnymarketPojo {
     @JsonProperty("answers")
     private List<Answer> answers = new ArrayList<Answer>();
     @JsonProperty("questionDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
     private Date questionDate;
 
     public Long getId() {
