@@ -1,6 +1,5 @@
 package br.com.anymarket.sdk.categories.dto;
 
-import br.com.anymarket.sdk.AnymarketPojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -14,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by marcio.scharam on 17/03/2016.
  */
-public class Category implements AnymarketPojo {
+public class Category {
 
     @JsonProperty("id")
     private Long id;
@@ -85,7 +84,6 @@ public class Category implements AnymarketPojo {
         return parent;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -112,11 +110,6 @@ public class Category implements AnymarketPojo {
 
     public void setParent(Category parent) {
         this.parent = parent;
-    }
-
-    @Override
-    public String getPathURI() {
-        return "/categories";
     }
 
 
