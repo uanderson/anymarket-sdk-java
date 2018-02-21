@@ -20,6 +20,9 @@ public class Brand {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("reducedName")
+    private String reducedName;
+
     @JsonProperty("partnerId")
     private String partnerId;
 
@@ -37,6 +40,14 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getReducedName() {
+        return reducedName;
+    }
+
+    public void setReducedName(String reducedName) {
+        this.reducedName = reducedName;
     }
 
     public String getPartnerId() {
