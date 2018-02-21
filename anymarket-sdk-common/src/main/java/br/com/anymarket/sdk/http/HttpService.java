@@ -82,7 +82,7 @@ public class HttpService {
     }
 
     private HttpServerException getCouldNotConnectException() {
-        return new HttpServerException(500, "Could not connect to ANYMARKET.");
+        return new HttpServerException(500, "Serviço indisponível no momento. Estamos trabalhando para restabelecer a conexão com a sua integração.");
     }
 
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
