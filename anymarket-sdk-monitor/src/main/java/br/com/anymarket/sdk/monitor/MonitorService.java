@@ -9,9 +9,10 @@ import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.post;
 import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.put;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-public class MonitorService{
+public class MonitorService {
 
     private String apiEndPoint;
+    private static final String MONITONING_URI = "/monitorings";
 
     public MonitorService(String apiEndPoint) {
         if (isNullOrEmpty(apiEndPoint)) {
@@ -21,7 +22,7 @@ public class MonitorService{
     }
 
     public Response insert(Monitor monitor, IntegrationHeader... headers) {
-        return post(apiEndPoint + monitor.getPathURI())
+        return post(apiEndPoint + MONITONING_URI)
                 .headers(headers)
                 .body(monitor)
                 .getResponse();
@@ -30,7 +31,7 @@ public class MonitorService{
     public Response update(Monitor monitor, IntegrationHeader... headers) {
         return put(apiEndPoint.concat("{pathUri}/{id}"))
                 .headers(headers)
-                .routeParam("pathUri", monitor.getPathURI())
+                .routeParam("pathUri", MONITONING_URI)
                 .routeParam("id", monitor.getId().toString())
                 .body(monitor)
                 .getResponse();
