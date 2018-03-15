@@ -13,7 +13,8 @@ public enum MarketPlace {
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
     AMAZON("Amazon"),
-    BUSCAPE("Buscapé");
+    BUSCAPE("Buscapé"),
+    B2W_NEW_API("B2W Nova API");
 
     private String name;
 
