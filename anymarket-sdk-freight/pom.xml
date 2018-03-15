@@ -5,29 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
   
   <parent>
-    <artifactId>anymarket-sdk-java</artifactId>
     <groupId>br.com.anymarket.sdk</groupId>
+    <artifactId>anymarket-sdk-java</artifactId>
     <version>0.33.1</version>
   </parent>
 
-  <artifactId>anymarket-sdk-product</artifactId>
+  <artifactId>anymarket-sdk-freight</artifactId>
 
   <dependencies>
     <dependency>
       <groupId>br.com.anymarket.sdk</groupId>
       <artifactId>anymarket-sdk-common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>br.com.anymarket.sdk</groupId>
-      <artifactId>anymarket-sdk-categories</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>br.com.anymarket.sdk</groupId>
-      <artifactId>anymarket-sdk-brand</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>br.com.anymarket.sdk</groupId>
-      <artifactId>anymarket-sdk-variation</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -40,6 +28,5 @@
       <version>${jackson.version}</version>
     </dependency>
   </dependencies>
-
 
 </project>

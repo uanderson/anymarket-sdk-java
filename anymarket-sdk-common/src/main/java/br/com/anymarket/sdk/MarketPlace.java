@@ -1,7 +1,7 @@
 package br.com.anymarket.sdk;
 
 public enum MarketPlace {
-    CNOVA("Cnova"),
+    CNOVA("Via Varejo"),
     MAGENTO("Magento"),
     MERCADO_LIVRE("Mercado Livre"),
     B2W("B2W"),
@@ -13,7 +13,7 @@ public enum MarketPlace {
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
     AMAZON("Amazon"),
-    B2W_NEW_API("B2W Nova API");
+    BUSCAPE("Buscapé");
 
     private String name;
 

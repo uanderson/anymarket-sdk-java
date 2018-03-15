@@ -27,7 +27,7 @@ import static java.lang.String.format;
 public class CategoryService extends HttpService {
 
     private static final String NEXT = "next";
-    public static final String CATEGORIES_URI = "/categories/";
+    private static final String CATEGORIES_URI = "/categories/";
     private String apiEndPoint;
 
     public CategoryService(String apiEndPoint) {
@@ -36,13 +36,13 @@ public class CategoryService extends HttpService {
     }
 
     public Category updateCategory(Category category, IntegrationHeader... headers) {
-        RequestBodyEntity putRequest = put(apiEndPoint + category.getPathURI() + "/" + category.getId(), category, headers);
+        RequestBodyEntity putRequest = put(apiEndPoint + CATEGORIES_URI + "/" + category.getId(), category, headers);
         Response response = execute(putRequest);
         return response.to(Category.class);
     }
 
     public Category insertCategory(Category category, IntegrationHeader... headers) {
-        RequestBodyEntity postRequest = post(apiEndPoint + category.getPathURI(), category, headers);
+        RequestBodyEntity postRequest = post(apiEndPoint + CATEGORIES_URI, category, headers);
         Response response = execute(postRequest);
         return response.to(Category.class);
     }
@@ -88,7 +88,8 @@ public class CategoryService extends HttpService {
             GetRequest getRequest = get(urlToGet, headers);
             Response response = execute(getRequest);
             if (response.getStatus() == HttpStatus.SC_OK) {
-                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {});
+                Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {
+                });
                 for (Category root : rootResponse.getContent()) {
                     List<Category> completeRootHierarchy = getCompleteCategory(root, headers);
                     allCategories.addAll(completeRootHierarchy);
@@ -120,7 +121,7 @@ public class CategoryService extends HttpService {
 
     private List<Category> loadCompleteChildren(Category parent, IntegrationHeader... headers) {
         List<Category> completeChildren = new ArrayList<Category>();
-        if(parent.getChildren() != null) {
+        if (parent.getChildren() != null) {
             for (Category child : parent.getChildren()) {
                 completeChildren.addAll(getCompleteCategory(child, headers));
             }

@@ -1,17 +1,16 @@
 package br.com.anymarket.sdk.monitor.dto;
 
-import br.com.anymarket.sdk.AnymarketPojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+import static br.com.anymarket.sdk.AnymarketPojo.MAGICAL_HASH_CODE;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Objects.isNull;
 
 /**
  * Created by marcio.scharam on 08/03/2016.
  */
-public class Monitor implements AnymarketPojo {
+public class Monitor {
 
     @JsonProperty("id")
     private Long id;
@@ -32,9 +31,11 @@ public class Monitor implements AnymarketPojo {
     @JsonProperty("status")
     private MonitorStatus status;
 
+    protected Monitor() {}
+
     private Monitor(Builder builder) {
 
-        if (isNull(builder.id) && isNull(builder.partnerId)) {
+        if (builder.id == null && builder.partnerId == null) {
             throw new IllegalArgumentException(
                 "It must be filled the id or partnerId");
         }
@@ -107,11 +108,6 @@ public class Monitor implements AnymarketPojo {
 
     public void concatRetryCallbackPathWithModule(String module, String retryCallbackPath) {
         this.retryCallbackURL = module + retryCallbackPath;
-    }
-
-    @Override
-    public String getPathURI() {
-        return "/monitorings";
     }
 
     @Override
