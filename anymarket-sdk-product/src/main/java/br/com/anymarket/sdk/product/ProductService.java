@@ -89,7 +89,7 @@ public class ProductService extends HttpService {
                         RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
                             .concat(product.getId().toString()).concat("/images/"), image, headers);
                         execute(post);
-                    }else{
+                    } else {
                         RequestBodyEntity puts = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
                             .concat(product.getId().toString()).concat("/images/"), image, headers);
                         execute(puts);
@@ -98,7 +98,7 @@ public class ProductService extends HttpService {
             }
 
             if (product.getImagesForDelete() != null) {
-                imageForDelete(product,headers);
+                imageForDelete(product, headers);
             }
         }
         return getProduct(product.getId(), headers);
