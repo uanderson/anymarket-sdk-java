@@ -58,22 +58,19 @@ public class SkuService extends HttpService {
     }
 
     public List<Sku> getAllSkus(final Long idProduct, IntegrationHeader... headers) {
-        return getAllSkus(idProduct, Sku.class, headers);
-    }
-
-    public <T> List<T> getAllSkus(final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
-        final List<T> allSkus = Lists.newArrayList();
         final GetRequest getRequest = get(getURLFormated(idProduct).concat("/"), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            Page<T> rootResponse = response.to(new TypeReference<Page<T>>() {
+            return response.to(new TypeReference<List<Sku>>() {
             });
-            allSkus.addAll(rootResponse.getContent());
         } else {
             throw new NotFoundException("Skus not found.");
         }
-        return allSkus;
     }
+
+//    public List<Sku> getAllSkus(final Long idProduct, IntegrationHeader... headers) {
+//
+//    }
 
     public Sku getSku(Long idSku, final Long idProduct, IntegrationHeader... headers) {
         return getSku(idSku, idProduct, Sku.class, headers);
