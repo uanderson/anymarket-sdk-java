@@ -41,6 +41,9 @@ public class Order {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date cancelDate;
 
+    @JsonProperty("cancellationCode")
+    private OrderCancellationCode cancellationCode;
+
     @JsonProperty("transmissionStatus")
     private OrderTransmissionStatus transmissionStatus;
 
@@ -390,6 +393,14 @@ public class Order {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
+    }
+
+    public OrderCancellationCode getCancellationCode() {
+        return cancellationCode;
+    }
+
+    public void setCancellationCode(final OrderCancellationCode cancellationCode) {
+        this.cancellationCode = cancellationCode;
     }
 
     @Override
