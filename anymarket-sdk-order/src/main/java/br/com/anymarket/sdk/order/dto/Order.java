@@ -411,6 +411,22 @@ public class Order {
         this.cancellationCode = cancellationCode;
     }
 
+    public Date getShipmentExceptionDate() {
+        return shipmentExceptionDate;
+    }
+
+    public void setShipmentExceptionDate(final Date shipmentExceptionDate) {
+        this.shipmentExceptionDate = shipmentExceptionDate;
+    }
+
+    public String getShipmentExceptionDescription() {
+        return shipmentExceptionDescription;
+    }
+
+    public void setShipmentExceptionDescription(final String shipmentExceptionDescription) {
+        this.shipmentExceptionDescription = shipmentExceptionDescription;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
