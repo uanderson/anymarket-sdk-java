@@ -123,6 +123,14 @@ public class Order {
     @JsonProperty("accountName")
     private String accountName;
 
+    @JsonProperty("shipmentExceptionDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
+    private Date shipmentExceptionDate;
+
+    @JsonProperty("shipmentExceptionDescription")
+    private String shipmentExceptionDescription;
+
+
     public Long getId() {
         return id;
     }
