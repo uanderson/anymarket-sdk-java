@@ -83,6 +83,10 @@ public class ProductService extends HttpService {
             .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         if (response.getStatus() == HttpStatus.SC_OK) {
+
+            if (product.getImagesForDelete() != null) {
+                imageForDelete(product, headers);
+            }
             if (product.getImages() != null) {
                 for (Image image : product.getImages()) {
                     if (image.getId() == null) {
@@ -95,10 +99,6 @@ public class ProductService extends HttpService {
                         execute(puts);
                     }
                 }
-            }
-
-            if (product.getImagesForDelete() != null) {
-                imageForDelete(product, headers);
             }
         }
         return getProduct(product.getId(), headers);
