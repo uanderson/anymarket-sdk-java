@@ -41,6 +41,9 @@ public class Order {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date cancelDate;
 
+    @JsonProperty("cancellationCode")
+    private OrderCancellationCode cancellationCode;
+
     @JsonProperty("transmissionStatus")
     private OrderTransmissionStatus transmissionStatus;
 
@@ -119,6 +122,14 @@ public class Order {
 
     @JsonProperty("accountName")
     private String accountName;
+
+    @JsonProperty("shipmentExceptionDate")
+    @JsonSerialize(using = SDKDateSerializer.class)
+    private Date shipmentExceptionDate;
+
+    @JsonProperty("shipmentExceptionDescription")
+    private String shipmentExceptionDescription;
+
 
     public Long getId() {
         return id;
@@ -390,6 +401,30 @@ public class Order {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
+    }
+
+    public OrderCancellationCode getCancellationCode() {
+        return cancellationCode;
+    }
+
+    public void setCancellationCode(final OrderCancellationCode cancellationCode) {
+        this.cancellationCode = cancellationCode;
+    }
+
+    public Date getShipmentExceptionDate() {
+        return shipmentExceptionDate;
+    }
+
+    public void setShipmentExceptionDate(final Date shipmentExceptionDate) {
+        this.shipmentExceptionDate = shipmentExceptionDate;
+    }
+
+    public String getShipmentExceptionDescription() {
+        return shipmentExceptionDescription;
+    }
+
+    public void setShipmentExceptionDescription(final String shipmentExceptionDescription) {
+        this.shipmentExceptionDescription = shipmentExceptionDescription;
     }
 
     @Override

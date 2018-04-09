@@ -34,7 +34,7 @@ public class ProductService extends HttpService {
 
     public ProductService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
-                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+            SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
     public Product insertProduct(Product product, IntegrationHeader... headers) {
@@ -45,21 +45,21 @@ public class ProductService extends HttpService {
 
     public Product updateProduct(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                .concat(product.getId().toString()), product, headers);
+            .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         return response.to(Product.class);
     }
 
     public Product updateProductAndImages(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                .concat(product.getId().toString()), product, headers);
+            .concat(product.getId().toString()), product, headers);
         Response response = execute(put);
         if (response.getStatus() == HttpStatus.SC_OK) {
             if (product.getImages() != null) {
                 for (Image image : product.getImages()) {
                     if (image.getId() == null) {
                         RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                                .concat(product.getId().toString()).concat("/images/"), image, headers);
+                            .concat(product.getId().toString()).concat("/images/"), image, headers);
                         execute(post);
                     }
                 }
@@ -69,13 +69,49 @@ public class ProductService extends HttpService {
                 for (Image image : product.getImagesForDelete()) {
                     if (image.getId() != null) {
                         HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                                .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                            .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
                         execute(delete);
                     }
                 }
             }
         }
         return getProduct(product.getId(), headers);
+    }
+
+    public Product updateProductAndCreateAndUpdateImages(Product product, IntegrationHeader... headers) {
+        RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+            .concat(product.getId().toString()), product, headers);
+        Response response = execute(put);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+
+            if (product.getImagesForDelete() != null) {
+                imageForDelete(product, headers);
+            }
+            if (product.getImages() != null) {
+                for (Image image : product.getImages()) {
+                    if (image.getId() == null) {
+                        RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                        execute(post);
+                    } else {
+                        RequestBodyEntity puts = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                        execute(puts);
+                    }
+                }
+            }
+        }
+        return getProduct(product.getId(), headers);
+    }
+
+    private void imageForDelete(Product product, IntegrationHeader... headers) {
+        for (Image image : product.getImagesForDelete()) {
+            if (image.getId() != null) {
+                HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
+                    .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                execute(delete);
+            }
+        }
     }
 
     public Product getProduct(Long id, IntegrationHeader... headers) {
@@ -109,7 +145,7 @@ public class ProductService extends HttpService {
 
     private String getUrlForProductsWithSku(String sku) {
         return apiEndPoint.concat(PRODUCTS_URI).concat("?sku=")
-                .concat(SDKUrlEncoder.encodeParameterToUTF8(sku));
+            .concat(SDKUrlEncoder.encodeParameterToUTF8(sku));
     }
 
     public List<Product> getAllProducts(final String url, IntegrationHeader... headers) {
