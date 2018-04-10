@@ -19,6 +19,7 @@
     <module>anymarket-sdk-variation</module>
     <module>anymarket-sdk-question</module>
     <module>anymarket-sdk-freight</module>
+    <module>anymarket-sdk-template</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -96,6 +97,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-freight</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>anymarket-sdk-template</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
