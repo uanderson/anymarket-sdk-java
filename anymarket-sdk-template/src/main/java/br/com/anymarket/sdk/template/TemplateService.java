@@ -39,7 +39,7 @@ public class TemplateService extends HttpService {
     }
 
     public List<Template> getTemplatesByMarketPlace(final MarketPlace marketPlace, IntegrationHeader... headers) {
-        return getTemplateList(apiEndPoint.concat(TEMPLATE_URI).concat("?name=").concat(SDKUrlEncoder.encodeParameterToUTF8(marketPlace.name())), headers);
+        return getTemplateList(apiEndPoint.concat(TEMPLATE_URI).concat("/list/").concat(SDKUrlEncoder.encodeParameterToUTF8(marketPlace.name())), headers);
     }
 
     private List<Template> getTemplateList(final String url, IntegrationHeader... headers) {
@@ -51,7 +51,7 @@ public class TemplateService extends HttpService {
             });
             templates.addAll(rootResponse.getContent());
         } else {
-            throw new NotFoundException("Templates not found.");
+            throw new NotFoundException("Template not found.");
         }
         return templates;
     }
