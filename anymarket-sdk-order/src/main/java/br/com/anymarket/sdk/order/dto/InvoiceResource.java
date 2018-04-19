@@ -31,6 +31,12 @@ public class InvoiceResource {
     @JsonProperty("linkNfe")
     private String linkNfe;
 
+    @JsonProperty("cfop")
+    private String cfop;
+
+    @JsonProperty("companyStateTaxId")
+    private String companyStateTaxId;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -71,6 +77,22 @@ public class InvoiceResource {
         this.linkNfe = linkNfe;
     }
 
+    public String getCfop() {
+        return cfop;
+    }
+
+    public void setCfop(String cfop) {
+        this.cfop = cfop;
+    }
+
+    public String getCompanyStateTaxId() {
+        return companyStateTaxId;
+    }
+
+    public void setCompanyStateTaxId(String companyStateTaxId) {
+        this.companyStateTaxId = companyStateTaxId;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -79,6 +101,8 @@ public class InvoiceResource {
             .add("number", number)
             .add("date", date)
             .add("linkNfe", linkNfe)
+            .add("cfop", cfop)
+            .add("companyStateTaxId", companyStateTaxId)
             .toString();
     }
 }
