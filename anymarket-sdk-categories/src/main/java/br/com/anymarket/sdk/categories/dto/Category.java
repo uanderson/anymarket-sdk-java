@@ -36,6 +36,9 @@ public class Category {
     @JsonProperty("parent")
     private Category parent;
 
+    @JsonProperty("path")
+    private String path;
+
     protected Category() {
 
     }
@@ -112,6 +115,13 @@ public class Category {
         this.parent = parent;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     @Override
     public String toString() {
@@ -123,6 +133,7 @@ public class Category {
             .add("calculatedPrice", calculatedPrice)
             .add("children", children)
             .add("parent", parent)
+            .add("path", path)
             .toString();
     }
 
@@ -135,6 +146,7 @@ public class Category {
         private Boolean calculatedPrice;
         private List<Category> children = new ArrayList<Category>();
         private Category parent;
+        private String path;
 
         public Builder withId(Long id) {
             this.id = id;
@@ -171,10 +183,14 @@ public class Category {
             return this;
         }
 
+        public Builder withPath(String path) {
+            this.path = path;
+            return this;
+        }
+
         public Category build() {
             return new Category(this);
         }
-
     }
 
     @Override
