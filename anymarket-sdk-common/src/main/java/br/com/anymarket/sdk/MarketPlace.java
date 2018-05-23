@@ -16,7 +16,8 @@ public enum MarketPlace {
     BUSCAPE("Buscapé"),
     ORACLECOMMERCE("Oracle Commerce Cloud"),
     MADEIRA_MADEIRA("Madeira Madeira"),
-    CISSA_MAGAZINE("Cissa Magazine");
+    CISSA_MAGAZINE("Cissa Magazine"),
+    B2W_NEW_API("B2W Nova API");
 
     private String name;
 
