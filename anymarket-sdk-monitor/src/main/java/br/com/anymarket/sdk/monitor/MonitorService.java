@@ -11,6 +11,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 public class MonitorService {
 
+    private static final String CONCLUDE = "/conclude";
     private String apiEndPoint;
     private static final String MONITONING_URI = "/monitorings";
 
@@ -23,6 +24,13 @@ public class MonitorService {
 
     public Response insert(Monitor monitor, IntegrationHeader... headers) {
         return post(apiEndPoint + MONITONING_URI)
+                .headers(headers)
+                .body(monitor)
+                .getResponse();
+    }
+
+    public Response conclude(Monitor monitor, IntegrationHeader... headers) {
+        return post(apiEndPoint + MONITONING_URI + CONCLUDE)
                 .headers(headers)
                 .body(monitor)
                 .getResponse();
