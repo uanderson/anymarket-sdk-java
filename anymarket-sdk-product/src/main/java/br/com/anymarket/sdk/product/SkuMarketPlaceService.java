@@ -7,6 +7,8 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
+import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
+import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceResource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
@@ -22,6 +24,7 @@ import static java.lang.String.format;
 public class SkuMarketPlaceService extends HttpService {
 
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
+    private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -99,6 +102,16 @@ public class SkuMarketPlaceService extends HttpService {
             throw new NotFoundException("SkuMps not found.");
         }
         return allSkuMps;
+    }
+
+    public SkuMarketplacePriceErrors updatePricesForSkuAndMarketplace(Long idSku, MarketPlace marketPlace, SkuMarketplacePriceResource prices, IntegrationHeader... headers) {
+        Objects.requireNonNull(idSku, "Informe o id do SKU");
+        Objects.requireNonNull(marketPlace, "Informe o Marketplace");
+
+        String URL = String.format(apiEndPoint.concat(SKUMP_UPDATE_PRICE_URI), idSku, marketPlace);
+        RequestBodyEntity post = post(URL, prices, headers);
+        Response response = execute(post);
+        return response.to(SkuMarketplacePriceErrors.class);
     }
 
 
