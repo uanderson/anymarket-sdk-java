@@ -54,8 +54,7 @@ public class OrderReservationService {
         put(apiEndPointForResource.concat(ORDERS_RESERVATIONS).concat("/{id}/cancel"))
             .routeParam("id", idOrder.toString())
             .headers(headers)
-            .getResponse()
-            .to(String.class);
+            .getResponse();
     }
 
 }
