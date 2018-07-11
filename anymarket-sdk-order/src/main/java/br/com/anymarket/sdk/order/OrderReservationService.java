@@ -49,13 +49,13 @@ public class OrderReservationService {
             .to(OrderReservation.class);
     }
 
-    public OrderReservation cancelOrderReservation(Long idOrder, IntegrationHeader... headers) {
+    public void cancelOrderReservation(Long idOrder, IntegrationHeader... headers) {
         checkNotNull(idOrder, "Erro ao cancelar a reserva do pedido: Id não informado");
-        return put(apiEndPointForResource.concat(ORDERS_RESERVATIONS).concat("/{id}/cancel"))
+        put(apiEndPointForResource.concat(ORDERS_RESERVATIONS).concat("/{id}/cancel"))
             .routeParam("id", idOrder.toString())
             .headers(headers)
             .getResponse()
-            .to(OrderReservation.class);
+            .to(String.class);
     }
 
 }
