@@ -35,6 +35,9 @@ public abstract class AbstractAddressResource {
     @JsonProperty("comment")
     private String comment;
 
+    @JsonProperty("reference")
+    private String reference;
+
     @JsonProperty("zipCode")
     private String zipCode;
 
@@ -124,5 +127,13 @@ public abstract class AbstractAddressResource {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }
