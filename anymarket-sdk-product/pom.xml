@@ -7,7 +7,7 @@
   <parent>
     <artifactId>anymarket-sdk-java</artifactId>
     <groupId>br.com.anymarket.sdk</groupId>
-    <version>1.40.0-hub-zoom</version>
+    <version>0.40.0-hub-zoom</version>
   </parent>
 
   <artifactId>anymarket-sdk-product</artifactId>
