@@ -18,7 +18,9 @@ public enum MarketPlace {
     MADEIRA_MADEIRA("Madeira Madeira"),
     CISSA_MAGAZINE("Cissa Magazine"),
     B2W_NEW_API("B2W Nova API"),
-    SARAIVA("Saraiva");
+    SARAIVA("Saraiva"),
+    HUB_SALES("Hub Sales"),
+    ZOOM("Zoom");
 
     private String name;
 
