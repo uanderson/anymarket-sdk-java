@@ -20,7 +20,8 @@ public enum MarketPlace {
     B2W_NEW_API("B2W Nova API"),
     SARAIVA("Saraiva"),
     HUB_SALES("Hub Sales"),
-    ZOOM("Zoom");
+    ZOOM("Zoom"),
+    WEB_CONTINENTAL("Web Continental");
 
     private String name;
 
