@@ -5,7 +5,7 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
-import br.com.anymarket.sdk.marketplaces.dto.MarketPlaces;
+import br.com.anymarket.sdk.marketplaces.dto.MarketPlacesDTO;
 import com.google.common.base.Strings;
 import com.mashape.unirest.request.GetRequest;
 import org.apache.http.HttpStatus;
@@ -21,11 +21,11 @@ public class MarketPlacesService extends HttpService {
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
-    public MarketPlaces getMarketPlaces(String status, IntegrationHeader... headers) {
+    public MarketPlacesDTO getMarketPlaces(String status, IntegrationHeader... headers) {
         GetRequest getRequest = get(apiEndPoint + MARKETPLACES_URI + STATUS + status, headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(MarketPlaces.class);
+            return response.to(MarketPlacesDTO.class);
         }
         throw new NotFoundException("Marketplaces not found.");
     }

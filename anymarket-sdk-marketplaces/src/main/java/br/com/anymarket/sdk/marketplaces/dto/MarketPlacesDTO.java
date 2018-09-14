@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class MarketPlaces {
+public class MarketPlacesDTO {
 
     @JsonProperty("marketplaces")
     private List<String> marketplaces;
