@@ -60,6 +60,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-template</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-marketplaces</artifactId>
+    </dependency>
   </dependencies>
 
 
