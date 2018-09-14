@@ -1,7 +1,8 @@
 package br.com.anymarket.sdk.marketplaces.dto;
 
-import br.com.anymarket.sdk.MarketPlace;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class MarketPlaces {
 
