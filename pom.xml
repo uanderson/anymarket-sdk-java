@@ -20,6 +20,7 @@
     <module>anymarket-sdk-question</module>
     <module>anymarket-sdk-freight</module>
     <module>anymarket-sdk-template</module>
+    <module>anymarket-sdk-marketplaces</module>
   </modules>
   <packaging>pom</packaging>
 
