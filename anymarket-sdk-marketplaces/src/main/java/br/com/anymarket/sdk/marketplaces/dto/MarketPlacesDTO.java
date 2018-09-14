@@ -7,13 +7,13 @@ import java.util.List;
 public class MarketPlacesDTO {
 
     @JsonProperty("marketplaces")
-    private List<String> marketplaces;
+    private List<MarketPlaceDTO> marketplaces;
 
-    public List<String> getMarketplaces() {
+    public List<MarketPlaceDTO> getMarketplaces() {
         return marketplaces;
     }
 
-    public void setMarketplaces(List<String> marketplaces) {
+    public void setMarketplaces(List<MarketPlaceDTO> marketplaces) {
         this.marketplaces = marketplaces;
     }
 }
