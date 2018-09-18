@@ -22,7 +22,8 @@ public enum MarketPlace {
     HUB_SALES("Hub Sales"),
     ZOOM("Zoom"),
     WEB_CONTINENTAL("Web Continental"),
-    RICARDO_ELETRO("Ricardo Eletro");
+    RICARDO_ELETRO("Ricardo Eletro"),
+    TRAY("Tray");
 
     private String name;
 
