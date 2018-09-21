@@ -6,10 +6,12 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Image;
 import br.com.anymarket.sdk.product.dto.Product;
 import br.com.anymarket.sdk.product.dto.ProductComplete;
+import br.com.anymarket.sdk.product.filters.ProductFilter;
 import br.com.anymarket.sdk.resource.Link;
 import br.com.anymarket.sdk.util.SDKUrlEncoder;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -28,6 +30,8 @@ import static java.lang.String.format;
 
 public class ProductService extends HttpService {
 
+    public static final TypeReference<Page<Product>> PAGED_TYPE_REFERENCE = new TypeReference<Page<Product>>() {
+    };
     private static final String PRODUCTS_URI = "/products";
     private final String apiEndPoint;
     public static final String NEXT = "next";
@@ -174,6 +178,14 @@ public class ProductService extends HttpService {
             throw new NotFoundException("Products not found.");
         }
         return allProducts;
+    }
+
+    public Page<Product> getProductPaged(List<ProductFilter> filters, IntegrationHeader... headers) {
+        return AnyMarketRestDSL.get(apiEndPoint.concat(PRODUCTS_URI))
+            .headers(headers)
+            .filters(filters)
+            .getResponse()
+            .to(PAGED_TYPE_REFERENCE);
     }
 
     public Page<Product> getProductPaged(IntegrationHeader... headers) {
