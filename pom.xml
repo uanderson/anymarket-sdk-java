@@ -4,7 +4,7 @@
 
   <groupId>br.com.anymarket.sdk</groupId>
   <artifactId>anymarket-sdk-java</artifactId>
-  <version>0.42.0-SNAPSHOT</version>
+  <version>0.42.0-mg2</version>
   <modules>
     <module>anymarket-sdk-stock</module>
     <module>anymarket-sdk-order</module>
@@ -20,6 +20,7 @@
     <module>anymarket-sdk-question</module>
     <module>anymarket-sdk-freight</module>
     <module>anymarket-sdk-template</module>
+    <module>anymarket-sdk-marketplaces</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -102,6 +103,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-template</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>anymarket-sdk-marketplaces</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
