@@ -130,6 +130,12 @@ public class Order {
     @JsonProperty("shipmentExceptionDescription")
     private String shipmentExceptionDescription;
 
+    @JsonProperty("subChannel")
+    private String subChannel;
+
+    @JsonProperty("subChannelNormalized")
+    private String subChannelNormalized;
+
 
     public Long getId() {
         return id;
@@ -427,6 +433,22 @@ public class Order {
         this.shipmentExceptionDescription = shipmentExceptionDescription;
     }
 
+    public String getSubChannel() {
+        return subChannel;
+    }
+
+    public void setSubChannel(String subChannel) {
+        this.subChannel = subChannel;
+    }
+
+    public String getSubChannelNormalized() {
+        return subChannelNormalized;
+    }
+
+    public void setSubChannelNormalized(String subChannelNormalized) {
+        this.subChannelNormalized = subChannelNormalized;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -453,6 +475,8 @@ public class Order {
             .add("tracking", tracking)
             .add("items", items)
             .add("anymarketAddress", anymarketOrderAddress)
+            .add("subChannel", subChannel)
+            .add("subChannelNormalized", subChannelNormalized)
             .toString();
     }
 }
