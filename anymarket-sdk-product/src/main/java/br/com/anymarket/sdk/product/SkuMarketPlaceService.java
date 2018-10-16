@@ -121,7 +121,7 @@ public class SkuMarketPlaceService extends HttpService {
 
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
         String urlFormated = String.format(apiEndPoint.concat(SKUMP_ALL_MARKETPLACE), marketPlace);
-        final GetRequest getRequest = get(status == null ? urlFormated : urlFormated.concat("?status=").concat(status.getName()), headers);
+        final GetRequest getRequest = get(status == null ? urlFormated : urlFormated.concat("?status=").concat(status.toString()), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
