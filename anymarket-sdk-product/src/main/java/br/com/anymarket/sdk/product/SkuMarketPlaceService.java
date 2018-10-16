@@ -6,6 +6,7 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.PublicationStatus;
 import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
 import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
@@ -124,8 +125,9 @@ public class SkuMarketPlaceService extends HttpService {
         final GetRequest getRequest = get(status == null ? urlFormated : urlFormated.concat("?status=").concat(status.toString()), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
-            allSkuMps.addAll(rootResponse);
+            Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {
+            });
+            allSkuMps.addAll(rootResponse.getContent());
         }
         return allSkuMps;
     }
