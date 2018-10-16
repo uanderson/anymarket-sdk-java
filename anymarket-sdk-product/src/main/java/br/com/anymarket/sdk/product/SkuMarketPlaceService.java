@@ -6,6 +6,7 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.product.dto.PublicationStatus;
 import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
 import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
 import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceResource;
@@ -25,6 +26,7 @@ public class SkuMarketPlaceService extends HttpService {
 
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
+    private static final String SKUMP_ALL_MARKETPLACE = "/skus/%s/all";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -114,5 +116,18 @@ public class SkuMarketPlaceService extends HttpService {
         return response.to(SkuMarketplacePriceErrors.class);
     }
 
+    public List<SkuMarketPlace> getSkuAndMarketplaceByMarketplace(MarketPlace marketPlace, PublicationStatus status, IntegrationHeader... headers) {
+        Objects.requireNonNull(marketPlace, "Informe o Marketplace");
+
+        final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
+        String urlFormated = String.format(apiEndPoint.concat(SKUMP_ALL_MARKETPLACE), marketPlace);
+        final GetRequest getRequest = get(status == null ? urlFormated : urlFormated.concat("?status=").concat(status.getName()), headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
+            allSkuMps.addAll(rootResponse);
+        }
+        return allSkuMps;
+    }
 
 }
