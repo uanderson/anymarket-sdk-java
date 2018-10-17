@@ -23,7 +23,8 @@ public enum MarketPlace {
     ZOOM("Zoom"),
     WEB_CONTINENTAL("Web Continental"),
     RICARDO_ELETRO("Ricardo Eletro"),
-    PORTAL_DO_MEDICO("Portal do Médico");
+    PORTAL_DO_MEDICO("Portal do Médico"),
+    TRAY("Tray");
 
     private String name;
 
