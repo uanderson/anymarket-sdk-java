@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SkuMarketplacePriceResource {
@@ -13,6 +14,9 @@ public class SkuMarketplacePriceResource {
 
     @JsonProperty(value = "discountPrice")
     private BigDecimal discountPrice;
+
+    @JsonProperty(value = "fields")
+    private List<SkuMarketplaceFieldsResource> fields;
 
     public BigDecimal getPrice() {
         return price;
@@ -28,5 +32,13 @@ public class SkuMarketplacePriceResource {
 
     public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
+    }
+
+    public List<SkuMarketplaceFieldsResource> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<SkuMarketplaceFieldsResource> fields) {
+        this.fields = fields;
     }
 }
