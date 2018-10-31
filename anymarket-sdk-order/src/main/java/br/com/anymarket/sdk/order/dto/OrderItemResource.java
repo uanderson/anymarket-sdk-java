@@ -38,6 +38,17 @@ public class OrderItemResource {
     @JsonProperty("orderItemId")
     private Long orderItemId;
 
+    @JsonProperty("idInMarketPlace")
+    private String idInMarketPlace;
+
+    public String getIdInMarketPlace() {
+        return idInMarketPlace;
+    }
+
+    public void setIdInMarketPlace(String idInMarketPlace) {
+        this.idInMarketPlace = idInMarketPlace;
+    }
+
     public SimpleSkuResource getSku() {
         return sku;
     }

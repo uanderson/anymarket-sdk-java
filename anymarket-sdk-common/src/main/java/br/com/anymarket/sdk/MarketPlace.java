@@ -24,7 +24,8 @@ public enum MarketPlace {
     WEB_CONTINENTAL("Web Continental"),
     RICARDO_ELETRO("Ricardo Eletro"),
     PORTAL_DO_MEDICO("Portal do Médico"),
-    TRAY("Tray");
+    TRAY("Tray"),
+    CAMICADO("Camicado");
 
     private String name;
 
