@@ -11,6 +11,7 @@ import br.com.anymarket.sdk.product.dto.PublicationStatus;
 import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
 import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
 import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceResource;
+import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
@@ -28,6 +29,7 @@ public class SkuMarketPlaceService extends HttpService {
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
     private static final String SKUMP_ALL_MARKETPLACE = "/skus/%s/all";
+    public static final String NEXT = "next";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -57,7 +59,7 @@ public class SkuMarketPlaceService extends HttpService {
                 Boolean.toString(skuMp.getPrice().compareTo(skuMp.getDiscountPrice()) != 0));
         }
 
-        String url = getURLFormated(idSku).concat("/").concat(idSkuMP.toString()).concat("?syncChanges="+syncChanges);
+        String url = getURLFormated(idSku).concat("/").concat(idSkuMP.toString()).concat("?syncChanges=" + syncChanges);
         RequestBodyEntity put = put(url, skuMp, headers);
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
@@ -92,14 +94,16 @@ public class SkuMarketPlaceService extends HttpService {
 
     public List<SkuMarketPlace> getAllSkuMps(Long idSku, IntegrationHeader... headers) {
         return getAllSkuMps(idSku, null, headers);
-     }
+    }
+
     public List<SkuMarketPlace> getAllSkuMps(Long idSku, MarketPlace marketPlace, IntegrationHeader... headers) {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
         String urlFormated = getURLFormated(idSku);
         final GetRequest getRequest = get(marketPlace == null ? urlFormated : urlFormated.concat("?marketplace=").concat(marketPlace.name()), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {});
+            List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {
+            });
             allSkuMps.addAll(rootResponse);
         } else {
             throw new NotFoundException("SkuMps not found.");
@@ -131,5 +135,38 @@ public class SkuMarketPlaceService extends HttpService {
         }
         return allSkuMps;
     }
+
+    public Page<SkuMarketPlace> getSkuAndMarketplaceByMarketplacePaged(MarketPlace marketPlace, PublicationStatus status, IntegrationHeader... headers) {
+        Objects.requireNonNull(marketPlace, "Informe o Marketplace");
+
+        String urlFormated = String.format(apiEndPoint.concat(SKUMP_ALL_MARKETPLACE), marketPlace);
+        final GetRequest getRequest = get(status == null ? urlFormated : urlFormated.concat("?status=").concat(status.toString()), headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(new TypeReference<Page<SkuMarketPlace>>() {
+            });
+        } else {
+            throw new NotFoundException(String.format("SkuMarketplaces not found for marketplace %s.", marketPlace.toString()));
+        }
+    }
+
+    public Page<SkuMarketPlace> getNextSkuAndMarketplaceByMarketplace(Page<SkuMarketPlace> actualPaged, IntegrationHeader... headers) {
+        String nextPageUrl = null;
+        for (Link link : actualPaged.getLinks()) {
+            if (link.getRel().equals(NEXT)) {
+                nextPageUrl = link.getHref();
+                break;
+            }
+        }
+        if (nextPageUrl != null) {
+            Response response = execute(get(nextPageUrl, headers));
+            if (response.getStatus() == HttpStatus.SC_OK) {
+                return response.to(new TypeReference<Page<SkuMarketPlace>>() {
+                });
+            }
+        }
+        return new Page<SkuMarketPlace>();
+    }
+
 
 }
