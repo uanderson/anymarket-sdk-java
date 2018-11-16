@@ -121,6 +121,28 @@ public class SkuMarketPlaceService extends HttpService {
         return response.to(SkuMarketplacePriceErrors.class);
     }
 
+    public List<SkuMarketPlace> getSkuAndMarketplaceByMarketplaceAndPartnerId(MarketPlace marketPlace, PublicationStatus status, String partnerId, IntegrationHeader... headers) {
+        Objects.requireNonNull(marketPlace, "Informe o Marketplace");
+        Objects.requireNonNull(partnerId, "Informe o partnerId");
+
+
+        final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
+        String urlFormated = String.format(apiEndPoint.concat(SKUMP_ALL_MARKETPLACE), marketPlace);
+
+
+        String finalUrl = urlFormated.concat("?skuPartnerId=").concat(partnerId);
+        finalUrl = status == null ? finalUrl : urlFormated.concat("&status=").concat(status.toString());
+
+        final GetRequest getRequest = get(finalUrl, headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {
+            });
+            allSkuMps.addAll(rootResponse.getContent());
+        }
+        return allSkuMps;
+    }
+
     public List<SkuMarketPlace> getSkuAndMarketplaceByMarketplace(MarketPlace marketPlace, PublicationStatus status, IntegrationHeader... headers) {
         Objects.requireNonNull(marketPlace, "Informe o Marketplace");
 
