@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
+    private final String FROZEN = "FROZEN";
+
     @JsonProperty("id")
     private Long id;
 
@@ -136,6 +139,9 @@ public class Order {
     @JsonProperty("subChannelNormalized")
     private String subChannelNormalized;
 
+    public boolean isFrozen() {
+        return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
+    }
 
     public Long getId() {
         return id;
