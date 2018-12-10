@@ -25,7 +25,9 @@ public enum MarketPlace {
     RICARDO_ELETRO("Ricardo Eletro"),
     PORTAL_DO_MEDICO("Portal do Médico"),
     TRAY("Tray"),
-    CAMICADO("Camicado");
+    CAMICADO("Camicado"),
+    DIA_GROUP("Dia Group"),
+    MIXTEL("Mixtel");
 
     private String name;
 
