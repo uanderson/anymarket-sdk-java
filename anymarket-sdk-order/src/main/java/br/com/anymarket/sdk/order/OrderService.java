@@ -127,6 +127,18 @@ public class OrderService {
             .to(Order.class);
     }
 
+    public Order updateOrder(Order order,  final String origin, IntegrationHeader... headers) {
+        checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
+        checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
+        return put(apiEndPointForResource.concat("/orders/{id}"))
+            .body(order)
+            .headers(headers)
+            .routeParam("id", order.getId().toString())
+            .routeParam("origin", origin)
+            .getResponse()
+            .to(Order.class);
+    }
+
     public void updatePartnerIdOrder(Order order, IntegrationHeader... headers) {
         checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
