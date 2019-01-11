@@ -134,7 +134,7 @@ public class OrderService {
             .body(order)
             .headers(headers)
             .routeParam("id", order.getId().toString())
-            .routeParam("origin", origin)
+            .queryString("origin", origin)
             .getResponse()
             .to(Order.class);
     }
