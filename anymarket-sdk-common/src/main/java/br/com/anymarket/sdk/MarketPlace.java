@@ -26,6 +26,7 @@ public enum MarketPlace {
     PORTAL_DO_MEDICO("Portal do Médico"),
     TRAY("Tray"),
     CAMICADO("Camicado"),
+    COLOMBO("Lojas Colombo"),
     DIA_GROUP("Dia Group"),
     MIXTEL("Mixtel");
 
