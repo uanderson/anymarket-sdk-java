@@ -23,9 +23,11 @@ public enum MarketPlace {
     ZOOM("Zoom"),
     WEB_CONTINENTAL("Web Continental"),
     RICARDO_ELETRO("Ricardo Eletro"),
+    CENTAURO("Centauro"),
     PORTAL_DO_MEDICO("Portal do Médico"),
     TRAY("Tray"),
     CAMICADO("Camicado"),
+    GALITHX("Go Core Marketplace (Galithx e Gorila Z)"),
     COLOMBO("Lojas Colombo");
 
     private String name;
