@@ -28,7 +28,8 @@ public enum MarketPlace {
     TRAY("Tray"),
     CAMICADO("Camicado"),
     GALITHX("Go Core Marketplace (Galithx e Gorila Z)"),
-    COLOMBO("Lojas Colombo");
+    COLOMBO("Lojas Colombo"),
+    OPTEMAIS("Optemais");
 
     private String name;
 
