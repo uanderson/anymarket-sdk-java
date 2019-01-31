@@ -29,6 +29,8 @@ public enum MarketPlace {
     CAMICADO("Camicado"),
     GALITHX("Go Core Marketplace (Galithx e Gorila Z)"),
     COLOMBO("Lojas Colombo"),
+    DIA_GROUP("Dia Group"),
+    MIXTEL("Mixtel"),
     OPTEMAIS("Optemais");
 
     private String name;
