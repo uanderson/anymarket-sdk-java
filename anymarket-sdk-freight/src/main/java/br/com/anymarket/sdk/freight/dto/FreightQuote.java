@@ -22,6 +22,9 @@ public class FreightQuote {
     @JsonProperty("price")
     private BigDecimal price;
 
+    @JsonProperty("additionalTime")
+    private Integer additionalTime;
+
     public String getCarrierName() {
         return carrierName;
     }
@@ -60,5 +63,13 @@ public class FreightQuote {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getAdditionalTime() {
+        return additionalTime;
+    }
+
+    public void setAdditionalTime(Integer additionalTime) {
+        this.additionalTime = additionalTime;
     }
 }
