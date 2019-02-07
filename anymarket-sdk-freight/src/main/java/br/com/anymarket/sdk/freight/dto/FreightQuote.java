@@ -72,4 +72,15 @@ public class FreightQuote {
     public void setAdditionalTime(Integer additionalTime) {
         this.additionalTime = additionalTime;
     }
+
+    public Boolean hasAdditionalTime() {
+        return additionalTime != null && additionalTime >= 0;
+    }
+
+    public Integer getDeliveryTimeWithAdditionalTime() {
+        if (additionalTime != null) {
+            return deliveryTime + additionalTime;
+        }
+        return deliveryTime;
+    }
 }
