@@ -26,7 +26,7 @@ public class PrintTagService {
         Preconditions.checkNotNull(printType, "Erro ao emitir etiqueta: Tipo não informado.");
 
 
-        String url = apiEndPointForResource.concat("/v2/printtag/").concat(printType.getName());
+        String url = apiEndPointForResource.concat("/printtag/").concat(printType.getName());
         if(file != null){
             url.concat("?file=").concat(file.getName());
         }
