@@ -69,6 +69,18 @@ public class CategoryService extends HttpService {
         throw new NotFoundException(format("Category with id %s not found.", id));
     }
 
+    public Category getCategoryByPartnerId(String partnerId, IntegrationHeader... headers) {
+        String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(SDKUrlEncoder.encodeParameterToUTF8(partnerId));
+        Response response = execute(get(url, headers));
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            List<Category> categoryPage = response.to(new TypeReference<Page<Category>>() {}).getContent();
+            if (categoryPage != null && !categoryPage.isEmpty()) {
+                return categoryPage.get(0);
+            }
+        }
+        return null;
+    }
+
     public List<Category> findCategoryByPartnerId(String partnerId, IntegrationHeader... headers) {
         String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(SDKUrlEncoder.encodeParameterToUTF8(partnerId));
         return doGetAllCategories(url, headers);

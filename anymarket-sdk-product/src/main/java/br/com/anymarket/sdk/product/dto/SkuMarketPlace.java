@@ -70,6 +70,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty("accountName")
     private String accountName;
 
+    @JsonProperty("skuMarketPlaceMessage")
+    private SkuMarketPlaceMessage skuMarketPlaceMessage;
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -93,6 +96,7 @@ public class SkuMarketPlace implements Serializable {
         setSku(builder.sku);
         setIdAccount(builder.idAccount);
         setAccountName(builder.accountName);
+        setSkuMarketPlaceMessage(builder.skuMarketPlaceMessage);
     }
 
     public static Builder builder() {
@@ -255,6 +259,14 @@ public class SkuMarketPlace implements Serializable {
         this.accountName = accountName;
     }
 
+    public SkuMarketPlaceMessage getSkuMarketPlaceMessage() {
+        return skuMarketPlaceMessage;
+    }
+
+    public void setSkuMarketPlaceMessage(final SkuMarketPlaceMessage skuMarketPlaceMessage) {
+        this.skuMarketPlaceMessage = skuMarketPlaceMessage;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -294,6 +306,7 @@ public class SkuMarketPlace implements Serializable {
         private Sku sku;
         private Long idAccount;
         private String accountName;
+        private SkuMarketPlaceMessage skuMarketPlaceMessage;
 
         private Builder() {
         }
@@ -385,6 +398,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withAccountName(String accountName) {
             this.accountName = accountName;
+            return this;
+        }
+
+        public Builder withSkuMarketPlaceMessage(SkuMarketPlaceMessage skuMarketPlaceMessage) {
+            this.skuMarketPlaceMessage = skuMarketPlaceMessage;
             return this;
         }
 
