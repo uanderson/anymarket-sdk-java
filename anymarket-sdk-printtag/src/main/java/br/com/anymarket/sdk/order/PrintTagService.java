@@ -36,4 +36,15 @@ public class PrintTagService {
             .getResponse()
             .to(Object.class);
     }
+
+    public void markTagPrinted(PrintTagResource printTag, IntegrationHeader... headers){
+        Preconditions.checkNotNull(printTag, "Erro ao emitir etiqueta: Dados não encontrados.");
+
+        String url = apiEndPointForResource.concat("/printtag/markAsPrinted");
+
+        post(url)
+            .body(printTag)
+            .headers(headers)
+            .getResponse();
+    }
 }
