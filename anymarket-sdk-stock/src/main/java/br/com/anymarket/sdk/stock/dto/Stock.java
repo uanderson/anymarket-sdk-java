@@ -22,6 +22,8 @@ public class Stock implements AnymarketPojo {
     private BigDecimal costPrice;
     @JsonProperty("additionalTime")
     private Integer additionalTime;
+    @JsonProperty("stockLocalId")
+    private Long stockLocalId;
 
     private Stock(Builder builder) {
         if (isNull(builder.id) && isNull(builder.partnerId)) {
@@ -37,6 +39,7 @@ public class Stock implements AnymarketPojo {
         this.quantity = builder.quantity;
         this.costPrice = builder.costPrice;
         this.additionalTime = builder.additionalTime;
+        this.stockLocalId = builder.stockLocalId;
     }
 
     public static Builder builder() {
@@ -63,6 +66,10 @@ public class Stock implements AnymarketPojo {
         return additionalTime;
     }
 
+    public Long getStockLocalId() {
+        return stockLocalId;
+    }
+
     @Override
     public String getPathURI() {
         return "/stocks";
@@ -75,6 +82,7 @@ public class Stock implements AnymarketPojo {
         private BigDecimal quantity;
         private BigDecimal costPrice;
         private Integer additionalTime;
+        private Long stockLocalId;
 
         public Builder withId(Long id) {
             this.id = id;
@@ -98,6 +106,11 @@ public class Stock implements AnymarketPojo {
 
         public Builder withAdditionalTime(Integer additionalTime) {
             this.additionalTime = additionalTime;
+            return this;
+        }
+
+        public Builder withStockLocalId(Long stockLocalId) {
+            this.stockLocalId = stockLocalId;
             return this;
         }
 
