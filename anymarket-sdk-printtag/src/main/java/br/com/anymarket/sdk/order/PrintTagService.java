@@ -5,6 +5,8 @@ import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.order.dto.PrintTagResource;
 import com.google.common.base.Preconditions;
 
+import java.io.InputStream;
+
 import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.post;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
@@ -21,7 +23,7 @@ public class PrintTagService {
         return getPrintTag(printTag, printType, null, headers);
     }
 
-    public Object getPrintTag(PrintTagResource printTag, PrintType printType, FileType file, IntegrationHeader... headers) {
+    public InputStream getPrintTag(PrintTagResource printTag, PrintType printType, FileType file, IntegrationHeader... headers) {
         Preconditions.checkNotNull(printTag, "Erro ao emitir etiqueta: Dados não encontrados.");
         Preconditions.checkNotNull(printType, "Erro ao emitir etiqueta: Tipo não informado.");
 
@@ -33,8 +35,7 @@ public class PrintTagService {
         return post(url)
             .body(printTag)
             .headers(headers)
-            .getResponse()
-            .to(Object.class);
+            .getResponseByte();
     }
 
     public void markTagPrinted(PrintTagResource printTag, IntegrationHeader... headers){
