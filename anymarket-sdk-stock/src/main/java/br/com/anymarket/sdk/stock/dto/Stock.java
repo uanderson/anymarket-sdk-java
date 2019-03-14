@@ -24,6 +24,8 @@ public class Stock implements AnymarketPojo {
     private Integer additionalTime;
     @JsonProperty("stockLocalId")
     private Long stockLocalId;
+    @JsonProperty("insertIfNotExist")
+    private boolean insertIfNotExist;
 
     private Stock(Builder builder) {
         if (isNull(builder.id) && isNull(builder.partnerId)) {
@@ -40,6 +42,7 @@ public class Stock implements AnymarketPojo {
         this.costPrice = builder.costPrice;
         this.additionalTime = builder.additionalTime;
         this.stockLocalId = builder.stockLocalId;
+        this.insertIfNotExist = builder.insertIfNotExist;
     }
 
     public static Builder builder() {
@@ -70,6 +73,10 @@ public class Stock implements AnymarketPojo {
         return stockLocalId;
     }
 
+    public boolean isInsertIfNotExist() {
+        return insertIfNotExist;
+    }
+
     @Override
     public String getPathURI() {
         return "/stocks";
@@ -83,6 +90,7 @@ public class Stock implements AnymarketPojo {
         private BigDecimal costPrice;
         private Integer additionalTime;
         private Long stockLocalId;
+        private boolean insertIfNotExist;
 
         public Builder withId(Long id) {
             this.id = id;
@@ -111,6 +119,11 @@ public class Stock implements AnymarketPojo {
 
         public Builder withStockLocalId(Long stockLocalId) {
             this.stockLocalId = stockLocalId;
+            return this;
+        }
+
+        public Builder withInsertIfNotExist(boolean insertIfNotExist) {
+            this.insertIfNotExist = insertIfNotExist;
             return this;
         }
 
