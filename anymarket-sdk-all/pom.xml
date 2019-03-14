@@ -64,6 +64,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-marketplaces</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-printtag</artifactId>
+    </dependency>
   </dependencies>
 
 
