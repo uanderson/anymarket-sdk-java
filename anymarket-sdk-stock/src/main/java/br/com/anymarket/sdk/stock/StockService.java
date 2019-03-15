@@ -27,6 +27,21 @@ public class StockService extends HttpService {
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public Response insertStock(Stock stock, IntegrationHeader... headers) {
+        return insertStock(Lists.newArrayList(stock), headers);
+    }
+
+    public Response insertStock(List<Stock> stocks, IntegrationHeader... headers) {
+        StockCollection stockCollection = new StockCollection();
+        stockCollection.addAllStock(stocks);
+        return insertStock(stockCollection, headers);
+    }
+
+    public Response insertStock(StockCollection stocks, IntegrationHeader... headers) {
+        RequestBodyEntity putRequest = post(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), headers);
+        return execute(putRequest);
+    }
+
     public Response updateStock(Stock stock, IntegrationHeader... headers) {
         return updateStock(Lists.newArrayList(stock), headers);
     }
