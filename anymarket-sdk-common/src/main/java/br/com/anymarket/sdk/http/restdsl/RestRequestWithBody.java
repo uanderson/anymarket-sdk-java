@@ -9,11 +9,16 @@ import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.http.headers.NewOrderTotalsPatternHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
+import sun.misc.IOUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class RestRequestWithBody {
     private HttpRequestWithBody request;
@@ -81,4 +86,44 @@ public class RestRequestWithBody {
             throw new HttpClientException(message, details);
         }
     }
+
+    public InputStream getResponseByte() {
+        try {
+            String bodyAsString = Mapper.get().writeValueAsString(body);
+            HttpResponse<InputStream> response = request.body(bodyAsString).asBinary();
+            checkGenericErrorToThrowGenericExceptionToInputStream(response);
+            return response.getBody();
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void checkGenericErrorToThrowGenericExceptionToInputStream(HttpResponse<InputStream> response) {
+        int statusCode = response.getStatus();
+        if (statusCode >= 400 && statusCode != 404) {
+            String message = null;
+            String details = null;
+            try {
+                    message = CharStreams.toString(new InputStreamReader( response.getBody(), Charsets.UTF_8));
+                    ErrorDTO errorDTO = Mapper.get().readValue(CharStreams.toString(new InputStreamReader( response.getBody(), Charsets.UTF_8)), ErrorDTO.class);
+                    message = errorDTO.getMessage();
+                    details = errorDTO.getDetails();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Unexpected error: " + e.getMessage());
+            }
+
+            if (statusCode >= 500) {
+                throw new HttpServerException(statusCode, message, details);
+            } else if (statusCode == 401) {
+                throw new UnauthorizedException(message);
+            }
+            throw new HttpClientException(message, details);
+        }
+    }
+
+
 }

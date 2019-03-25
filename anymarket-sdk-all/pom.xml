@@ -6,7 +6,7 @@
   <parent>
     <artifactId>anymarket-sdk-java</artifactId>
     <groupId>br.com.anymarket.sdk</groupId>
-    <version>0.50.3</version>
+    <version>0.51.0-RC1</version>
   </parent>
 
   <artifactId>anymarket-sdk-all</artifactId>
@@ -63,6 +63,10 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-marketplaces</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-printtag</artifactId>
     </dependency>
   </dependencies>
 
