@@ -32,7 +32,7 @@ public enum MarketPlace {
     DIA_GROUP("Dia Group"),
     MIXTEL("Mixtel"),
     OPTEMAIS("Optemais"),
-    EFACIL("Éfacil");
+    EFACIL("eFácil");
 
     private String name;
 
