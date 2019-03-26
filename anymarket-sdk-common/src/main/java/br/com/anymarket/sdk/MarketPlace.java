@@ -31,7 +31,8 @@ public enum MarketPlace {
     COLOMBO("Lojas Colombo"),
     DIA_GROUP("Dia Group"),
     MIXTEL("Mixtel"),
-    OPTEMAIS("Optemais");
+    OPTEMAIS("Optemais"),
+    EFACIL("Éfacil");
 
     private String name;
 
