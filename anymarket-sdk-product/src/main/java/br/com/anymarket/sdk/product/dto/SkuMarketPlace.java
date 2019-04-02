@@ -1,6 +1,7 @@
 package br.com.anymarket.sdk.product.dto;
 
 import br.com.anymarket.sdk.MarketPlace;
+import br.com.anymarket.sdk.SKUMpOrigin;
 import br.com.anymarket.sdk.dto.AvailableStockDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -73,6 +74,9 @@ public class SkuMarketPlace implements Serializable {
     @JsonProperty("skuMarketPlaceMessage")
     private SkuMarketPlaceMessage skuMarketPlaceMessage;
 
+    @JsonProperty("origin")
+    private SKUMpOrigin origin;
+
     protected SkuMarketPlace() {
         //to serialize
     }
@@ -97,6 +101,7 @@ public class SkuMarketPlace implements Serializable {
         setIdAccount(builder.idAccount);
         setAccountName(builder.accountName);
         setSkuMarketPlaceMessage(builder.skuMarketPlaceMessage);
+        setOrigin(builder.origin);
     }
 
     public static Builder builder() {
@@ -267,6 +272,14 @@ public class SkuMarketPlace implements Serializable {
         this.skuMarketPlaceMessage = skuMarketPlaceMessage;
     }
 
+    public SKUMpOrigin getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(SKUMpOrigin origin) {
+        this.origin = origin;
+    }
+
     @Override
     public String toString() {
         return "SkuMarketPlace{" +
@@ -284,6 +297,7 @@ public class SkuMarketPlace implements Serializable {
             ", sku=" + sku +
             ", idAccount=" + idAccount +
             ", idAccount=" + accountName +
+            ", origin=" + origin +
             '}';
     }
 
@@ -307,6 +321,7 @@ public class SkuMarketPlace implements Serializable {
         private Long idAccount;
         private String accountName;
         private SkuMarketPlaceMessage skuMarketPlaceMessage;
+        private SKUMpOrigin origin;
 
         private Builder() {
         }
@@ -403,6 +418,11 @@ public class SkuMarketPlace implements Serializable {
 
         public Builder withSkuMarketPlaceMessage(SkuMarketPlaceMessage skuMarketPlaceMessage) {
             this.skuMarketPlaceMessage = skuMarketPlaceMessage;
+            return this;
+        }
+
+        public Builder withOrigin(SKUMpOrigin origin) {
+            this.origin = origin;
             return this;
         }
 
