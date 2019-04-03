@@ -30,7 +30,7 @@ public enum MarketPlace {
     GALITHX("Go Core Marketplace (Galithx e Gorila Z)"),
     COLOMBO("Lojas Colombo"),
     DIA_GROUP("Dia Group"),
-    MIXTEL("Mixtel"),
+    ELETRUM("Eletrum"),
     OPTEMAIS("Optemais"),
     EFACIL("eFácil");
 
