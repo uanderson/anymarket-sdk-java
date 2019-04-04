@@ -41,6 +41,9 @@ public class OrderItemResource {
     @JsonProperty("idInMarketPlace")
     private String idInMarketPlace;
 
+    @JsonProperty("listingType")
+    private String listingType;
+
     public String getIdInMarketPlace() {
         return idInMarketPlace;
     }
@@ -119,6 +122,14 @@ public class OrderItemResource {
 
     public void setOrderItemId(final Long orderItemId) {
         this.orderItemId = orderItemId;
+    }
+
+    public String getListingType() {
+        return listingType;
+    }
+
+    public void setListingType(String listingType) {
+        this.listingType = listingType;
     }
 
     @Override
