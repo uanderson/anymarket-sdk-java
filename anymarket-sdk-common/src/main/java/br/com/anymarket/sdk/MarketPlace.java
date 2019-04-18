@@ -32,7 +32,8 @@ public enum MarketPlace {
     DIA_GROUP("Dia Group"),
     ELETRUM("Eletrum"),
     OPTEMAIS("Optemais"),
-    EFACIL("eFácil");
+    EFACIL("eFácil"),
+    LEROY_MERLIN("Leroy Merlin");
 
     private String name;
 
