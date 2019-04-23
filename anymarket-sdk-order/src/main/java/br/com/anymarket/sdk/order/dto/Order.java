@@ -139,6 +139,9 @@ public class Order {
     @JsonProperty("subChannelNormalized")
     private String subChannelNormalized;
 
+    @JsonProperty("orderMessage")
+    private OrderMessage orderMessage;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -455,6 +458,14 @@ public class Order {
         this.subChannelNormalized = subChannelNormalized;
     }
 
+    public OrderMessage getOrderMessage() {
+        return orderMessage;
+    }
+
+    public void setOrderMessage(final OrderMessage orderMessage) {
+        this.orderMessage = orderMessage;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -483,6 +494,7 @@ public class Order {
             .add("anymarketAddress", anymarketOrderAddress)
             .add("subChannel", subChannel)
             .add("subChannelNormalized", subChannelNormalized)
+            .add("orderMessage", orderMessage)
             .toString();
     }
 }
