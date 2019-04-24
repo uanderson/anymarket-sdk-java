@@ -33,7 +33,9 @@ public enum MarketPlace {
     ELETRUM("Eletrum"),
     OPTEMAIS("Optemais"),
     EFACIL("eFácil"),
-    LEROY_MERLIN("Leroy Merlin");
+    LEROY_MERLIN("Leroy Merlin"),
+    COBASI("Cobasi"),
+    CATWALK("Catwalk");
 
     private String name;
 
