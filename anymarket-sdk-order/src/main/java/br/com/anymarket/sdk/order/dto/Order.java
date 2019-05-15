@@ -139,6 +139,9 @@ public class Order {
     @JsonProperty("subChannelNormalized")
     private String subChannelNormalized;
 
+    @JsonProperty("cancelDetails")
+    private String cancelDetails;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -453,6 +456,14 @@ public class Order {
 
     public void setSubChannelNormalized(String subChannelNormalized) {
         this.subChannelNormalized = subChannelNormalized;
+    }
+
+    public String getCancelDetails() {
+        return cancelDetails;
+    }
+
+    public void setCancelDetails(String cancelDetails) {
+        this.cancelDetails = cancelDetails;
     }
 
     @Override
