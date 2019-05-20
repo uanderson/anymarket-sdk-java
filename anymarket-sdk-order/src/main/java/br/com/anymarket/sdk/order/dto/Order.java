@@ -139,6 +139,9 @@ public class Order {
     @JsonProperty("subChannelNormalized")
     private String subChannelNormalized;
 
+    @JsonProperty("cancelDetails")
+    private String cancelDetails;
+
     @JsonProperty("orderMessage")
     private OrderMessage orderMessage;
 
@@ -456,6 +459,14 @@ public class Order {
 
     public void setSubChannelNormalized(String subChannelNormalized) {
         this.subChannelNormalized = subChannelNormalized;
+    }
+
+    public String getCancelDetails() {
+        return cancelDetails;
+    }
+
+    public void setCancelDetails(String cancelDetails) {
+        this.cancelDetails = cancelDetails;
     }
 
     public OrderMessage getOrderMessage() {
