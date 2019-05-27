@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class ProductBase {
+public class ProductBase {
 
     @JsonProperty("id")
     private Long id;
