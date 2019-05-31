@@ -13,7 +13,7 @@ import static java.lang.String.format;
 
 public class AutomaticMessageService extends HttpService {
 
-    private static final String AUTOMATIC_MESSAGE_URI = "/messages/%s";
+    private static final String AUTOMATIC_MESSAGE_URI = "/messages/order/%s";
 
     private String apiEndPoint;
 

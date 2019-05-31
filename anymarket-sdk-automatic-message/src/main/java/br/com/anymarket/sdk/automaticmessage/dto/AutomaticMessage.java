@@ -11,6 +11,9 @@ public class AutomaticMessage {
         this.message = message;
     }
 
+    public AutomaticMessage() {
+    }
+
     public Long getId() {
         return id;
     }
