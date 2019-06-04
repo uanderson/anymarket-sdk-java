@@ -82,6 +82,7 @@ public class SkuMarketPlace implements Serializable {
     }
 
     private SkuMarketPlace(Builder builder) {
+        setId(builder.id);
         setIdInMarketplace(builder.idInMarketplace);
         setMarketPlace(builder.marketPlace);
         setIndex(builder.index);
@@ -302,6 +303,7 @@ public class SkuMarketPlace implements Serializable {
     }
 
     public static final class Builder {
+        private Long id;
         private String idInMarketplace;
         private MarketPlace marketPlace;
         private Integer index;
@@ -324,6 +326,11 @@ public class SkuMarketPlace implements Serializable {
         private SKUMpOrigin origin;
 
         private Builder() {
+        }
+
+        public Builder withId(Long val) {
+            id = val;
+            return this;
         }
 
         public Builder withIdInMarketplace(String val) {
