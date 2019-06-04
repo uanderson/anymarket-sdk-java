@@ -68,6 +68,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-printtag</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-automatic-message</artifactId>
+    </dependency>
   </dependencies>
 
 

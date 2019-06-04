@@ -328,8 +328,8 @@ public class SkuMarketPlace implements Serializable {
         private Builder() {
         }
 
-        public Builder withId(Long val) {
-            id = val;
+        public Builder withId(Long id){
+            this.id = id;
             return this;
         }
 
