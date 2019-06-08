@@ -4,7 +4,7 @@
 
   <groupId>br.com.anymarket.sdk</groupId>
   <artifactId>anymarket-sdk-java</artifactId>
-  <version>0.55.0-SNAPSHOT-WISH</version>
+  <version>0.56.0-SNAPSHOT</version>
   <modules>
     <module>anymarket-sdk-stock</module>
     <module>anymarket-sdk-order</module>
@@ -22,6 +22,7 @@
     <module>anymarket-sdk-template</module>
     <module>anymarket-sdk-marketplaces</module>
     <module>anymarket-sdk-printtag</module>
+    <module>anymarket-sdk-automatic-message</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -114,6 +115,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-printtag</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>anymarket-sdk-automatic-message</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
