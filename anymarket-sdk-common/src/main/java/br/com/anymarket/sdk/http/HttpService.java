@@ -101,7 +101,7 @@ public class HttpService {
                 throw new HttpServerException(statusCode, message, details);
             } else if (statusCode == 502 || statusCode == 503 || statusCode == 505) {
                 throw getCouldNotConnectException();
-            } else if (statusCode == 401) {
+            } else if (statusCode == 401 || statusCode == 403) {
                 throw new UnauthorizedException(message);
             }
             throw new HttpClientException(message, details);
