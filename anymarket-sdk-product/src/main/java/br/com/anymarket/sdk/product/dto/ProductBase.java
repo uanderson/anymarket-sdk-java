@@ -89,7 +89,7 @@ public class ProductBase {
     private ProductGender gender;
 
     @JsonProperty("allowAutomaticSkuMarketplaceCreation")
-    private boolean allowAutomaticSkuMarketplaceCreation;
+    private Boolean allowAutomaticSkuMarketplaceCreation = Boolean.FALSE;
 
     public Long getId() {
         return id;
@@ -275,11 +275,11 @@ public class ProductBase {
         this.definitionPriceScope = definitionPriceScope;
     }
 
-    public boolean isAllowAutomaticSkuMarketplaceCreation() {
+    public Boolean isAllowAutomaticSkuMarketplaceCreation() {
         return allowAutomaticSkuMarketplaceCreation;
     }
 
-    public void setAllowAutomaticSkuMarketplaceCreation(boolean allowAutomaticSkuMarketplaceCreation) {
+    public void setAllowAutomaticSkuMarketplaceCreation(Boolean allowAutomaticSkuMarketplaceCreation) {
         this.allowAutomaticSkuMarketplaceCreation = allowAutomaticSkuMarketplaceCreation;
     }
 
