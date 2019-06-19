@@ -35,7 +35,8 @@ public enum MarketPlace {
     EFACIL("eFácil"),
     LEROY_MERLIN("Leroy Merlin"),
     COBASI("Cobasi"),
-    CATWALK("Catwalk");
+    CATWALK("Catwalk"),
+    WISH("Wish");
 
     private String name;
 
