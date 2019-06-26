@@ -149,6 +149,16 @@ public class OrderService {
             .getResponse();
     }
 
+    public void putXMLNFe(Order order, String xml, IntegrationHeader... headers) {
+        checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
+        checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
+        put(apiEndPointForResource.concat("/{id}/nfe"))
+            .body(xml)
+            .headers(headers)
+            .routeParam("id", order.getId().toString())
+            .getResponse();
+    }
+
     public Order updateTransmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
         checkNotNull(idOrder, "Erro ao atualizar pedido: Id não informado");
         checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
