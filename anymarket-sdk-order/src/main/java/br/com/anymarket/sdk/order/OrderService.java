@@ -152,7 +152,7 @@ public class OrderService {
     public void putXMLNFe(Order order, String xml, IntegrationHeader... headers) {
         checkNotNull(order, "Erro ao atualizar pedido: Dados não encontrados.");
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
-        put(apiEndPointForResource.concat("/{id}/nfe"))
+        put(apiEndPointForResource.concat("/orders/{id}/nfe"))
             .body(xml)
             .headers(headers)
             .routeParam("id", order.getId().toString())
