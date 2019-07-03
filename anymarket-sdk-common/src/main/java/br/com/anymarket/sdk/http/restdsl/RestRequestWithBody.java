@@ -68,7 +68,7 @@ public class RestRequestWithBody {
 
     public Response getResponseXML() {
         try {
-            HttpResponse<String> response = request.body(body).asString();
+            HttpResponse<String> response = request.body(body.toString()).asString();
             checkGenericErrorToThrowGenericException(response);
             return new Response(response.getStatus(), response.getBody());
         } catch (UnirestException e) {
