@@ -66,6 +66,16 @@ public class RestRequestWithBody {
         }
     }
 
+    public Response getResponseXML() {
+        try {
+            HttpResponse<String> response = request.body(body.toString()).asString();
+            checkGenericErrorToThrowGenericException(response);
+            return new Response(response.getStatus(), response.getBody());
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
         int statusCode = response.getStatus();
         if (statusCode >= 400 && statusCode != 404) {

@@ -156,7 +156,7 @@ public class OrderService {
             .body(xml)
             .headers(headers)
             .routeParam("id", order.getId().toString())
-            .getResponse();
+            .getResponseXML();
     }
 
     public Order updateTransmissionStatus(Long idOrder, OrderTransmissionStatusResource resource, IntegrationHeader... headers) {
