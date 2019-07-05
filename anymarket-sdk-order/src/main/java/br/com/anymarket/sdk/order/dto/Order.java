@@ -145,6 +145,9 @@ public class Order {
     @JsonProperty("orderMessage")
     private OrderMessage orderMessage;
 
+    @JsonProperty("fulfillment")
+    private Boolean fulfillment;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -477,6 +480,14 @@ public class Order {
         this.orderMessage = orderMessage;
     }
 
+    public Boolean getFulfillment() {
+        return fulfillment;
+    }
+
+    public void setFulfillment(Boolean fulfillment) {
+        this.fulfillment = fulfillment;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -506,6 +517,7 @@ public class Order {
             .add("subChannel", subChannel)
             .add("subChannelNormalized", subChannelNormalized)
             .add("orderMessage", orderMessage)
+            .add("fulfillment", fulfillment)
             .toString();
     }
 }
