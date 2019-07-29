@@ -36,7 +36,9 @@ public enum MarketPlace {
     LEROY_MERLIN("Leroy Merlin"),
     COBASI("Cobasi"),
     CATWALK("Catwalk"),
-    WISH("Wish");
+    WISH("Wish"),
+    HOME_TO_GO("Home To Go"),
+    CONNECT_PARTS("Connect Parts");
 
     private String name;
 
