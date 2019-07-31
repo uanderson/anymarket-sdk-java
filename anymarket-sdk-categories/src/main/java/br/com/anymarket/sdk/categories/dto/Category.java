@@ -30,6 +30,7 @@ public class Category {
     @JsonProperty("priceFactor")
     private BigDecimal priceFactor;
 
+    @JsonInclude(Include.NON_NULL)
     @JsonProperty("calculatedPrice")
     private Boolean calculatedPrice;
 
