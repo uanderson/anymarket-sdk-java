@@ -1,5 +1,7 @@
 package br.com.anymarket.sdk.categories.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -24,6 +26,7 @@ public class Category {
     @JsonProperty("partnerId")
     private String partnerId;
 
+    @JsonInclude(Include.NON_NULL)
     @JsonProperty("priceFactor")
     private BigDecimal priceFactor;
 
