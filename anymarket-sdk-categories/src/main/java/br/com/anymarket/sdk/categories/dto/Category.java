@@ -37,6 +37,7 @@ public class Category {
     @JsonProperty("children")
     private List<Category> children = new ArrayList<Category>();
 
+    @JsonInclude(Include.NON_NULL)
     @JsonProperty("parent")
     private Category parent;
 
