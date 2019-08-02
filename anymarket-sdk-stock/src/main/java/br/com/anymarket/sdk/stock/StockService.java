@@ -67,4 +67,15 @@ public class StockService extends HttpService {
             throw new NotFoundException("Stock Locals not found.");
         }
     }
+
+    public List<Stock> getStocks(String sku, IntegrationHeader... headers) {
+        final GetRequest getRequest = get(apiEndPoint.concat("/stocks/").concat(sku), headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(new TypeReference<List<Stock>>() {
+            });
+        } else {
+            throw new NotFoundException(String.format("Stock for sku %s not found.", sku));
+        }
+    }
 }
