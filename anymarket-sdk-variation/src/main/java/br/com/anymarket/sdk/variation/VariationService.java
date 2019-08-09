@@ -91,4 +91,18 @@ public class VariationService extends HttpService {
         }
         return allTypes;
     }
+
+    public List<VariationType> getAllTypesNotPaged(IntegrationHeader... headers){
+        final List<VariationType> allTypes = Lists.newArrayList();
+        final GetRequest getRequest = get(apiEndPoint.concat(VARIATIONS_URI).concat("/all"), headers);
+        final Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            List<VariationType> rootResponse = response.to(new TypeReference<List<VariationType>>() {
+            });
+            allTypes.addAll(rootResponse);
+        }else {
+            throw new NotFoundException("VariationType not found");
+        }
+        return allTypes;
+    }
 }
