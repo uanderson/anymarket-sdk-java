@@ -30,9 +30,6 @@ public class IndividualAvailableStockDTO implements Serializable {
     @JsonProperty("reservedPaid")
     private BigDecimal reservedPaid;
 
-    @JsonProperty("totalInInvoicedStatus")
-    private BigDecimal totalInInvoicedStatus;
-
     @JsonProperty("stockLocal")
     private String stockLocal;
 
@@ -104,14 +101,6 @@ public class IndividualAvailableStockDTO implements Serializable {
         } else {
             return availableAmount;
         }
-    }
-
-    public BigDecimal getTotalInInvoicedStatus() {
-        return totalInInvoicedStatus;
-    }
-
-    public void setTotalInInvoicedStatus(BigDecimal totalInInvoicedStatus) {
-        this.totalInInvoicedStatus = totalInInvoicedStatus;
     }
 
     public Integer getAdditionalTime() {
