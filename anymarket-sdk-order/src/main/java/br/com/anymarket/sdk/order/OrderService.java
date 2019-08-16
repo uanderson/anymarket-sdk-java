@@ -7,10 +7,7 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.order.dto.Order;
 import br.com.anymarket.sdk.order.dto.OrderTransmissionStatusResource;
-import br.com.anymarket.sdk.order.filters.OrderFilter;
-import br.com.anymarket.sdk.order.filters.OrderMarketplaceFilter;
-import br.com.anymarket.sdk.order.filters.OrderMarketplaceIdFilter;
-import br.com.anymarket.sdk.order.filters.OrderPartnerIdFilter;
+import br.com.anymarket.sdk.order.filters.*;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -56,6 +53,23 @@ public class OrderService {
 
         if (ordersPage.getContent().size() > 1) {
             throw new HttpClientException(format("Foi encontrado mais de um pedido com partnerId %s", partnerId));
+        }
+
+        return ordersPage.getContent().get(0);
+    }
+
+    public Order getOrderByNumberInMarketPlace(String numberInMarketPlace, IntegrationHeader... headers) {
+        checkNotNull(numberInMarketPlace, "Erro ao recuperar pedido: código do Marketplace não informado");
+
+        OrderNumberInMarketPlaceFilter numberInMarketPlaceFilter = new OrderNumberInMarketPlaceFilter(numberInMarketPlace);
+
+        Page<Order> ordersPage = getOrders(Lists.<OrderFilter>newArrayList(numberInMarketPlaceFilter), headers);
+        if (ordersPage.getContent() == null || ordersPage.getContent().isEmpty()) {
+            throw new NotFoundException(format("Não foi encontrado pedido com código do Marketplace %s", numberInMarketPlace));
+        }
+
+        if (ordersPage.getContent().size() > 1) {
+            throw new HttpClientException(format("Foi encontrado mais de um pedido com código do Marketplace %s", numberInMarketPlace));
         }
 
         return ordersPage.getContent().get(0);

@@ -38,7 +38,8 @@ public enum MarketPlace {
     CATWALK("Catwalk"),
     WISH("Wish"),
     HOME_TO_GO("Home To Go"),
-    CONNECT_PARTS("Connect Parts");
+    CONNECT_PARTS("Connect Parts"),
+    GARBARINO("Garbarino");
 
     private String name;
 
