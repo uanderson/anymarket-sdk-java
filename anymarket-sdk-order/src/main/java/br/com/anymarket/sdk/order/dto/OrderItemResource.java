@@ -3,6 +3,7 @@ package br.com.anymarket.sdk.order.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class OrderItemResource {
 
     @JsonProperty("listingType")
     private String listingType;
+
+    @JsonProperty("stocks")
+    private List<OrderItemStockResource> stocks = Lists.newArrayList();
 
     public String getIdInMarketPlace() {
         return idInMarketPlace;
@@ -132,6 +136,14 @@ public class OrderItemResource {
         this.listingType = listingType;
     }
 
+    public List<OrderItemStockResource> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<OrderItemStockResource> stocks) {
+        this.stocks = stocks;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -143,6 +155,7 @@ public class OrderItemResource {
             .add("discount", discount)
             .add("shippings", shippings)
             .add("marketPlaceId", marketPlaceId)
+            .add("stocks", stocks)
             .toString();
     }
 }

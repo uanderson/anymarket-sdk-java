@@ -3,12 +3,14 @@ package br.com.anymarket.sdk.product.dto;
 import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SKUMpOrigin;
 import br.com.anymarket.sdk.dto.AvailableStockDTO;
+import br.com.anymarket.sdk.dto.IndividualAvailableStockDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -58,6 +60,9 @@ public class SkuMarketPlace implements Serializable {
 
     @JsonProperty(value = "availableStock")
     private AvailableStockDTO availableStock;
+
+    @JsonProperty(value = "availableStocks")
+    private List<IndividualAvailableStockDTO> individualAvailableStocks;
 
     @JsonProperty(value = "attributes")
     private Map<String, String> attributes = new HashMap<String, String>();
@@ -227,6 +232,14 @@ public class SkuMarketPlace implements Serializable {
 
     public void setAvailableStock(AvailableStockDTO availableStockDTO) {
         this.availableStock = availableStockDTO;
+    }
+
+    public List<IndividualAvailableStockDTO> getIndividualAvailableStocks() {
+        return individualAvailableStocks;
+    }
+
+    public void setIndividualAvailableStocks(List<IndividualAvailableStockDTO> individualAvailableStocks) {
+        this.individualAvailableStocks = individualAvailableStocks;
     }
 
     public Boolean hasEnabledDiscount(String enabledDiscountParamName) {
