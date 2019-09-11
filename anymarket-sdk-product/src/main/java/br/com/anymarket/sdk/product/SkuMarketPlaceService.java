@@ -82,9 +82,13 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, false, headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
-        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()), headers);
+        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
