@@ -37,6 +37,9 @@ public class InvoiceResource {
     @JsonProperty("companyStateTaxId")
     private String companyStateTaxId;
 
+    @JsonProperty("invoiceLink")
+    private String invoiceLink;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -93,6 +96,14 @@ public class InvoiceResource {
         this.companyStateTaxId = companyStateTaxId;
     }
 
+    public String getInvoiceLink() {
+        return invoiceLink;
+    }
+
+    public void setInvoiceLink(String invoiceLink) {
+        this.invoiceLink = invoiceLink;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -101,6 +112,7 @@ public class InvoiceResource {
             .add("number", number)
             .add("date", date)
             .add("linkNfe", linkNfe)
+            .add("invoiceLink", invoiceLink)
             .add("cfop", cfop)
             .add("companyStateTaxId", companyStateTaxId)
             .toString();
