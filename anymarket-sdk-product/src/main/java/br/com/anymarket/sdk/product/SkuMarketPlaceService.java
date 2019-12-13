@@ -7,10 +7,7 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
-import br.com.anymarket.sdk.product.dto.PublicationStatus;
-import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
-import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
-import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceResource;
+import br.com.anymarket.sdk.product.dto.*;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
@@ -194,5 +191,20 @@ public class SkuMarketPlaceService extends HttpService {
         return new Page<SkuMarketPlace>();
     }
 
+    public SkuMarketplaceComplete getSkuMarketplaceCompleteById(Long idSkuMarketplace, IntegrationHeader headers) {
+        Objects.requireNonNull(idSkuMarketplace, "Informe o idSkuMarketplace");
+
+        String endpoint = String.format("/skus/marketplaces/%s/complete", idSkuMarketplace);
+
+        GetRequest getRequest = get(this.apiEndPoint.concat(endpoint), headers);
+
+        Response response = execute(getRequest);
+
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(SkuMarketplaceComplete.class);
+        } else {
+            throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+        }
+    }
 
 }
