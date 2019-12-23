@@ -14,6 +14,8 @@ import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +24,8 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
 public class SkuMarketPlaceService extends HttpService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SkuMarketPlaceService.class);
 
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
@@ -198,11 +202,17 @@ public class SkuMarketPlaceService extends HttpService {
 
         GetRequest getRequest = get(this.apiEndPoint.concat(endpoint), headers);
 
-        Response response = execute(getRequest);
+        try{
+            LOG.info("Chamando endpoint {}, headers {}", this.apiEndPoint.concat(endpoint), headers.toString());
+            Response response = execute(getRequest);
 
-        if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(SkuMarketplaceComplete.class);
-        } else {
+            if (response.getStatus() == HttpStatus.SC_OK) {
+                return response.to(SkuMarketplaceComplete.class);
+            } else {
+                throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+            }
+        } catch (Exception e) {
+            LOG.error("Ocorreu um erro ao chamar endpoint {} com headers {}", this.apiEndPoint.concat(endpoint), headers.toString(), e);
             throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
         }
     }
