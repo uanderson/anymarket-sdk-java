@@ -148,6 +148,9 @@ public class Order {
     @JsonProperty("fulfillment")
     private Boolean fulfillment;
 
+    @JsonProperty("shippingId")
+    private String shippingId;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -486,6 +489,14 @@ public class Order {
 
     public void setFulfillment(Boolean fulfillment) {
         this.fulfillment = fulfillment;
+    }
+
+    public String getShippingId() {
+        return shippingId;
+    }
+
+    public void setShippingId(String shippingId) {
+        this.shippingId = shippingId;
     }
 
     @Override
