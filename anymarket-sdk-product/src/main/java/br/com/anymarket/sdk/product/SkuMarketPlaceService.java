@@ -200,10 +200,10 @@ public class SkuMarketPlaceService extends HttpService {
 
         String endpoint = String.format("/skus/marketplaces/%s/complete", idSkuMarketplace);
 
-        GetRequest getRequest = get(this.apiEndPoint.concat(endpoint), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(endpoint), headers);
 
         try{
-            LOG.info("Chamando endpoint {}, headers {}", this.apiEndPoint.concat(endpoint), headers.toString());
+            LOG.info("Chamando endpoint {}, headers {}", apiEndPoint.concat(endpoint), headers.toString());
             Response response = execute(getRequest);
             LOG.info("Response status {}", response.getStatus());
 
