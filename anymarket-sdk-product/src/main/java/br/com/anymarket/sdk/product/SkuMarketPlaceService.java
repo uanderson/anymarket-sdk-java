@@ -205,6 +205,7 @@ public class SkuMarketPlaceService extends HttpService {
         try{
             LOG.info("Chamando endpoint {}, headers {}", this.apiEndPoint.concat(endpoint), headers.toString());
             Response response = execute(getRequest);
+            LOG.info("Response status {}", response.getStatus());
 
             if (response.getStatus() == HttpStatus.SC_OK) {
                 return response.to(SkuMarketplaceComplete.class);
