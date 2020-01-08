@@ -6,7 +6,6 @@ import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
-import br.com.anymarket.sdk.product.dto.Product;
 import br.com.anymarket.sdk.product.dto.Sku;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -19,7 +18,6 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class SkuService extends HttpService {
