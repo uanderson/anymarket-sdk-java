@@ -5,10 +5,9 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
-import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Sku;
+import br.com.anymarket.sdk.product.dto.SkuResource;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
@@ -92,8 +91,17 @@ public class SkuService extends HttpService {
     }
 
     public <T> T getSku(Long idSku, Class<T> clazz, IntegrationHeader... headers) {
+        return getSku(idSku, false, clazz, headers);
+    }
+
+    public SkuResource getSkuWithProduct(Long idSku, IntegrationHeader... headers) {
+        return getSku(idSku, true, SkuResource.class, headers);
+    }
+
+    private <T> T getSku(Long idSku, boolean showProduct, Class<T> clazz, IntegrationHeader... headers) {
         checkNotNull(idSku, "Informe o id do Sku.");
-        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()), headers);
+        String param = showProduct ? "?showProduct=true":"";
+        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()).concat(param), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(clazz);
