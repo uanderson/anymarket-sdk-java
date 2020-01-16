@@ -43,18 +43,18 @@ public enum MarketPlace {
     NOVOMUNDO("Novo Mundo", "NVM");
 
     private String name;
-    private String abbreviation;
+    private String shortName;
 
-    private MarketPlace(String name, String abbreviation) {
+    private MarketPlace(String name, String shortName) {
         this.name = name;
-        this.abbreviation = abbreviation;
+        this.shortName = shortName;
     }
 
     public String getDescription() {
         return this.name;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
+    public String getShortName() {
+        return shortName;
     }
 }
