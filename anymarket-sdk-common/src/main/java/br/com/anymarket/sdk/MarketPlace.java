@@ -40,7 +40,9 @@ public enum MarketPlace {
     HOME_TO_GO("Home To Go"),
     CONNECT_PARTS("Connect Parts"),
     GARBARINO("Garbarino"),
-    NOVOMUNDO("Novo Mundo");
+    NOVOMUNDO("Novo Mundo"),
+    POSTHAUS("Posthaus"),
+    MARABRAZ("Marabraz");
 
     private String name;
 
