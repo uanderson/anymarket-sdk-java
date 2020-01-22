@@ -112,10 +112,10 @@ public class SkuService extends HttpService {
 
     public Page<Sku> getSkusPaged(Integer offset, Integer limit, IntegrationHeader... headers) {
         GetRequest request = get(apiEndPoint.concat(SKU_URI), headers);
-        if (nonNull(offset)) {
+        if (offset != null) {
             request.queryString(OFFSET, offset);
         }
-        if (nonNull(limit)) {
+        if (limit != null) {
             request.queryString(LIMIT, limit);
         }
         Response response = execute(request);
