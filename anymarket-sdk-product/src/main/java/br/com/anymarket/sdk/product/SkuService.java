@@ -5,6 +5,7 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
+import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Sku;
 import br.com.anymarket.sdk.resource.Link;
 import br.com.anymarket.sdk.product.dto.SkuResource;
