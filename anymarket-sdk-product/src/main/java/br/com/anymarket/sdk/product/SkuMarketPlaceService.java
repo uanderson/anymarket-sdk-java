@@ -83,13 +83,18 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
-        return getSkuMarketPlace(idSku, idSkuMp, false, headers);
+        return getSkuMarketPlace(idSku, idSkuMp, false, null, headers);
     }
 
-    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
+    public SkuMarketPlace getSkuMarketPlaceWithSku(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, false, "SKU_COMPLETE", headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, String skuMarketplaceReturnType, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
-        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd), headers);
+        skuMarketplaceReturnType = skuMarketplaceReturnType == null ? "" : "&returnType=" + skuMarketplaceReturnType;
+        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd).concat(skuMarketplaceReturnType), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
