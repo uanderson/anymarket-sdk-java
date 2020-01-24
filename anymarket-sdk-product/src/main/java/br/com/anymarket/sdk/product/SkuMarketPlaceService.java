@@ -90,6 +90,10 @@ public class SkuMarketPlaceService extends HttpService {
         return getSkuMarketPlace(idSku, idSkuMp, false, "SKU_COMPLETE", headers);
     }
 
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, multiCd, headers);
+    }
+
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, String skuMarketplaceReturnType, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
