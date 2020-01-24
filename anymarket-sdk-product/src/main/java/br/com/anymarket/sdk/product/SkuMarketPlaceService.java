@@ -91,7 +91,7 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
-        return getSkuMarketPlace(idSku, idSkuMp, multiCd, headers);
+        return getSkuMarketPlace(idSku, idSkuMp, multiCd, null, headers);
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, String skuMarketplaceReturnType, IntegrationHeader... headers) {
