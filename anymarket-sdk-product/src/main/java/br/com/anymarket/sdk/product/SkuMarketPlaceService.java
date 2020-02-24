@@ -2,6 +2,7 @@ package br.com.anymarket.sdk.product;
 
 import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
+import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
@@ -211,7 +212,7 @@ public class SkuMarketPlaceService extends HttpService {
 
         GetRequest getRequest = get(apiEndPoint.concat(endpoint), headers);
 
-        try{
+        try {
             LOG.info("Chamando endpoint {}, headers {}", apiEndPoint.concat(endpoint), headers.toString());
             Response response = execute(getRequest);
             LOG.info("Response status {}", response.getStatus());
@@ -221,6 +222,8 @@ public class SkuMarketPlaceService extends HttpService {
             } else {
                 throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
             }
+        } catch (HttpServerException e) {
+            throw e;
         } catch (Exception e) {
             LOG.error("Ocorreu um erro ao chamar endpoint {} com headers {}", this.apiEndPoint.concat(endpoint), headers.toString(), e);
             throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
