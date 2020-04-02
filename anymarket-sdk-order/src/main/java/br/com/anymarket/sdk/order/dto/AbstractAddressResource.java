@@ -11,6 +11,9 @@ public abstract class AbstractAddressResource {
     @JsonProperty("state")
     private String state;
 
+    @JsonProperty("stateAcronymNormalized")
+    private String stateAcronymNormalized;
+
     @JsonProperty("stateNameNormalized")
     private String stateNameNormalized;
 
@@ -55,6 +58,14 @@ public abstract class AbstractAddressResource {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getStateAcronymNormalized() {
+        return stateAcronymNormalized;
+    }
+
+    public void setStateAcronymNormalized(String stateAcronymNormalized) {
+        this.stateAcronymNormalized = stateAcronymNormalized;
     }
 
     public String getCountry() {
