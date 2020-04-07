@@ -9,6 +9,7 @@ public enum MarketPlace {
     WALMART("Walmart"),
     VTEX("VTEX"),
     GFG("GFG - Dafiti"),
+    LINIO("Linio"),
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
