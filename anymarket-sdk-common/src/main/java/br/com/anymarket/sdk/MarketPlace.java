@@ -41,7 +41,7 @@ public enum MarketPlace {
     HOME_TO_GO("Home To Go"),
     CONNECT_PARTS("Connect Parts"),
     GARBARINO("Garbarino"),
-    NOVOMUNDO("Novo Mundo"),
+    NOVO_MUNDO("Novo Mundo"),
     POSTHAUS("Posthaus"),
     MARABRAZ("Marabraz"),
     LOJA_VIVO("Loja Vivo"),
