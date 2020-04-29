@@ -2,6 +2,7 @@ package br.com.anymarket.sdk.product;
 
 import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
+import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
@@ -83,13 +84,22 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
-        return getSkuMarketPlace(idSku, idSkuMp, false, headers);
+        return getSkuMarketPlace(idSku, idSkuMp, false, null, headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlaceWithSku(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, false, "SKU_COMPLETE", headers);
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, multiCd, null, headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, String skuMarketplaceReturnType, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
-        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd), headers);
+        skuMarketplaceReturnType = skuMarketplaceReturnType == null ? "" : "&returnType=" + skuMarketplaceReturnType;
+        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd).concat(skuMarketplaceReturnType), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
@@ -202,7 +212,7 @@ public class SkuMarketPlaceService extends HttpService {
 
         GetRequest getRequest = get(apiEndPoint.concat(endpoint), headers);
 
-        try{
+        try {
             LOG.info("Chamando endpoint {}, headers {}", apiEndPoint.concat(endpoint), headers.toString());
             Response response = execute(getRequest);
             LOG.info("Response status {}", response.getStatus());
@@ -212,6 +222,8 @@ public class SkuMarketPlaceService extends HttpService {
             } else {
                 throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
             }
+        } catch (HttpServerException e) {
+            throw e;
         } catch (Exception e) {
             LOG.error("Ocorreu um erro ao chamar endpoint {} com headers {}", this.apiEndPoint.concat(endpoint), headers.toString(), e);
             throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));

@@ -289,11 +289,15 @@ public class ProductBase {
     }
 
     public List<Image> getImagesForSku(SkuComplete sku) {
+        return getImagesForSku(sku.getVariations());
+    }
 
-        if (sku.getVariations().isEmpty()) {
+    public List<Image> getImagesForSku(List<Variation> variations) {
+
+        if (variations == null || variations.isEmpty()) {
             return this.getImagesWithoutVariationValue();
         } else {
-            return this.getImagesByVariationValues(sku.getVariations());
+            return this.getImagesByVariationValues(variations);
         }
     }
 
