@@ -41,10 +41,11 @@ public enum MarketPlace {
     HOME_TO_GO("Home To Go"),
     CONNECT_PARTS("Connect Parts"),
     GARBARINO("Garbarino"),
-    NOVOMUNDO("Novo Mundo"),
+    NOVO_MUNDO("Novo Mundo"),
     POSTHAUS("Posthaus"),
     MARABRAZ("Marabraz"),
-    LOJA_VIVO("Loja Vivo");
+    LOJA_VIVO("Loja Vivo"),
+    ESTANTE_VIRTUAL("Estante Virtual");
     private String name;
 
     private MarketPlace(String name) {
