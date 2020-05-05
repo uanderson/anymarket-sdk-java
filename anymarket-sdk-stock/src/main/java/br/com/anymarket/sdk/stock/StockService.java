@@ -7,6 +7,7 @@ import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.stock.dto.Stock;
 import br.com.anymarket.sdk.stock.dto.StockCollection;
+import br.com.anymarket.sdk.stock.dto.StockItem;
 import br.com.anymarket.sdk.stock.dto.StockLocal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
@@ -61,8 +62,8 @@ public class StockService extends HttpService {
         return execute(putRequest);
     }
 
-    public Stock getStock(String idSku, String idStockLocal, String sku, long offset,
-                             long limit, String sort, String sortDirection, IntegrationHeader... headers) {
+    public StockItem getStock(String idSku, String idStockLocal, String sku, long offset,
+                              long limit, String sort, String sortDirection, IntegrationHeader... headers) {
 
         Map<String, Object> params = Maps.newHashMap();
         if (!isBlank(idSku)) {
@@ -91,12 +92,13 @@ public class StockService extends HttpService {
         HttpRequest getRequest = get(apiEndPoint.concat("/stocks"), headers).queryString(params);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
-            return response.to(new TypeReference<Stock>() {});
+            return response.to(new TypeReference<StockItem>() {});
         } else {
             throw new NotFoundException("Stock not found.");
         }
 
     }
+
     public List<StockLocal> getAllStockLocals(IntegrationHeader... headers) {
         final GetRequest getRequest = get(apiEndPoint.concat("/stocks/locals"), headers);
         final Response response = execute(getRequest);
