@@ -87,6 +87,14 @@ public class StockItem implements AnymarketPojo {
             this.price = price;
             return this;
         }
+        public Builder withActive(Boolean active) {
+            this.active = active;
+            return this;
+        }
+        public Builder withLastStockUpdate(Date lastStockUpdate) {
+            this.lastStockUpdate = lastStockUpdate;
+            return this;
+        }
         public StockItem build() {
             return new StockItem(this);
         }
