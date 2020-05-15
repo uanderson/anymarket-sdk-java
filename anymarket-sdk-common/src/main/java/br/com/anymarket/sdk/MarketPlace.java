@@ -46,7 +46,9 @@ public enum MarketPlace {
     MARABRAZ("Marabraz"),
     LOJA_VIVO("Loja Vivo"),
     ESTANTE_VIRTUAL("Estante Virtual"),
-    RI_HAPPY("Ri Happy");
+    RI_HAPPY("Ri Happy"),
+    CENTAURO_NEW_API("Centauro Nova API");
+
     private String name;
 
     private MarketPlace(String name) {
