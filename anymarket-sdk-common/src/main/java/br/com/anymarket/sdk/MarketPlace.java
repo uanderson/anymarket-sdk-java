@@ -45,7 +45,9 @@ public enum MarketPlace {
     POSTHAUS("Posthaus"),
     MARABRAZ("Marabraz"),
     LOJA_VIVO("Loja Vivo"),
-    ESTANTE_VIRTUAL("Estante Virtual");
+    ESTANTE_VIRTUAL("Estante Virtual"),
+    RI_HAPPY("Ri Happy"),
+    FAST_SHOP("Fast Shop");
     private String name;
 
     private MarketPlace(String name) {
