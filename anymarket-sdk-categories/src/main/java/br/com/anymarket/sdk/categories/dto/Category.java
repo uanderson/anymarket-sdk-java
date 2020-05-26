@@ -44,9 +44,7 @@ public class Category {
     @JsonProperty("path")
     private String path;
 
-    protected Category() {
-
-    }
+    private Category() {}
 
     private Category(Builder builder) {
         if (builder.id == null && builder.partnerId == null) {
@@ -92,40 +90,12 @@ public class Category {
         return parent;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPartnerId(String partnerId) {
-        this.partnerId = partnerId;
-    }
-
-    public void setPriceFactor(BigDecimal priceFactor) {
-        this.priceFactor = priceFactor;
-    }
-
-    public void setCalculatedPrice(Boolean calculatedPrice) {
-        this.calculatedPrice = calculatedPrice;
-    }
-
-    public void setChildren(List<Category> children) {
-        this.children = children;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
     public String getPath() {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public static Category.Builder builder() {
+        return new Category.Builder();
     }
 
     @Override
