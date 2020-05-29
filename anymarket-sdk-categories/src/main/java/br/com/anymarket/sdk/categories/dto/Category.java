@@ -60,6 +60,7 @@ public class Category {
         this.priceFactor = builder.priceFactor;
         this.parent = builder.parent;
         this.children = builder.children;
+        this.path = builder.path;
     }
 
     public Long getId() {
