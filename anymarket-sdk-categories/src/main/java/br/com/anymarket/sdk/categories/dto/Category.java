@@ -63,6 +63,38 @@ public class Category {
         this.path = builder.path;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
+    }
+
+    public void setPriceFactor(BigDecimal priceFactor) {
+        this.priceFactor = priceFactor;
+    }
+
+    public void setCalculatedPrice(Boolean calculatedPrice) {
+        this.calculatedPrice = calculatedPrice;
+    }
+
+    public void setChildren(List<Category> children) {
+        this.children = children;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public Long getId() {
         return id;
     }
