@@ -48,7 +48,10 @@ public enum MarketPlace {
     ESTANTE_VIRTUAL("Estante Virtual"),
     RI_HAPPY("Ri Happy"),
     FAST_SHOP("Fast Shop"),
-    CYBELAR("Cybelar");
+    CYBELAR("Cybelar"),
+    CLUBE_DE_MARCAS("Clube de Marcas"),
+    C_A("C&A");
+
     private String name;
 
     private MarketPlace(String name) {
