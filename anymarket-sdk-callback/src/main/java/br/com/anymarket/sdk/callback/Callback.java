@@ -21,6 +21,18 @@ public class Callback implements AnymarketPojo {
     @JsonProperty("token")
     private String token;
 
+    @JsonProperty("orderActive")
+    private Boolean orderActive;
+
+    @JsonProperty("productActive")
+    private Boolean productActive;
+
+    @JsonProperty("transmissionActive")
+    private Boolean transmissionActive;
+
+    @JsonProperty("questionActive")
+    private Boolean questionActive;
+
     public Callback() {
     }
 
@@ -46,6 +58,38 @@ public class Callback implements AnymarketPojo {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Boolean getOrderActive() {
+        return orderActive;
+    }
+
+    public void setOrderActive(Boolean orderActive) {
+        this.orderActive = orderActive;
+    }
+
+    public Boolean getProductActive() {
+        return productActive;
+    }
+
+    public void setProductActive(Boolean productActive) {
+        this.productActive = productActive;
+    }
+
+    public Boolean getTransmissionActive() {
+        return transmissionActive;
+    }
+
+    public void setTransmissionActive(Boolean transmissionActive) {
+        this.transmissionActive = transmissionActive;
+    }
+
+    public Boolean getQuestionActive() {
+        return questionActive;
+    }
+
+    public void setQuestionActive(Boolean questionActive) {
+        this.questionActive = questionActive;
     }
 
     @Override
