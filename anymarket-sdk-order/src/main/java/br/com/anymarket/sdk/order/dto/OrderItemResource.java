@@ -48,6 +48,13 @@ public class OrderItemResource {
     @JsonProperty("stocks")
     private List<OrderItemStockResource> stocks = Lists.newArrayList();
 
+    @JsonProperty("officialStoreId")
+    private String officialStoreId;
+
+    @JsonProperty("officialStoreName")
+    private String officialStoreName;
+
+
     public String getIdInMarketPlace() {
         return idInMarketPlace;
     }
@@ -144,6 +151,22 @@ public class OrderItemResource {
         this.stocks = stocks;
     }
 
+    public String getOfficialStoreId() {
+        return officialStoreId;
+    }
+
+    public void setOfficialStoreId(String officialStoreId) {
+        this.officialStoreId = officialStoreId;
+    }
+
+    public String getOfficialStoreName() {
+        return officialStoreName;
+    }
+
+    public void setOfficialStoreName(String officialStoreName) {
+        this.officialStoreName = officialStoreName;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -156,6 +179,8 @@ public class OrderItemResource {
             .add("shippings", shippings)
             .add("marketPlaceId", marketPlaceId)
             .add("stocks", stocks)
+            .add("officialStoreId", officialStoreId)
+            .add("officialStoreName", officialStoreName)
             .toString();
     }
 }
