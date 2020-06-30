@@ -85,7 +85,6 @@ public class StockService extends HttpService {
             params.put("sortDirection", sortDirection);
         }
 
-//        http://sandbox-api.anymarket.com.br/v2/stocks?idSku=1&idStockLocal=2&sku=3&offset=4&limit=5&sort=6&sortDirection=7
         HttpRequest getRequest = get(apiEndPoint.concat("/stocks"), headers).queryString(params);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {

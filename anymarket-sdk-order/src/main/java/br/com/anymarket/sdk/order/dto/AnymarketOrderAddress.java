@@ -16,6 +16,9 @@ public class AnymarketOrderAddress {
     @JsonProperty("state")
     private String state;
 
+    @JsonProperty("stateAcronymNormalized")
+    private String stateAcronymNormalized;
+
     @JsonProperty("city")
     private String city;
 
@@ -54,6 +57,14 @@ public class AnymarketOrderAddress {
 
     public String getState() {
         return state;
+    }
+
+    public String getStateAcronymNormalized() {
+        return stateAcronymNormalized;
+    }
+
+    public void setStateAcronymNormalized(String stateAcronymNormalized) {
+        this.stateAcronymNormalized = stateAcronymNormalized;
     }
 
     public void setState(String state) {
