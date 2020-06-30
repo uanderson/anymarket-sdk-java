@@ -31,6 +31,8 @@ public class StockItem implements AnymarketPojo {
     @JsonProperty("lastStockUpdate")
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date lastStockUpdate;
+    @JsonProperty("additionalTime")
+    private Integer additionalTime;
 
     public StockItem() {}
 
@@ -51,6 +53,7 @@ public class StockItem implements AnymarketPojo {
         this.price = builder.price;
         this.active = builder.active;
         this.lastStockUpdate = builder.lastStockUpdate;
+        this.additionalTime = builder.additionalTime;
     }
 
     public static class Builder {
@@ -62,6 +65,7 @@ public class StockItem implements AnymarketPojo {
         private BigDecimal price;
         private Boolean active;
         private Date lastStockUpdate;
+        private Integer additionalTime;
 
         public Builder withStockKeepingUnit(StockKeepingUnit stockKeepingUnit) {
             this.stockKeepingUnit = stockKeepingUnit;
@@ -93,6 +97,10 @@ public class StockItem implements AnymarketPojo {
         }
         public Builder withLastStockUpdate(Date lastStockUpdate) {
             this.lastStockUpdate = lastStockUpdate;
+            return this;
+        }
+        public Builder withAdditionalTime(Integer additionalTime) {
+            this.additionalTime = additionalTime;
             return this;
         }
         public StockItem build() {
@@ -139,5 +147,9 @@ public class StockItem implements AnymarketPojo {
 
     public Date getLastStockUpdate() {
         return lastStockUpdate;
+    }
+
+    public Integer getAdditionalTime() {
+        return additionalTime;
     }
 }
