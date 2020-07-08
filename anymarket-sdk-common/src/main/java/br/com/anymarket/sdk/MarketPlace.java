@@ -50,9 +50,7 @@ public enum MarketPlace {
     FAST_SHOP("Fast Shop"),
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
-    C_A("C&A");
-
-    RI_HAPPY("Ri Happy"),
+    C_A("C&A"),
     CENTAURO_NEW_API("Centauro Nova API");
 
     private String name;
