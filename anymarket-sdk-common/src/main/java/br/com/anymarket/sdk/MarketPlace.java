@@ -47,6 +47,12 @@ public enum MarketPlace {
     LOJA_VIVO("Loja Vivo"),
     ESTANTE_VIRTUAL("Estante Virtual"),
     RI_HAPPY("Ri Happy"),
+    FAST_SHOP("Fast Shop"),
+    CYBELAR("Cybelar"),
+    CLUBE_DE_MARCAS("Clube de Marcas"),
+    C_A("C&A");
+
+    RI_HAPPY("Ri Happy"),
     CENTAURO_NEW_API("Centauro Nova API");
 
     private String name;

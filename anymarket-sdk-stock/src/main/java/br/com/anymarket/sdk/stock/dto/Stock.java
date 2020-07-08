@@ -25,6 +25,8 @@ public class Stock implements AnymarketPojo {
     @JsonProperty("stockLocalId")
     private Long stockLocalId;
 
+    public Stock() {}
+
     private Stock(Builder builder) {
         if (isNull(builder.id) && isNull(builder.partnerId)) {
             throw new IllegalArgumentException(

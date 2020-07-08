@@ -12,6 +12,10 @@ public class SimpleSkuResource {
     @JsonProperty("partnerId")
     private String partnerId;
 
+    @JsonProperty("title")
+    private String title;
+
+
     public Long getId() {
         return id;
     }
@@ -26,5 +30,13 @@ public class SimpleSkuResource {
 
     public void setPartnerId(String partnerId) {
         this.partnerId = partnerId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

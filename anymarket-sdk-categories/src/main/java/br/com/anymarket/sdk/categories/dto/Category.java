@@ -44,9 +44,7 @@ public class Category {
     @JsonProperty("path")
     private String path;
 
-    protected Category() {
-
-    }
+    private Category() {}
 
     private Category(Builder builder) {
         if (builder.id == null && builder.partnerId == null) {
@@ -62,34 +60,7 @@ public class Category {
         this.priceFactor = builder.priceFactor;
         this.parent = builder.parent;
         this.children = builder.children;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPartnerId() {
-        return partnerId;
-    }
-
-    public BigDecimal getPriceFactor() {
-        return priceFactor;
-    }
-
-    public Boolean getCalculatedPrice() {
-        return calculatedPrice;
-    }
-
-    public List<Category> getChildren() {
-        return children;
-    }
-
-    public Category getParent() {
-        return parent;
+        this.path = builder.path;
     }
 
     public void setId(Long id) {
@@ -120,12 +91,44 @@ public class Category {
         this.parent = parent;
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public BigDecimal getPriceFactor() {
+        return priceFactor;
+    }
+
+    public Boolean getCalculatedPrice() {
+        return calculatedPrice;
+    }
+
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
     public String getPath() {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public static Category.Builder builder() {
+        return new Category.Builder();
     }
 
     @Override

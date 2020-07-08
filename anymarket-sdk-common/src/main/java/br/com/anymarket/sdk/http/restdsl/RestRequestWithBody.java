@@ -14,7 +14,6 @@ import com.google.common.io.CharStreams;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
-import sun.misc.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
