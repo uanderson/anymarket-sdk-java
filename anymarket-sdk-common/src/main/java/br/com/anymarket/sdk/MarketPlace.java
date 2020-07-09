@@ -51,7 +51,7 @@ public enum MarketPlace {
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
     C_A("C&A"),
-    ICBC("ICBC");
+    ICBC_MALL("ICBC Mall");
 
     private String name;
 
