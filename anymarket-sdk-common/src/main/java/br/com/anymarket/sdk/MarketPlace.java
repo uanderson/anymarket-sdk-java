@@ -52,7 +52,8 @@ public enum MarketPlace {
     FAST_SHOP("Fast Shop"),
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
-    C_A("C&A");
+    C_A("C&A"),
+    QISAR("Qisar");
 
     private String name;
 
