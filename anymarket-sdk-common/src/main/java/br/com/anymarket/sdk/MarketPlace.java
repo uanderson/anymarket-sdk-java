@@ -37,7 +37,9 @@ public enum MarketPlace {
     LEROY_MERLIN("Leroy Merlin"),
     COBASI("Cobasi"),
     CATWALK("Catwalk"),
+    CASA_SHOW("BRHC"),
     WISH("Wish"),
+    MOBLY("Mobly"),
     HOME_TO_GO("Home To Go"),
     CONNECT_PARTS("Connect Parts"),
     GARBARINO("Garbarino"),
@@ -50,7 +52,8 @@ public enum MarketPlace {
     FAST_SHOP("Fast Shop"),
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
-    C_A("C&A");
+    C_A("C&A"),
+    QISAR("Qisar");
 
     private String name;
 
