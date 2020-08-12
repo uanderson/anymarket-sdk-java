@@ -54,6 +54,8 @@ public enum MarketPlace {
     CLUBE_DE_MARCAS("Clube de Marcas"),
     C_A("C&A"),
     QISAR("Qisar"),
+    CLAROPROMO("Claropromo"),
+    BALCAO_RURAL("Balcao Rural"),
     CENTAURO_NEW_API("Centauro Nova API");
 
     private String name;
