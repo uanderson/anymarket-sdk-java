@@ -53,7 +53,9 @@ public enum MarketPlace {
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
     C_A("C&A"),
-    QISAR("Qisar");
+    QISAR("Qisar"),
+    CLAROPROMO("Claropromo"),
+    BALCAO_RURAL("Balcao Rural");
 
     private String name;
 
