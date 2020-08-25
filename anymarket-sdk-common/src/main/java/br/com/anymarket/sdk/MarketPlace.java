@@ -57,7 +57,8 @@ public enum MarketPlace {
     CLAROPROMO("Claropromo"),
     BALCAO_RURAL("Balcao Rural"),
     CENTAURO_NEW_API("Centauro Nova API"),
-    KABUM("Kabum");
+    KABUM("Kabum"),
+    MULTIVAREJO_GPA("Multivarejo GPA");
 
     private String name;
 
