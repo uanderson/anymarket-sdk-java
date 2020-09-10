@@ -56,7 +56,10 @@ public enum MarketPlace {
     QISAR("Qisar"),
     CLAROPROMO("Claropromo"),
     BALCAO_RURAL("Balcao Rural"),
-    CENTAURO_NEW_API("Centauro Nova API");
+    CENTAURO_NEW_API("Centauro Nova API"),
+    KABUM("Kabum"),
+    MULTIVAREJO_GPA("Multivarejo GPA"),
+    NUVEMSHOP("Nuvemshop");
 
     private String name;
 
