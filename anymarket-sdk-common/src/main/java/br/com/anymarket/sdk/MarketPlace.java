@@ -59,7 +59,8 @@ public enum MarketPlace {
     CENTAURO_NEW_API("Centauro Nova API"),
     KABUM("Kabum"),
     MULTIVAREJO_GPA("Multivarejo GPA"),
-    NUVEMSHOP("Nuvemshop");
+    NUVEMSHOP("Nuvemshop"),
+    LOJAS_LEBES("Lojas Lebes");
 
     private String name;
 
