@@ -60,7 +60,8 @@ public enum MarketPlace {
     KABUM("Kabum"),
     MULTIVAREJO_GPA("Multivarejo GPA"),
     NUVEMSHOP("Nuvemshop"),
-    LOJAS_LEBES("Lojas Lebes");
+    LOJAS_LEBES("Lojas Lebes"),
+    DROGA_RAIA("Droga Raia");
 
     private String name;
 
