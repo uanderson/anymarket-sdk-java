@@ -158,6 +158,9 @@ public class Order {
     @JsonProperty("metadata")
     private Map<String, String> metadata;
 
+    @JsonProperty("orderTypeName")
+    private String orderTypeName;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -522,6 +525,14 @@ public class Order {
         this.partnerNumber = partnerNumber;
     }
 
+    public String getOrderTypeName() {
+        return orderTypeName;
+    }
+
+    public void setOrderTypeName(String orderTypeName) {
+        this.orderTypeName = orderTypeName;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -553,6 +564,7 @@ public class Order {
             .add("orderMessage", orderMessage)
             .add("fulfillment", fulfillment)
             .add("metadata", metadata)
+            .add("orderTypeName", orderTypeName)
             .toString();
     }
 }
