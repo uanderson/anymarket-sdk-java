@@ -75,6 +75,7 @@ public class OrderService {
         return ordersPage.getContent().get(0);
     }
 
+    @Deprecated
     public Order getOrderByIdInMarketplace(String idInMarketplace, MarketPlace marketplace, IntegrationHeader... headers) {
         checkNotNull(idInMarketplace, "Erro ao recuperar pedido: idInMarketplace não informado");
         checkNotNull(idInMarketplace, "Erro ao recuperar pedido: marketplace não informado");
@@ -92,6 +93,24 @@ public class OrderService {
         }
 
         return ordersPage.getContent().get(0);
+    }
+
+    public Order getOrderBy(String idInMarketplace, MarketPlace marketplace, IntegrationHeader... headers) {
+        checkNotNull(idInMarketplace, "Erro ao recuperar pedido: idInMarketplace não informado");
+        checkNotNull(idInMarketplace, "Erro ao recuperar pedido: marketplace não informado");
+
+        Order order = get(apiEndPointForResource.concat("/orders/{marketPlace}/{idInMarketPlace}"))
+                .headers(headers)
+                .routeParam("marketPlace", marketplace.toString())
+                .routeParam("idInMarketPlace", idInMarketplace)
+                .getResponse()
+                .to(Order.class);
+
+        if (order == null) {
+            throw new NotFoundException(format("Não foi encontrado pedido com idInMarketplace %s e marketplace %s", idInMarketplace, marketplace.getDescription()));
+        }
+
+        return order;
     }
 
     public Page<Order> getOrders(List<OrderFilter> filters, IntegrationHeader... headers) {
