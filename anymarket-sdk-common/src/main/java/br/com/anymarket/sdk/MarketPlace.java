@@ -66,7 +66,7 @@ public enum MarketPlace {
     AVENIDA("Avenida"),
     TIENDA_NARANJA("Tienda Naranja"),
     BANCO_INTER("Banco Inter"),
-    HAVAN("Havan");
+    HAVAN("Havan"); 
 
     private String name;
 
