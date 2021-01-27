@@ -54,6 +54,7 @@ public enum MarketPlace {
     CLUBE_DE_MARCAS("Clube de Marcas"),
     C_A("C&A"),
     ICBC_MALL("ICBC Mall"),
+    TIENDA_SUPERVILLE("Tienda Superville"),
     QISAR("Qisar"),
     CLAROPROMO("Claropromo"),
     BALCAO_RURAL("Balcao Rural"),
