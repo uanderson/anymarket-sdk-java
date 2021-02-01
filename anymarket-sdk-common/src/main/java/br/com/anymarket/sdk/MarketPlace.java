@@ -55,6 +55,7 @@ public enum MarketPlace {
     C_A("C&A"),
     ICBC_MALL("ICBC Mall"),
     TIENDA_SUPERVILLE("Tienda Superville"),
+    TIENDA_CLICK("Tienda Click"),
     QISAR("Qisar"),
     CLAROPROMO("Claropromo"),
     BALCAO_RURAL("Balcao Rural"),
