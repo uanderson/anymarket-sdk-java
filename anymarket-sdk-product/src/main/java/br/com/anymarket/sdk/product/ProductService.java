@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
@@ -35,35 +36,42 @@ public class ProductService extends HttpService {
     private static final String PRODUCTS_URI = "/products";
     private final String apiEndPoint;
     public static final String NEXT = "next";
+    private String moduleOrigin;
 
     public ProductService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public ProductService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public Product insertProduct(Product product, IntegrationHeader... headers) {
-        RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI), product, headers);
+        RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI), product, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(Product.class);
     }
 
     public Product updateProduct(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-            .concat(product.getId().toString()), product, headers);
+            .concat(product.getId().toString()), product, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         return response.to(Product.class);
     }
 
     public Product updateProductAndImages(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-            .concat(product.getId().toString()), product, headers);
+            .concat(product.getId().toString()), product, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         if (response.getStatus() == HttpStatus.SC_OK) {
             if (product.getImages() != null) {
                 for (Image image : product.getImages()) {
                     if (image.getId() == null) {
                         RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                            .concat(product.getId().toString()).concat("/images/"), image, addModuleOriginHeader(headers, this.moduleOrigin));
                         execute(post);
                     }
                 }
@@ -73,7 +81,7 @@ public class ProductService extends HttpService {
                 for (Image image : product.getImagesForDelete()) {
                     if (image.getId() != null) {
                         HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                            .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), addModuleOriginHeader(headers, this.moduleOrigin));
                         execute(delete);
                     }
                 }
@@ -84,7 +92,7 @@ public class ProductService extends HttpService {
 
     public Product updateProductAndCreateAndUpdateImages(Product product, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-            .concat(product.getId().toString()), product, headers);
+            .concat(product.getId().toString()), product, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         if (response.getStatus() == HttpStatus.SC_OK) {
 
@@ -95,11 +103,11 @@ public class ProductService extends HttpService {
                 for (Image image : product.getImages()) {
                     if (image.getId() == null) {
                         RequestBodyEntity post = post(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                            .concat(product.getId().toString()).concat("/images/"), image, addModuleOriginHeader(headers, this.moduleOrigin));
                         execute(post);
                     } else {
                         RequestBodyEntity puts = put(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                            .concat(product.getId().toString()).concat("/images/"), image, headers);
+                            .concat(product.getId().toString()).concat("/images/"), image, addModuleOriginHeader(headers, this.moduleOrigin));
                         execute(puts);
                     }
                 }
@@ -112,7 +120,7 @@ public class ProductService extends HttpService {
         for (Image image : product.getImagesForDelete()) {
             if (image.getId() != null) {
                 HttpRequestWithBody delete = delete(apiEndPoint.concat(PRODUCTS_URI).concat("/")
-                    .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), headers);
+                    .concat(product.getId().toString()).concat("/images/").concat(image.getId().toString()), addModuleOriginHeader(headers, this.moduleOrigin));
                 execute(delete);
             }
         }
@@ -123,7 +131,7 @@ public class ProductService extends HttpService {
     }
 
     public <T> T getProduct(Long id, Class<T> clazz, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(id.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(clazz);
@@ -154,7 +162,7 @@ public class ProductService extends HttpService {
 
     public List<Product> getAllProducts(final String url, IntegrationHeader... headers) {
         final List<Product> allProducts = new ArrayList<Product>();
-        final GetRequest getRequest = get(url, headers);
+        final GetRequest getRequest = get(url, addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<Product> rootResponse = response.to(new TypeReference<Page<Product>>() {
@@ -168,7 +176,7 @@ public class ProductService extends HttpService {
 
     public List<ProductComplete> getAllCompleteProducts(final String url, IntegrationHeader... headers) {
         final List<ProductComplete> allProducts = new ArrayList<ProductComplete>();
-        final GetRequest getRequest = get(url, headers);
+        final GetRequest getRequest = get(url, addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<ProductComplete> rootResponse = response.to(new TypeReference<Page<ProductComplete>>() {
@@ -182,14 +190,14 @@ public class ProductService extends HttpService {
 
     public Page<Product> getProductPaged(List<ProductFilter> filters, IntegrationHeader... headers) {
         return AnyMarketRestDSL.get(apiEndPoint.concat(PRODUCTS_URI))
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .filters(filters)
             .getResponse()
             .to(PAGED_TYPE_REFERENCE);
     }
 
     public Page<Product> getProductPaged(IntegrationHeader... headers) {
-        Response response = execute(get(apiEndPoint.concat(PRODUCTS_URI), headers));
+        Response response = execute(get(apiEndPoint.concat(PRODUCTS_URI), addModuleOriginHeader(headers, this.moduleOrigin)));
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(new TypeReference<Page<Product>>() {
             });
@@ -207,7 +215,7 @@ public class ProductService extends HttpService {
             }
         }
         if (nextPageUrl != null) {
-            Response response = execute(get(nextPageUrl, headers));
+            Response response = execute(get(nextPageUrl, addModuleOriginHeader(headers, this.moduleOrigin)));
             if (response.getStatus() == HttpStatus.SC_OK) {
                 return response.to(new TypeReference<Page<Product>>() {
                 });
@@ -218,7 +226,7 @@ public class ProductService extends HttpService {
 
     public Map<String, String> getActiveAttributesByMarketPlace(Long idProduct, MarketPlace marketPlace, IntegrationHeader... headers) {
         String url = apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(idProduct.toString()).concat("/attributes/").concat(marketPlace.name());
-        GetRequest getRequest = get(url, headers);
+        GetRequest getRequest = get(url, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(HashMap.class);
