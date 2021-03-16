@@ -15,23 +15,30 @@ import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
-import java.net.URLEncoder;
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static java.lang.String.format;
 
 public class BrandService extends HttpService {
 
     private static final String BRANDS_URI = "/brands";
     private final String apiEndPoint;
+    private String moduleOrigin;
 
     public BrandService(String apiEndPoint) {
         this.apiEndPoint = !Strings.isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public BrandService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !Strings.isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public Brand insertBrand(Brand brand, IntegrationHeader... headers) {
-        RequestBodyEntity post = post(apiEndPoint.concat(BRANDS_URI), brand, headers);
+        RequestBodyEntity post = post(apiEndPoint.concat(BRANDS_URI), brand, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(Brand.class);
     }
@@ -49,13 +56,13 @@ public class BrandService extends HttpService {
 
     public Brand updateBrand(Brand brand, IntegrationHeader... headers) {
         RequestBodyEntity put = put(apiEndPoint.concat(BRANDS_URI).concat("/")
-            .concat(brand.getId().toString()), brand, headers);
+            .concat(brand.getId().toString()), brand, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         return response.to(Brand.class);
     }
 
     public Brand getBrand(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(BRANDS_URI).concat("/").concat(id.toString()), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(BRANDS_URI).concat("/").concat(id.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Brand.class);
@@ -73,7 +80,7 @@ public class BrandService extends HttpService {
 
     private List<Brand> getAllBrands(final String url, IntegrationHeader... headers) {
         final List<Brand> allBrands = Lists.newArrayList();
-        final GetRequest getRequest = get(url, headers);
+        final GetRequest getRequest = get(url, addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<Brand> rootResponse = response.to(new TypeReference<Page<Brand>>() {

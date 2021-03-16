@@ -19,6 +19,7 @@ import org.apache.http.HttpStatus;
 import java.util.List;
 import java.util.Objects;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
@@ -30,16 +31,23 @@ public class TransmissionService extends HttpService {
     public static final String NEXT = "next";
 
     private final String apiEndPoint;
+    private String moduleOrigin;
 
     public TransmissionService(final String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public TransmissionService(final String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public SkuMarketPlace updateStatus(final TransmissionDTO skuMp, Long idSkuMp, IntegrationHeader... headers) {
         Objects.requireNonNull(skuMp, "Informe o SkuMarketPlace a ser atualizado.");
         Objects.requireNonNull(idSkuMp, "Informe o id do SKU");
-        RequestBodyEntity put = put(getURLFormated(idSkuMp), skuMp, headers);
+        RequestBodyEntity put = put(getURLFormated(idSkuMp), skuMp, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         return response.to(SkuMarketPlace.class);
     }
@@ -54,7 +62,7 @@ public class TransmissionService extends HttpService {
 
     public SkuMarketPlace getSkuMarketPlace(Long idSkuMp, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
-        GetRequest getRequest = get(getURLFormated(idSkuMp), headers);
+        GetRequest getRequest = get(getURLFormated(idSkuMp), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
@@ -64,7 +72,7 @@ public class TransmissionService extends HttpService {
 
     public List<SkuMarketPlace> getAllSkuMps(IntegrationHeader... headers) {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
-        final GetRequest getRequest = get(getURLFormatedAll(), headers);
+        final GetRequest getRequest = get(getURLFormatedAll(), addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {
@@ -82,7 +90,7 @@ public class TransmissionService extends HttpService {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
         String urlToGet = String.format(apiEndPoint.concat(TRANSMISSIONS_BY_MARKETPLACE_URI), marketplace.toString());
         do {
-            final GetRequest getRequest = get(urlToGet, headers);
+            final GetRequest getRequest = get(urlToGet, addModuleOriginHeader(headers, this.moduleOrigin));
             final Response response = execute(getRequest);
             if (response.getStatus() == HttpStatus.SC_OK) {
                 Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {});
