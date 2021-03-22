@@ -16,20 +16,28 @@ import org.apache.http.HttpStatus;
 
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static java.lang.String.format;
 
 public class VariationService extends HttpService {
 
     private static final String VARIATIONS_URI = "/variations";
     private final String apiEndPoint;
+    private String moduleOrigin;
 
     public VariationService(String apiEndPoint) {
         this.apiEndPoint = !Strings.isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public VariationService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !Strings.isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public VariationType insertType(VariationType type, IntegrationHeader... headers) {
-        RequestBodyEntity post = post(apiEndPoint.concat(VARIATIONS_URI), type, headers);
+        RequestBodyEntity post = post(apiEndPoint.concat(VARIATIONS_URI), type, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(VariationType.class);
     }
@@ -47,7 +55,7 @@ public class VariationService extends HttpService {
 
     public VariationType updateType(VariationType type, IntegrationHeader... headers) {
         String url = apiEndPoint.concat(VARIATIONS_URI).concat("/").concat(type.getId().toString());
-        RequestBodyEntity put = put(url, type, headers);
+        RequestBodyEntity put = put(url, type, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         return response.to(VariationType.class);
     }
@@ -56,13 +64,13 @@ public class VariationService extends HttpService {
         String url = apiEndPoint.concat(VARIATIONS_URI)
             .concat("/").concat(type.getId().toString())
             .concat("/").concat("values");
-        RequestBodyEntity post = post(url, value, headers);
+        RequestBodyEntity post = post(url, value, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(Variation.class);
     }
 
     public VariationType getType(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(VARIATIONS_URI).concat("/").concat(id.toString()), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(VARIATIONS_URI).concat("/").concat(id.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(VariationType.class);
@@ -80,7 +88,7 @@ public class VariationService extends HttpService {
 
     private List<VariationType> getAllTypes(final String url, IntegrationHeader... headers) {
         final List<VariationType> allTypes = Lists.newArrayList();
-        final GetRequest getRequest = get(url, headers);
+        final GetRequest getRequest = get(url, addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<VariationType> rootResponse = response.to(new TypeReference<Page<VariationType>>() {
@@ -94,7 +102,7 @@ public class VariationService extends HttpService {
 
     public List<VariationType> getAllTypesNotPaged(IntegrationHeader... headers){
         final List<VariationType> allTypes = Lists.newArrayList();
-        final GetRequest getRequest = get(apiEndPoint.concat(VARIATIONS_URI).concat("/all"), headers);
+        final GetRequest getRequest = get(apiEndPoint.concat(VARIATIONS_URI).concat("/all"), addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             List<VariationType> rootResponse = response.to(new TypeReference<List<VariationType>>() {

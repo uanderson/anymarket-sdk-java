@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.*;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -26,16 +27,23 @@ public class OrderService {
     };
     public static final String NEXT_PAGE = "next";
     private String apiEndPointForResource;
+    private String moduleOrigin;
 
     public OrderService(String apiEndPoint) {
         this.apiEndPointForResource = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public OrderService(String apiEndPoint, String origin) {
+        this.apiEndPointForResource = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public Order getOrder(Long idOrder, IntegrationHeader... headers) {
         checkNotNull(idOrder, "Erro ao recuperar pedido: Id não informado");
         return get(apiEndPointForResource.concat("/orders/{id}"))
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
@@ -100,7 +108,7 @@ public class OrderService {
         checkNotNull(idInMarketplace, "Erro ao recuperar pedido: marketplace não informado");
 
         Order order = get(apiEndPointForResource.concat("/orders/{marketPlace}/{idInMarketPlace}"))
-                .headers(headers)
+                .headers(addModuleOriginHeader(headers, this.moduleOrigin))
                 .routeParam("marketPlace", marketplace.toString())
                 .routeParam("idInMarketPlace", idInMarketplace)
                 .getResponse()
@@ -115,7 +123,7 @@ public class OrderService {
 
     public Page<Order> getOrders(List<OrderFilter> filters, IntegrationHeader... headers) {
         return get(apiEndPointForResource.concat("/orders"))
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .filters(filters)
             .getResponse()
             .to(PAGED_TYPE_REFERENCE);
@@ -131,7 +139,7 @@ public class OrderService {
         }
         if (nextPageUrl != null) {
             return get(nextPageUrl)
-                .headers(headers)
+                .headers(addModuleOriginHeader(headers, this.moduleOrigin))
                 .getResponse()
                 .to(PAGED_TYPE_REFERENCE);
         }
@@ -144,7 +152,7 @@ public class OrderService {
         order.setProductGross(null);
         return post(apiEndPointForResource.concat("/orders"))
             .body(order)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .getResponse()
             .to(Order.class);
     }
@@ -154,7 +162,7 @@ public class OrderService {
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         return put(apiEndPointForResource.concat("/orders/{id}"))
             .body(order)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", order.getId().toString())
             .getResponse()
             .to(Order.class);
@@ -165,7 +173,7 @@ public class OrderService {
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         return put(apiEndPointForResource.concat("/orders/{id}"))
             .body(order)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", order.getId().toString())
             .queryString("origin", origin)
             .getResponse()
@@ -177,7 +185,7 @@ public class OrderService {
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         put(apiEndPointForResource.concat("/orders/partnerid/{id}"))
             .body(order)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", order.getId().toString())
             .getResponse();
     }
@@ -187,7 +195,7 @@ public class OrderService {
         checkNotNull(order.getId(), "Erro ao atualizar pedido: Id não informado");
         put(apiEndPointForResource.concat("/orders/{id}/nfe"))
             .body(xml)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", order.getId().toString())
             .getResponseXML();
     }
@@ -197,7 +205,7 @@ public class OrderService {
         checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
         return put(apiEndPointForResource.concat("/orders/{id}/transmissionStatus"))
             .body(resource)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .routeParam("id", idOrder.toString())
             .getResponse()
             .to(Order.class);
