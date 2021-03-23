@@ -5,7 +5,10 @@ import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
-import br.com.anymarket.sdk.stock.dto.*;
+import br.com.anymarket.sdk.stock.dto.Stock;
+import br.com.anymarket.sdk.stock.dto.StockCollection;
+import br.com.anymarket.sdk.stock.dto.StockLocal;
+import br.com.anymarket.sdk.stock.dto.StockResult;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -17,16 +20,24 @@ import org.apache.http.HttpStatus;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class StockService extends HttpService {
 
     private String apiEndPoint;
+    private String moduleOrigin;
 
     public StockService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+    }
+
+    public StockService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
     }
 
     public Response insertStock(Stock stock, IntegrationHeader... headers) {
@@ -40,7 +51,7 @@ public class StockService extends HttpService {
     }
 
     public Response insertStock(StockCollection stocks, IntegrationHeader... headers) {
-        RequestBodyEntity putRequest = post(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), headers);
+        RequestBodyEntity putRequest = post(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), addModuleOriginHeader(headers, this.moduleOrigin));
         return execute(putRequest);
     }
 
@@ -55,7 +66,7 @@ public class StockService extends HttpService {
     }
 
     public Response updateStock(StockCollection stocks, IntegrationHeader... headers) {
-        RequestBodyEntity putRequest = put(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), headers);
+        RequestBodyEntity putRequest = put(apiEndPoint + stocks.getPathURI(), stocks.getStocks(), addModuleOriginHeader(headers, this.moduleOrigin));
         return execute(putRequest);
     }
 
@@ -85,7 +96,7 @@ public class StockService extends HttpService {
             params.put("sortDirection", sortDirection);
         }
 
-        HttpRequest getRequest = get(apiEndPoint.concat("/stocks"), headers).queryString(params);
+        HttpRequest getRequest = get(apiEndPoint.concat("/stocks"), addModuleOriginHeader(headers, this.moduleOrigin)).queryString(params);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(new TypeReference<StockResult>() {});
@@ -95,7 +106,7 @@ public class StockService extends HttpService {
     }
 
     public List<StockLocal> getAllStockLocals(IntegrationHeader... headers) {
-        final GetRequest getRequest = get(apiEndPoint.concat("/stocks/locals"), headers);
+        final GetRequest getRequest = get(apiEndPoint.concat("/stocks/locals"), addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(new TypeReference<List<StockLocal>>() {
@@ -104,4 +115,5 @@ public class StockService extends HttpService {
             throw new NotFoundException("Stock Locals not found.");
         }
     }
+
 }

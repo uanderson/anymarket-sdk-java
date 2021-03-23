@@ -7,16 +7,24 @@ import com.google.common.base.Preconditions;
 
 import java.io.InputStream;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static br.com.anymarket.sdk.http.restdsl.AnyMarketRestDSL.post;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 public class PrintTagService {
 
     private String apiEndPointForResource;
+    private String moduleOrigin;
 
     public PrintTagService(String apiEndPoint) {
         this.apiEndPointForResource = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+    }
+
+    public PrintTagService(String apiEndPoint, String origin) {
+        this.apiEndPointForResource = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
     }
 
     public Object getPrintTag(PrintTagResource printTag, PrintType printType, IntegrationHeader... headers) {
@@ -34,7 +42,7 @@ public class PrintTagService {
         }
         return post(url)
             .body(printTag)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .getResponseByte();
     }
 
@@ -45,7 +53,7 @@ public class PrintTagService {
 
         post(url)
             .body(printTag)
-            .headers(headers)
+            .headers(addModuleOriginHeader(headers, this.moduleOrigin))
             .getResponse();
     }
 }

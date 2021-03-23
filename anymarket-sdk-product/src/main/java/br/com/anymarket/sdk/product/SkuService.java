@@ -7,8 +7,8 @@ import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import br.com.anymarket.sdk.product.dto.Sku;
-import br.com.anymarket.sdk.resource.Link;
 import br.com.anymarket.sdk.product.dto.SkuResource;
+import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
@@ -16,10 +16,10 @@ import org.apache.http.HttpStatus;
 
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
-import static java.util.Objects.nonNull;
 
 public class SkuService extends HttpService {
 
@@ -30,9 +30,17 @@ public class SkuService extends HttpService {
     public static final String LIMIT = "limit";
     public static final String NEXT = "next";
 
+    private String moduleOrigin;
+
     public SkuService(final String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+    }
+
+    public SkuService(final String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
     }
 
     private String getURLFormated(final Long idProduct) {
@@ -42,7 +50,7 @@ public class SkuService extends HttpService {
     public Sku insertSku(final Sku sku, final Long idProduct, IntegrationHeader... headers) {
         checkNotNull(sku, "Informe o Sku a ser persistido.");
         checkNotNull(idProduct, "Informe o id do produto do Sku.");
-        RequestBodyEntity post = post(getURLFormated(idProduct), sku, headers);
+        RequestBodyEntity post = post(getURLFormated(idProduct), sku, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(Sku.class);
     }
@@ -50,7 +58,7 @@ public class SkuService extends HttpService {
     public Sku updateSku(final Sku sku, final Long idProduct, IntegrationHeader... headers) {
         checkNotNull(sku, "Informe o Sku a ser atualizado.");
         checkNotNull(idProduct, "Informe o id do produto do Sku.");
-        RequestBodyEntity put = put(getURLFormated(idProduct).concat("/").concat(sku.getId().toString()), sku, headers);
+        RequestBodyEntity put = put(getURLFormated(idProduct).concat("/").concat(sku.getId().toString()), sku, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(put);
         return response.to(Sku.class);
     }
@@ -64,7 +72,7 @@ public class SkuService extends HttpService {
     }
 
     public List<Sku> getAllSkus(final Long idProduct, IntegrationHeader... headers) {
-        final GetRequest getRequest = get(getURLFormated(idProduct).concat("/"), headers);
+        final GetRequest getRequest = get(getURLFormated(idProduct).concat("/"), addModuleOriginHeader(headers, this.moduleOrigin));
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(new TypeReference<List<Sku>>() {
@@ -85,7 +93,7 @@ public class SkuService extends HttpService {
     public <T> T getSku(Long idSku, final Long idProduct, Class<T> clazz, IntegrationHeader... headers) {
         checkNotNull(idSku, "Informe o id do Sku.");
         checkNotNull(idProduct, "Informe o id do produto do Sku.");
-        GetRequest getRequest = get(getURLFormated(idProduct).concat("/").concat(idSku.toString()), headers);
+        GetRequest getRequest = get(getURLFormated(idProduct).concat("/").concat(idSku.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(clazz);
@@ -108,7 +116,7 @@ public class SkuService extends HttpService {
     private <T> T getSku(Long idSku, boolean showProduct, Class<T> clazz, IntegrationHeader... headers) {
         checkNotNull(idSku, "Informe o id do Sku.");
         String param = showProduct ? "?showProduct=true":"";
-        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()).concat(param), headers);
+        GetRequest getRequest = get(this.apiEndPoint.concat("/skus/").concat(idSku.toString()).concat(param), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(clazz);
@@ -121,7 +129,7 @@ public class SkuService extends HttpService {
     }
 
     public Page<Sku> getSkusPaged(Integer offset, Integer limit, IntegrationHeader... headers) {
-        GetRequest request = get(apiEndPoint.concat(SKU_URI), headers);
+        GetRequest request = get(apiEndPoint.concat(SKU_URI), addModuleOriginHeader(headers, this.moduleOrigin));
         if (offset != null) {
             request.queryString(OFFSET, offset);
         }
@@ -146,7 +154,7 @@ public class SkuService extends HttpService {
             }
         }
         if (nextPageUrl != null) {
-            Response response = execute(get(nextPageUrl, headers));
+            Response response = execute(get(nextPageUrl, addModuleOriginHeader(headers, this.moduleOrigin)));
             if (response.getStatus() == HttpStatus.SC_OK) {
                 return response.to(new TypeReference<Page<Sku>>() {
                 });
@@ -154,4 +162,5 @@ public class SkuService extends HttpService {
         }
         return new Page<Sku>();
     }
+
 }
