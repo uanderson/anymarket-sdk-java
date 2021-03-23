@@ -4,6 +4,7 @@ import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
+import br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,6 +16,7 @@ import org.apache.http.HttpStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.*;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
@@ -25,15 +27,22 @@ public class CallbackService extends HttpService {
 
     public static final String CALLBACKS_URI = "/callbacks/";
     private String apiEndPoint;
+    private String moduleOrigin;
 
     public CallbackService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
                 SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public CallbackService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public List<Callback> getAllCallbacks(IntegrationHeader... headers) {
         List<Callback> callbackList = new ArrayList<Callback>();
-        GetRequest getRequest = get(apiEndPoint.concat(CALLBACKS_URI), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(CALLBACKS_URI), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<Callback> rootResponse = response.to(new TypeReference<Page<Callback>>() {
@@ -46,13 +55,13 @@ public class CallbackService extends HttpService {
     }
 
     public Callback insertCallback(Callback callback, IntegrationHeader... headers) {
-        RequestBodyEntity post = post(apiEndPoint.concat(CALLBACKS_URI), callback, headers);
+        RequestBodyEntity post = post(apiEndPoint.concat(CALLBACKS_URI), callback, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(post);
         return response.to(Callback.class);
     }
 
     public void deleteCallback(Long id, IntegrationHeader... headers) {
-        HttpRequestWithBody deleteRequest = delete(apiEndPoint.concat(CALLBACKS_URI).concat(id.toString()), headers);
+        HttpRequestWithBody deleteRequest = delete(apiEndPoint.concat(CALLBACKS_URI).concat(id.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(deleteRequest);
         if (response.getStatus() != HttpStatus.SC_NO_CONTENT) {
             throw new NotFoundException(format("Callback with id %s not found.", id));
@@ -60,7 +69,7 @@ public class CallbackService extends HttpService {
     }
 
     public Callback getCallback(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint.concat(CALLBACKS_URI).concat(id.toString()), headers);
+        GetRequest getRequest = get(apiEndPoint.concat(CALLBACKS_URI).concat(id.toString()), addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Callback.class);
@@ -72,7 +81,7 @@ public class CallbackService extends HttpService {
         if (callback.getId() == null) {
             throw new NotFoundException("Callback id can't be null");
         }
-        RequestBodyEntity putRequest = put(apiEndPoint.concat(CALLBACKS_URI).concat(callback.getId().toString()), callback, headers);
+        RequestBodyEntity putRequest = put(apiEndPoint.concat(CALLBACKS_URI).concat(callback.getId().toString()), callback, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(putRequest);
         return response.to(Callback.class);
     }
