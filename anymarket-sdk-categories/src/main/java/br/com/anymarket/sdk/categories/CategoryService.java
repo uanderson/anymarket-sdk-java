@@ -18,6 +18,7 @@ import org.apache.http.HttpStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.anymarket.sdk.http.headers.AnymarketHeaderUtils.addModuleOriginHeader;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
@@ -29,20 +30,31 @@ public class CategoryService extends HttpService {
     private static final String NEXT = "next";
     private static final String CATEGORIES_URI = "/categories/";
     private String apiEndPoint;
+    private String moduleOrigin;
 
+    @Deprecated
+    /**
+     * Use the constructor with the origin parameter. Origin = the name of the marketplace, epr or platform
+     */
     public CategoryService(String apiEndPoint) {
         this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
             SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
     }
 
+    public CategoryService(String apiEndPoint, String origin) {
+        this.apiEndPoint = !isNullOrEmpty(apiEndPoint) ? apiEndPoint :
+                SDKConstants.ANYMARKET_HOMOLOG_API_ENDPOINT;
+        this.moduleOrigin = origin;
+    }
+
     public Category updateCategory(Category category, IntegrationHeader... headers) {
-        RequestBodyEntity putRequest = put(apiEndPoint + CATEGORIES_URI + "/" + category.getId(), category, headers);
+        RequestBodyEntity putRequest = put(apiEndPoint + CATEGORIES_URI + "/" + category.getId(), category, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(putRequest);
         return response.to(Category.class);
     }
 
     public Category insertCategory(Category category, IntegrationHeader... headers) {
-        RequestBodyEntity postRequest = post(apiEndPoint + CATEGORIES_URI, category, headers);
+        RequestBodyEntity postRequest = post(apiEndPoint + CATEGORIES_URI, category, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(postRequest);
         return response.to(Category.class);
     }
@@ -52,7 +64,7 @@ public class CategoryService extends HttpService {
     }
 
     public void deleteCategory(Long id, IntegrationHeader... headers) {
-        HttpRequestWithBody deleteRequest = delete(apiEndPoint + CATEGORIES_URI + id, headers);
+        HttpRequestWithBody deleteRequest = delete(apiEndPoint + CATEGORIES_URI + id, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(deleteRequest);
         if (response.getStatus() != HttpStatus.SC_NO_CONTENT) {
             throw new NotFoundException(format("Category with id %s not found.", id));
@@ -61,7 +73,7 @@ public class CategoryService extends HttpService {
 
 
     public Category getCategory(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint + CATEGORIES_URI + id, headers);
+        GetRequest getRequest = get(apiEndPoint + CATEGORIES_URI + id, addModuleOriginHeader(headers, this.moduleOrigin));
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Category.class);
@@ -71,7 +83,7 @@ public class CategoryService extends HttpService {
 
     public Category getCategoryByPartnerId(String partnerId, IntegrationHeader... headers) {
         String url = apiEndPoint.concat(CATEGORIES_URI).concat("?partnerId=").concat(SDKUrlEncoder.encodeParameterToUTF8(partnerId));
-        Response response = execute(get(url, headers));
+        Response response = execute(get(url, addModuleOriginHeader(headers, this.moduleOrigin)));
         if (response.getStatus() == HttpStatus.SC_OK) {
             List<Category> categoryPage = response.to(new TypeReference<Page<Category>>() {}).getContent();
             if (categoryPage != null && !categoryPage.isEmpty()) {
@@ -97,7 +109,7 @@ public class CategoryService extends HttpService {
 
 
         do {
-            GetRequest getRequest = get(urlToGet, headers);
+            GetRequest getRequest = get(urlToGet, addModuleOriginHeader(headers, this.moduleOrigin));
             Response response = execute(getRequest);
             if (response.getStatus() == HttpStatus.SC_OK) {
                 Page<Category> rootResponse = response.to(new TypeReference<Page<Category>>() {
