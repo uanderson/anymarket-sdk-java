@@ -68,7 +68,8 @@ public enum MarketPlace {
     BANCO_INTER("Banco Inter"),
     HAVAN("Havan"),
     MARKETPLACE_TESTE("Marketplace Teste"),
-    ETNA("Etna");
+    ETNA("Etna"),
+    WEB_CONTINENTAL_NEW_API("Web Continental Nova API");
 
     private String name;
 
