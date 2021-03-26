@@ -70,7 +70,8 @@ public enum MarketPlace {
     MARKETPLACE_TESTE("Marketplace Teste"),
     ETNA("Etna"),
     WEB_CONTINENTAL_NEW_API("Web Continental Nova API"),
-    ELETROSOM("Eletrosom");
+    ELETROSOM("Eletrosom"),
+    QUERO_QUERO("Quero-Quero");
 
     private String name;
 
