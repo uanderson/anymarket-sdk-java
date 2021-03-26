@@ -69,7 +69,8 @@ public enum MarketPlace {
     HAVAN("Havan"),
     MARKETPLACE_TESTE("Marketplace Teste"),
     ETNA("Etna"),
-    WEB_CONTINENTAL_NEW_API("Web Continental Nova API");
+    WEB_CONTINENTAL_NEW_API("Web Continental Nova API"),
+    ELETROSOM("Eletrosom");
 
     private String name;
 
