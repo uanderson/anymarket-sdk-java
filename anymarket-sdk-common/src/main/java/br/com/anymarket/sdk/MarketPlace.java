@@ -72,7 +72,8 @@ public enum MarketPlace {
     WEB_CONTINENTAL_NEW_API("Web Continental Nova API"),
     ELETROSOM("Eletrosom"),
     QUERO_QUERO("Quero-Quero"),
-    COMPRA_CERTA("Compra Certa");
+    COMPRA_CERTA("Compra Certa"),
+    ARMAZEM_PARAIBA("Armazém Paraíba");
 
     private String name;
 
