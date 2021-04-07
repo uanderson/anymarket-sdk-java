@@ -71,7 +71,8 @@ public enum MarketPlace {
     ETNA("Etna"),
     WEB_CONTINENTAL_NEW_API("Web Continental Nova API"),
     ELETROSOM("Eletrosom"),
-    QUERO_QUERO("Quero-Quero");
+    QUERO_QUERO("Quero-Quero"),
+    COMPRA_CERTA("Compra Certa");
 
     private String name;
 
