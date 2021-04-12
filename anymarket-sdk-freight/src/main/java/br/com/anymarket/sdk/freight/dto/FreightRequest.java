@@ -27,6 +27,9 @@ public class FreightRequest {
     @JsonProperty("accountName")
     private String accountName;
 
+    @JsonProperty("accountId")
+    private Long accountId;
+
     public List<FreightProduct> getProducts() {
         return products;
     }
@@ -69,5 +72,13 @@ public class FreightRequest {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 }
