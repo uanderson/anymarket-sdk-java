@@ -73,7 +73,8 @@ public enum MarketPlace {
     ELETROSOM("Eletrosom"),
     QUERO_QUERO("Quero-Quero"),
     COMPRA_CERTA("Compra Certa"),
-    ARMAZEM_PARAIBA("Armazém Paraíba");
+    ARMAZEM_PARAIBA("Armazém Paraíba"),
+    SHOPEE("Shopee");
 
     private String name;
 
