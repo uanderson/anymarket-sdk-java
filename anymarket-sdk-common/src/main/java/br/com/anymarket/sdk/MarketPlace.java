@@ -63,7 +63,20 @@ public enum MarketPlace {
     KABUM("Kabum"),
     MULTIVAREJO_GPA("Multivarejo GPA"),
     NUVEMSHOP("Nuvemshop"),
-    LOJAS_LEBES("Lojas Lebes");
+    LOJAS_LEBES("Lojas Lebes"),
+    DROGA_RAIA("Droga Raia"),
+    PASSARELA("Passarela"),
+    AVENIDA("Avenida"),
+    TIENDA_NARANJA("Tienda Naranja"),
+    BANCO_INTER("Banco Inter"),
+    HAVAN("Havan"),
+    MARKETPLACE_TESTE("Marketplace Teste"),
+    ETNA("Etna"),
+    WEB_CONTINENTAL_NEW_API("Web Continental Nova API"),
+    ELETROSOM("Eletrosom"),
+    QUERO_QUERO("Quero-Quero"),
+    COMPRA_CERTA("Compra Certa"),
+    ARMAZEM_PARAIBA("Armazém Paraíba");
 
     private String name;
 
