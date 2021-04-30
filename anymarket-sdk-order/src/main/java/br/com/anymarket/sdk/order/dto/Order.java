@@ -542,6 +542,30 @@ public class Order {
         this.orderTypeName = orderTypeName;
     }
 
+    public String getDocumentIntermediator() {
+        return documentIntermediator;
+    }
+
+    public void setDocumentIntermediator(String documentIntermediator) {
+        this.documentIntermediator = documentIntermediator;
+    }
+
+    public String getIntermediateRegistrationId() {
+        return intermediateRegistrationId;
+    }
+
+    public void setIntermediateRegistrationId(String intermediateRegistrationId) {
+        this.intermediateRegistrationId = intermediateRegistrationId;
+    }
+
+    public String getDocumentPaymentInstitution() {
+        return documentPaymentInstitution;
+    }
+
+    public void setDocumentPaymentInstitution(String documentPaymentInstitution) {
+        this.documentPaymentInstitution = documentPaymentInstitution;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
