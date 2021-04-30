@@ -161,6 +161,15 @@ public class Order {
     @JsonProperty("orderTypeName")
     private String orderTypeName;
 
+    @JsonProperty("documentIntermediator")
+    private String documentIntermediator;
+
+    @JsonProperty("intermediateRegistrationId")
+    private String intermediateRegistrationId;
+
+    @JsonProperty("documentPaymentInstitution")
+    private String documentPaymentInstitution;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
