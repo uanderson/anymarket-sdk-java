@@ -44,6 +44,9 @@ public class Category {
     @JsonProperty("path")
     private String path;
 
+    @JsonProperty("definitionPriceScope")
+    private DefinitionPriceScope definitionPriceScope;
+
     private Category() {}
 
     private Category(Builder builder) {
@@ -61,6 +64,7 @@ public class Category {
         this.parent = builder.parent;
         this.children = builder.children;
         this.path = builder.path;
+        this.definitionPriceScope = builder.definitionPriceScope;
     }
 
     public void setId(Long id) {
@@ -95,6 +99,8 @@ public class Category {
         this.path = path;
     }
 
+    public void setDefinitionPriceScope(DefinitionPriceScope definitionPriceScope) { this.definitionPriceScope = definitionPriceScope; };
+
     public Long getId() {
         return id;
     }
@@ -127,6 +133,8 @@ public class Category {
         return path;
     }
 
+    public DefinitionPriceScope getDefinitionPriceScope() {return definitionPriceScope; }
+
     public static Category.Builder builder() {
         return new Category.Builder();
     }
@@ -142,6 +150,7 @@ public class Category {
             .add("children", children)
             .add("parent", parent)
             .add("path", path)
+            .add("definitionPriceScope", definitionPriceScope)
             .toString();
     }
 
@@ -155,6 +164,7 @@ public class Category {
         private List<Category> children = new ArrayList<Category>();
         private Category parent;
         private String path;
+        private DefinitionPriceScope definitionPriceScope;
 
         public Builder withId(Long id) {
             this.id = id;
@@ -193,6 +203,11 @@ public class Category {
 
         public Builder withPath(String path) {
             this.path = path;
+            return this;
+        }
+
+        public Builder withDefinitionPriceScope(DefinitionPriceScope definitionPriceScope){
+            this.definitionPriceScope = definitionPriceScope;
             return this;
         }
 

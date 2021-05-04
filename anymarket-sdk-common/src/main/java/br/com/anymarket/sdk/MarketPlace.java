@@ -53,6 +53,9 @@ public enum MarketPlace {
     CYBELAR("Cybelar"),
     CLUBE_DE_MARCAS("Clube de Marcas"),
     C_A("C&A"),
+    ICBC_MALL("ICBC Mall"),
+    TIENDA_SUPERVIELLE("Tienda Supervielle"),
+    TIENDA_CLIC("Tienda Clic"),
     QISAR("Qisar"),
     CLAROPROMO("Claropromo"),
     BALCAO_RURAL("Balcao Rural"),
@@ -74,6 +77,7 @@ public enum MarketPlace {
     QUERO_QUERO("Quero-Quero"),
     COMPRA_CERTA("Compra Certa"),
     ARMAZEM_PARAIBA("Armazém Paraíba"),
+    RIACHUELO("Riachuelo"),
     SHOPEE("Shopee");
 
     private String name;
