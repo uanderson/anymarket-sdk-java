@@ -99,6 +99,8 @@ public class Category {
         this.path = path;
     }
 
+    public void setDefinitionPriceScope(DefinitionPriceScope definitionPriceScope) { this.definitionPriceScope = definitionPriceScope; };
+
     public Long getId() {
         return id;
     }
@@ -130,6 +132,8 @@ public class Category {
     public String getPath() {
         return path;
     }
+
+    public DefinitionPriceScope getDefinitionPriceScope() {return definitionPriceScope; }
 
     public static Category.Builder builder() {
         return new Category.Builder();
