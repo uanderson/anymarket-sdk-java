@@ -15,6 +15,9 @@ public class OrderItemResource {
     @JsonProperty("sku")
     private SimpleSkuResource sku;
 
+    @JsonProperty("skuKit")
+    private SimpleSkuKitResource skuKit;
+
     @JsonProperty("amount")
     private BigDecimal amount;
 
