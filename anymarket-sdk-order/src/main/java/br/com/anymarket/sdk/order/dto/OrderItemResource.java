@@ -170,6 +170,14 @@ public class OrderItemResource {
         this.officialStoreName = officialStoreName;
     }
 
+    public SimpleSkuKitResource getSkuKit() {
+        return skuKit;
+    }
+
+    public void setSkuKit(SimpleSkuKitResource skuKit) {
+        this.skuKit = skuKit;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
