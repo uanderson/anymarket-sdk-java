@@ -15,6 +15,9 @@ public class OrderItemResource {
     @JsonProperty("sku")
     private SimpleSkuResource sku;
 
+    @JsonProperty("skuKit")
+    private SimpleSkuKitResource skuKit;
+
     @JsonProperty("amount")
     private BigDecimal amount;
 
@@ -165,6 +168,14 @@ public class OrderItemResource {
 
     public void setOfficialStoreName(String officialStoreName) {
         this.officialStoreName = officialStoreName;
+    }
+
+    public SimpleSkuKitResource getSkuKit() {
+        return skuKit;
+    }
+
+    public void setSkuKit(SimpleSkuKitResource skuKit) {
+        this.skuKit = skuKit;
     }
 
     @Override
