@@ -15,7 +15,6 @@ public class SimpleSkuResource {
     @JsonProperty("title")
     private String title;
 
-
     public Long getId() {
         return id;
     }
