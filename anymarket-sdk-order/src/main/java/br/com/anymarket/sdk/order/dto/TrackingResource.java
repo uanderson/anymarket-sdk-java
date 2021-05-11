@@ -40,7 +40,7 @@ public class TrackingResource {
     private Date deliveredDate;
 
     @JsonProperty("deliveryMethodId")
-    private String deliveryMethodId;
+    private Long deliveryMethodId;
 
     @JsonProperty("deliveryMethodName")
     private String deliveryMethodName;
@@ -109,11 +109,11 @@ public class TrackingResource {
         this.deliveredDate = deliveredDate;
     }
 
-    public String getDeliveryMethodId() {
+    public Long getDeliveryMethodId() {
         return deliveryMethodId;
     }
 
-    public void setDeliveryMethodId(String deliveryMethodId) {
+    public void setDeliveryMethodId(Long deliveryMethodId) {
         this.deliveryMethodId = deliveryMethodId;
     }
 
