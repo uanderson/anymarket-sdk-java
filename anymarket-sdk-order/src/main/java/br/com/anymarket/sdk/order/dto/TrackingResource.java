@@ -128,17 +128,16 @@ public class TrackingResource {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("url", url)
-                .add("number", number)
-                .add("carrier", carrier)
-                .add("carrierDocument", carrierDocument)
-                .add("date", date)
-                .add("estimateDate", estimateDate)
-                .add("shippedDate", shippedDate)
-                .add("deliveredDate", deliveredDate)
-                .add("deliveryMethodId", deliveryMethodId)
-                .add("deliveryMethodName", deliveryMethodName)
-                .toString();
+            .add("url", url)
+            .add("number", number)
+            .add("carrier", carrier)
+            .add("carrierDocument", carrierDocument)
+            .add("date", date)
+            .add("estimateDate", estimateDate)
+            .add("shippedDate", shippedDate)
+            .add("deliveredDate", deliveredDate)
+            .add("deliveryMethodId", deliveryMethodId)
+            .add("deliveryMethodName", deliveryMethodName)
+            .toString();
     }
 }
-
