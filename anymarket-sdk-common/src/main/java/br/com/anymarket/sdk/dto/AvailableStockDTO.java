@@ -42,6 +42,15 @@ public class AvailableStockDTO implements Serializable {
     @JsonProperty("additionalTime")
     private Integer additionalTime;
 
+    @JsonProperty("totalReservationInAccount")
+    private BigDecimal totalReservationInAccount;
+
+    @JsonProperty("reservedPendingInAccount")
+    private BigDecimal reservedPendingPerAccount;
+
+    @JsonProperty("reservedPaidInAccount")
+    private BigDecimal reservedPaidPerAccount;
+
     public BigDecimal getReservedPending() {
         return reservedPending;
     }
@@ -128,5 +137,29 @@ public class AvailableStockDTO implements Serializable {
 
     public void setAdditionalTime(final Integer additionalTime) {
         this.additionalTime = additionalTime;
+    }
+
+    public BigDecimal getTotalReservationInAccount() {
+        return totalReservationInAccount;
+    }
+
+    public void setTotalReservationInAccount(BigDecimal totalReservationInAccount) {
+        this.totalReservationInAccount = totalReservationInAccount;
+    }
+
+    public BigDecimal getReservedPendingPerAccount() {
+        return reservedPendingPerAccount;
+    }
+
+    public void setReservedPendingPerAccount(BigDecimal reservedPendingPerAccount) {
+        this.reservedPendingPerAccount = reservedPendingPerAccount;
+    }
+
+    public BigDecimal getReservedPaidPerAccount() {
+        return reservedPaidPerAccount;
+    }
+
+    public void setReservedPaidPerAccount(BigDecimal reservedPaidPerAccount) {
+        this.reservedPaidPerAccount = reservedPaidPerAccount;
     }
 }
