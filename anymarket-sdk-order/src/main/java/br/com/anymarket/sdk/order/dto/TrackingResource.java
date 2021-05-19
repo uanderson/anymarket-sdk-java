@@ -39,6 +39,12 @@ public class TrackingResource {
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date deliveredDate;
 
+    @JsonProperty("deliveryMethodId")
+    private Long deliveryMethodId;
+
+    @JsonProperty("deliveryMethodName")
+    private String deliveryMethodName;
+
     public String getUrl() {
         return url;
     }
@@ -103,6 +109,22 @@ public class TrackingResource {
         this.deliveredDate = deliveredDate;
     }
 
+    public Long getDeliveryMethodId() {
+        return deliveryMethodId;
+    }
+
+    public void setDeliveryMethodId(Long deliveryMethodId) {
+        this.deliveryMethodId = deliveryMethodId;
+    }
+
+    public String getDeliveryMethodName() {
+        return deliveryMethodName;
+    }
+
+    public void setDeliveryMethodName(String deliveryMethodName) {
+        this.deliveryMethodName = deliveryMethodName;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -114,7 +136,8 @@ public class TrackingResource {
             .add("estimateDate", estimateDate)
             .add("shippedDate", shippedDate)
             .add("deliveredDate", deliveredDate)
+            .add("deliveryMethodId", deliveryMethodId)
+            .add("deliveryMethodName", deliveryMethodName)
             .toString();
     }
 }
-
