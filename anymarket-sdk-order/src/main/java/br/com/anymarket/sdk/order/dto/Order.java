@@ -161,6 +161,15 @@ public class Order {
     @JsonProperty("orderTypeName")
     private String orderTypeName;
 
+    @JsonProperty("documentIntermediator")
+    private String documentIntermediator;
+
+    @JsonProperty("intermediateRegistrationId")
+    private String intermediateRegistrationId;
+
+    @JsonProperty("documentPaymentInstitution")
+    private String documentPaymentInstitution;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -531,6 +540,30 @@ public class Order {
 
     public void setOrderTypeName(String orderTypeName) {
         this.orderTypeName = orderTypeName;
+    }
+
+    public String getDocumentIntermediator() {
+        return documentIntermediator;
+    }
+
+    public void setDocumentIntermediator(String documentIntermediator) {
+        this.documentIntermediator = documentIntermediator;
+    }
+
+    public String getIntermediateRegistrationId() {
+        return intermediateRegistrationId;
+    }
+
+    public void setIntermediateRegistrationId(String intermediateRegistrationId) {
+        this.intermediateRegistrationId = intermediateRegistrationId;
+    }
+
+    public String getDocumentPaymentInstitution() {
+        return documentPaymentInstitution;
+    }
+
+    public void setDocumentPaymentInstitution(String documentPaymentInstitution) {
+        this.documentPaymentInstitution = documentPaymentInstitution;
     }
 
     @Override
