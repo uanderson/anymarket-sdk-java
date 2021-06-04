@@ -78,6 +78,7 @@ public enum MarketPlace {
     COMPRA_CERTA("Compra Certa"),
     ARMAZEM_PARAIBA("Armazém Paraíba"),
     RIACHUELO("Riachuelo"),
+    CONECTA_LA("Conecta La"),
     SHOPEE("Shopee");
 
     private String name;
