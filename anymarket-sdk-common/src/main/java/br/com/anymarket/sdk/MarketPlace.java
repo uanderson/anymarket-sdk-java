@@ -79,7 +79,8 @@ public enum MarketPlace {
     ARMAZEM_PARAIBA("Armazém Paraíba"),
     RIACHUELO("Riachuelo"),
     CONECTA_LA("Conecta La"),
-    OLIST("OLIST");
+    OLIST("OLIST"),
+    RENNER("Renner");
 
     private String name;
 

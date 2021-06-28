@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,13 @@ public class SkuMarketPlaceService extends HttpService {
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
     private static final String SKUMP_ALL_MARKETPLACE = "/skus/%s/all";
+    private static final String SKUMP_SEND_URI = "/skus/%s/marketplaces/%s/send";
     public static final String NEXT = "next";
+    public static final String SKUMP_NOT_INFORMED = "Informe o idSkuMarketplace";
+    public static final String REQUESTING_ENDPOINT = "Chamando endpoint {}";
+    public static final String RESPONSE_STATUS = "Response status {}";
+    public static final String REQUEST_ENDPOINT_ERROR = "Ocorreu um erro ao chamar endpoint {}";
+    public static final String SKUMP_NOT_FOUND = "SkuMarketplace not found for id %s.";
     private final String apiEndPoint;
     private String moduleOrigin;
 
@@ -214,7 +221,7 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketplaceComplete getSkuMarketplaceCompleteById(Long idSkuMarketplace, IntegrationHeader... headers) {
-        Objects.requireNonNull(idSkuMarketplace, "Informe o idSkuMarketplace");
+        Objects.requireNonNull(idSkuMarketplace, SKUMP_NOT_INFORMED);
 
         String endpoint = String.format("/skus/marketplaces/%s/complete", idSkuMarketplace);
 
@@ -222,7 +229,7 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketplaceComplete getSkuMarketplaceCompleteByIdWithReservationsForAccount(Long idSkuMarketplace, IntegrationHeader... headers) {
-        Objects.requireNonNull(idSkuMarketplace, "Informe o idSkuMarketplace");
+        Objects.requireNonNull(idSkuMarketplace, SKUMP_NOT_INFORMED);
 
         String endpoint = String.format("/skus/marketplaces/%s/complete/withReservationsForAccount", idSkuMarketplace);
 
@@ -233,21 +240,36 @@ public class SkuMarketPlaceService extends HttpService {
         GetRequest getRequest = get(apiEndPoint.concat(endpoint), addModuleOriginHeader(headers, this.moduleOrigin));
 
         try {
-            LOG.info("Chamando endpoint {}", apiEndPoint.concat(endpoint));
+            LOG.info(REQUESTING_ENDPOINT, apiEndPoint.concat(endpoint));
             Response response = execute(getRequest);
-            LOG.info("Response status {}", response.getStatus());
+            LOG.info(RESPONSE_STATUS, response.getStatus());
 
             if (response.getStatus() == HttpStatus.SC_OK) {
                 return response.to(SkuMarketplaceComplete.class);
             } else {
-                throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+                throw new NotFoundException(String.format(SKUMP_NOT_FOUND, idSkuMarketplace));
             }
         } catch (HttpServerException e) {
             throw e;
         } catch (Exception e) {
-            LOG.error("Ocorreu um erro ao chamar endpoint {}", this.apiEndPoint.concat(endpoint), e);
-            throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+            LOG.error(REQUEST_ENDPOINT_ERROR, this.apiEndPoint.concat(endpoint), e);
+            throw new NotFoundException(String.format(SKUMP_NOT_FOUND, idSkuMarketplace));
         }
     }
 
+    public void sendSkuMarketplace(Long idSku, Long idSkuMarketplace, IntegrationHeader... headers) {
+        Objects.requireNonNull(idSkuMarketplace, SKUMP_NOT_INFORMED);
+
+        String endpoint = String.format(SKUMP_SEND_URI, idSku, idSkuMarketplace);
+        RequestBodyEntity postRequest = post(apiEndPoint.concat(endpoint), StringUtils.EMPTY, addModuleOriginHeader(headers, this.moduleOrigin));
+
+        try {
+            LOG.info(REQUESTING_ENDPOINT, apiEndPoint.concat(endpoint));
+            Response response = execute(postRequest);
+            LOG.info(RESPONSE_STATUS, response.getStatus());
+        } catch (Exception e) {
+            LOG.error(REQUEST_ENDPOINT_ERROR, this.apiEndPoint.concat(endpoint), e);
+            throw new NotFoundException(String.format(SKUMP_NOT_FOUND, idSkuMarketplace));
+        }
+    }
 }
