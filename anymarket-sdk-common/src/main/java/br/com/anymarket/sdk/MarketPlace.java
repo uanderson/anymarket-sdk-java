@@ -80,6 +80,8 @@ public enum MarketPlace {
     RIACHUELO("Riachuelo"),
     CONECTA_LA("Conecta La"),
     OLIST("OLIST"),
+    RENNER("Renner"),
+    AJPLACE("AJPlace"),
     SHOPEE("Shopee");
 
     private String name;
