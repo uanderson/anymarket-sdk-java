@@ -81,7 +81,8 @@ public enum MarketPlace {
     CONECTA_LA("Conecta La"),
     OLIST("OLIST"),
     RENNER("Renner"),
-    AJPLACE("AJPlace");
+    AJPLACE("AJPlace"),
+    CREDITAS("Creditas");
 
     private String name;
 
