@@ -82,7 +82,8 @@ public enum MarketPlace {
     OLIST("OLIST"),
     RENNER("Renner"),
     AJPLACE("AJPlace"),
-    CREDITAS("Creditas");
+    CREDITAS("Creditas"),
+    CASSOL_CENTERLAR("Cassol Centerlar");
 
     private String name;
 
