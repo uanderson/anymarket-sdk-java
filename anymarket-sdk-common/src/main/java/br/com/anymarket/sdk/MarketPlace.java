@@ -94,7 +94,8 @@ public enum MarketPlace {
     ON_STORES_VTEX("On Stores Vtex"),
     FACILY("Facily"),
     CASA_VIDEO("Casa & Vídeo"),
-    SUPERCAMPO("SuperCampo");
+    SUPERCAMPO("SuperCampo"),
+    FRAVEGA_MARKET("FravegaMarket");
 
     private String name;
 
